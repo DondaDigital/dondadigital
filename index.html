@@ -5,311 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DONDA DIGITAL — Beyond Standard Webs</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=DM+Mono&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-  <!-- Lenis Smooth Scroll -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
-  <!-- Spline Viewer -->
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.28/build/spline-viewer.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            midnight: { 950: '#020818', 900: '#050f2c' },
-            neon: { cyan: '#00f5e4', blue: '#0066ff' }
-          },
-          fontFamily: {
-            display: ['Bebas Neue', 'sans-serif'],
-            body: ['Syne', 'sans-serif'],
-            mono: ['DM Mono', 'monospace'],
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    :root {
-      --neon: #00f5e4;
-      --midnight: #020818;
-      --glass: rgba(5, 20, 60, 0.55);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: var(--midnight);
-      color: #e2eaff;
-      font-family: 'Syne', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Cinematic Overlay */
+    :root { --neon: #00f5e4; --midnight: #020818; }
+    body { background-color: var(--midnight); color: #e2eaff; font-family: 'Syne', sans-serif; overflow-x: hidden; }
+    
+    /* Grainy Cinematic Overlay */
     body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
     }
 
-    .neon-text {
-      color: var(--neon);
-      text-shadow: 0 0 20px rgba(0,245,228,0.6);
-    }
-
-    .glass {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 245, 228, 0.15);
-    }
-
+    .neon-text { color: var(--neon); text-shadow: 0 0 20px rgba(0,245,228,0.6); }
+    .glass { background: rgba(5, 20, 60, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(0, 245, 228, 0.1); }
+    
+    /* 3D Canvas Styling */
+    #vortex-canvas { position: absolute; top: 0; right: 0; width: 50% !important; height: 100% !important; z-index: 1; pointer-events: none; }
+    
     .btn-neon {
-      border: 1px solid var(--neon);
-      color: var(--neon);
-      font-family: 'DM Mono', monospace;
-      text-transform: uppercase;
-      padding: 12px 24px;
-      transition: 0.3s;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid var(--neon); color: var(--neon); font-family: 'DM Mono', monospace;
+      padding: 12px 32px; transition: 0.3s; position: relative; overflow: hidden;
     }
-    .btn-neon:hover {
-      background: var(--neon);
-      color: var(--midnight);
-      box-shadow: 0 0 30px var(--neon);
-    }
+    .btn-neon:hover { background: var(--neon); color: var(--midnight); box-shadow: 0 0 40px var(--neon); }
 
-    /* 3D Vortex Container */
-    #spline-container {
-      height: 600px;
-      width: 100%;
-      position: relative;
-      transition: transform 0.1s ease-out;
-    }
-
-    /* Video Section */
-    .video-container {
-      position: relative;
-      height: 600px;
-      overflow: hidden;
-    }
-    .video-bg {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 100%; min-height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-    }
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, var(--midnight), transparent, var(--midnight));
-      z-index: 1;
-    }
-
-    .lang-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border: 1px solid rgba(0,245,228,0.3);
-      cursor: pointer;
-    }
-    .lang-btn.active {
-      border-color: var(--neon);
-      color: var(--neon);
-    }
-
-    .stat-number {
-      font-family: 'Bebas Neue';
-      font-size: 4rem;
-      line-height: 1;
-    }
+    .stat-number { font-family: 'Bebas Neue'; font-size: 5rem; line-height: 1; }
+    
+    /* Video Background for Solutions */
+    .video-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: 0; }
+    
+    .lang-btn { font-family: 'DM Mono'; font-size: 0.7rem; border: 1px solid rgba(0,245,228,0.3); padding: 4px 8px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--neon); color: var(--neon); background: rgba(0,245,228,0.1); }
   </style>
 </head>
 <body>
 
+<canvas id="vortex-canvas"></canvas>
+
 <nav class="fixed w-full z-50 glass py-4">
   <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-    <div class="text-2xl font-display tracking-widest neon-text">DONDA DIGITAL</div>
+    <div class="text-2xl font-display tracking-tighter neon-text">DONDA DIGITAL</div>
     <div class="flex items-center gap-6">
       <div class="flex gap-2">
         <button id="btn-en" class="lang-btn active" onclick="changeLang('en')">EN</button>
         <button id="btn-cz" class="lang-btn" onclick="changeLang('cz')">CZ</button>
       </div>
-      <a href="#contact" class="btn-neon text-xs">LAUNCH</a>
+      <a href="#contact" class="btn-neon text-xs">INITIATE</a>
     </div>
   </div>
 </nav>
 
-<section class="min-h-screen flex items-center pt-20 px-6">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center w-full">
+<section class="min-h-screen flex items-center relative z-10 px-6">
+  <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2">
     <div>
-      <h1 class="text-7xl md:text-9xl font-display leading-none mb-6">
-        <span id="h1-1">BEYOND</span><br>
-        <span class="neon-text" id="h1-2">STANDARD</span><br>
-        <span id="h1-3">WEBS</span>
+      <h1 class="text-8xl md:text-[11rem] font-display leading-[0.85] mb-8">
+        <span id="h1-1">BEYOND</span><br><span class="neon-text" id="h1-2">LIMITS</span>
       </h1>
-      <p id="hero-p" class="text-slate-400 text-lg mb-8 max-w-md">
-        We engineer high-performance ecosystems that turn attention into revenue. ROI-driven marketing, cinematic design.
+      <p id="hero-p" class="text-slate-400 text-lg mb-10 max-w-md leading-relaxed">
+        High-end digital performance. We don't just build webs; we engineer growth engines with cinematic precision.
       </p>
-      <div class="flex gap-4">
-        <a href="#contact" class="btn-neon" id="cta-main">GET STARTED</a>
+      <div class="flex gap-4 mb-16">
+        <a href="#contact" class="btn-neon" id="cta-main">START PROJECT</a>
       </div>
-      <div class="mt-12 flex gap-10">
+      <div class="flex gap-12">
+        <div>
+          <div class="stat-number neon-text">800K<span class="text-2xl">Kč</span></div>
+          <div class="text-xs font-mono uppercase opacity-50" id="stat-2">Revenue Generated</div>
+        </div>
         <div>
           <div class="stat-number neon-text">50+</div>
           <div class="text-xs font-mono uppercase opacity-50" id="stat-1">Projects</div>
         </div>
-        <div>
-          <div class="stat-number neon-text">$100k+</div>
-          <div class="text-xs font-mono uppercase opacity-50" id="stat-2">Revenue</div>
-        </div>
       </div>
-    </div>
-    <div id="spline-container">
-      <spline-viewer url="https://prod.spline.design/glassknotvortex-U1qOtOLNioClBYlQAtyy1tT5/scene.splinecode"></spline-viewer>
     </div>
   </div>
 </section>
 
-<section id="solutions" class="video-container flex items-center justify-center">
+<section id="solutions" class="py-32 relative overflow-hidden glass mx-6 rounded-3xl my-10">
   <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_25fps.mp4" type="video/mp4">
   </video>
-  <div class="video-overlay"></div>
-  <div class="relative z-10 text-center px-6">
-    <h2 class="text-5xl font-display mb-12" id="sol-title">CHOOSE YOUR WEAPON</h2>
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="glass p-8 rounded-lg">
-        <div class="text-4xl mb-4">🛒</div>
-        <h3 class="text-xl font-bold mb-4" id="card1-t">E-Commerce</h3>
-        <p class="text-3xl font-display neon-text mb-4" id="p1">From 2500€</p>
-        <p class="text-sm opacity-60" id="card1-d">Full store expansion and conversion setup.</p>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-6xl font-display mb-16" id="sol-title">CHOOSE YOUR WEAPON</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass p-10 border-white border-opacity-5">
+        <h3 class="text-2xl font-bold mb-4" id="card1-t">E-Commerce</h3>
+        <p class="text-4xl font-display neon-text mb-6" id="p1">2.500 €</p>
+        <p class="text-sm opacity-50" id="card1-d">Scalable shops built for high volume.</p>
       </div>
-      <div class="glass p-8 rounded-lg border-neon-cyan border-opacity-50">
-        <div class="text-4xl mb-4">💎</div>
-        <h3 class="text-xl font-bold mb-4" id="card2-t">High-End Web</h3>
-        <p class="text-3xl font-display neon-text mb-4" id="p2">From 1500€</p>
-        <p class="text-sm opacity-60" id="card2-d">Cinematic 3D experience and brand architecture.</p>
+      <div class="glass p-10 border-neon-cyan border-opacity-40 scale-105 shadow-2xl">
+        <h3 class="text-2xl font-bold mb-4" id="card2-t">Luxury Web</h3>
+        <p class="text-4xl font-display neon-text mb-6" id="p2">1.500 €</p>
+        <p class="text-sm opacity-50" id="card2-d">Cinematic experience for premium brands.</p>
       </div>
-      <div class="glass p-8 rounded-lg">
-        <div class="text-4xl mb-4">📈</div>
-        <h3 class="text-xl font-bold mb-4" id="card3-t">Growth Marketing</h3>
-        <p class="text-3xl font-display neon-text mb-4" id="p3">From 800€/mo</p>
-        <p class="text-sm opacity-60" id="card3-d">Scalable Ads, SEO and content strategy.</p>
+      <div class="glass p-10 border-white border-opacity-5">
+        <h3 class="text-2xl font-bold mb-4" id="card3-t">Growth Ads</h3>
+        <p class="text-4xl font-display neon-text mb-6" id="p3">800 €/mo</p>
+        <p class="text-sm opacity-50" id="card3-d">Performance marketing that hits target.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="py-24 px-6">
-  <div class="max-w-3xl mx-auto glass p-10 rounded-xl">
-    <h2 class="text-4xl font-display mb-8 text-center" id="contact-t">INITIALIZE CONTACT</h2>
-    <form action="https://formspree.io/f/YOUR_CODE_HERE" method="POST" class="grid gap-6">
-      <input type="text" name="name" placeholder="Name" class="bg-midnight-900 border border-slate-800 p-4 rounded outline-none focus:border-neon-cyan" required>
-      <input type="email" name="email" placeholder="Email" class="bg-midnight-900 border border-slate-800 p-4 rounded outline-none focus:border-neon-cyan" required>
-      <textarea name="message" rows="4" placeholder="Project details" class="bg-midnight-900 border border-slate-800 p-4 rounded outline-none focus:border-neon-cyan" required></textarea>
-      <button type="submit" class="btn-neon py-4 font-bold" id="form-btn">SEND TRANSMISSION</button>
-      <p class="text-[10px] text-center opacity-40" id="form-note">A personalized invoice and payment instructions will be sent to your email.</p>
-    </form>
-  </div>
-</section>
-
-<footer class="py-12 border-t border-slate-900 text-center">
-  <div class="text-xs font-mono opacity-40 mb-4">DONDA DIGITAL // HQ: donda.digital@gmail.com</div>
-  <div class="text-[10px] opacity-20">© 2024 ALL RIGHTS RESERVED. BEYOND STANDARD.</div>
-</footer>
-
 <script>
-  // 1. Smooth Scroll (Lenis)
+  // 1. Lenis Smooth Scroll
   const lenis = new Lenis();
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 
-  // 2. 3D Vortex Scroll Effect
-  const splineContainer = document.getElementById('spline-container');
-  window.addEventListener('scroll', () => {
-    const scrollPercent = window.scrollY / (document.body.offsetHeight - window.innerHeight);
-    const scale = 1 + scrollPercent * 0.3;
-    const rotation = scrollPercent * 45;
-    splineContainer.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
-  });
+  // 2. Interactive 3D Vortex (Canvas Particles)
+  const canvas = document.getElementById('vortex-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let scrollY = 0;
 
-  // 3. Language & Currency Logic
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2;
+      this.speedX = (Math.random() - 0.5) * 1;
+      this.speedY = (Math.random() - 0.5) * 1;
+      this.opacity = Math.random();
+    }
+    update() {
+      this.x += this.speedX + (scrollY * 0.05); // Reacts to scroll
+      this.y += this.speedY;
+      if (this.x > canvas.width) this.x = 0;
+      if (this.y > canvas.height) this.y = 0;
+    }
+    draw() {
+      ctx.fillStyle = `rgba(0, 245, 228, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 200; i++) particles.push(new Particle());
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    scrollY = window.pageYOffset;
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // 3. Language & Currency
   const content = {
     en: {
-      h1_1: "BEYOND", h1_2: "STANDARD", h1_3: "WEBS",
-      hero_p: "We engineer high-performance ecosystems that turn attention into revenue. ROI-driven marketing, cinematic design.",
-      cta: "GET STARTED",
-      st1: "Projects", st2: "Revenue",
-      sol_t: "CHOOSE YOUR WEAPON",
-      c1t: "E-Commerce", c1d: "Full store expansion and conversion setup.",
-      c2t: "High-End Web", c2d: "Cinematic 3D experience and brand architecture.",
-      c3t: "Growth Marketing", c3d: "Scalable Ads, SEO and content strategy.",
-      cont_t: "INITIALIZE CONTACT",
-      f_btn: "SEND TRANSMISSION",
-      note: "A personalized invoice and payment instructions will be sent to your email.",
-      p1: "From 2500€", p2: "From 1500€", p3: "From 800€/mo"
+      h1_1: "BEYOND", h1_2: "LIMITS", hero_p: "High-end digital performance. We don't just build webs; we engineer growth engines with cinematic precision.",
+      cta: "START PROJECT", sol_t: "CHOOSE YOUR WEAPON", st1: "Projects", st2: "Revenue Generated",
+      p1: "2.500 €", p2: "1.500 €", p3: "800 €/mo"
     },
     cz: {
-      h1_1: "ZA HRANICÍ", h1_2: "STANDARDNÍCH", h1_3: "WEBU",
-      hero_p: "Stavíme výkonné digitální ekosystémy, které mění pozornost v zisk. Marketing zaměřený na ROI, filmový design.",
-      cta: "ZAČÍT PROJEKT",
-      st1: "Projektů", st2: "Obrat",
-      sol_t: "VYBERTE SI ZBRAŇ",
-      c1t: "E-Commerce", c1d: "Expanze e-shopu a nastavení konverzí.",
-      c2t: "Prémiový Web", c2d: "Filmový 3D zážitek a brand architektura.",
-      c3t: "Growth Marketing", c3d: "Škálovatelné reklamy, SEO a obsahová strategie.",
-      cont_t: "NAVÁZAT KONTAKT",
-      f_btn: "ODESLAT DOTAZ",
-      note: "Personalizovaná faktura a instrukce k platbě budou zaslány na váš e-mail.",
-      p1: "Od 62 500 Kč", p2: "Od 37 500 Kč", p3: "Od 20 000 Kč/měs"
+      h1_1: "ZA HRANICÍ", h1_2: "MOŽNOSTÍ", hero_p: "Špičkový digitální výkon. Nestavíme jen weby, vyvíjíme růstové motory s filmovou precizností.",
+      cta: "ZAČÍT PROJEKT", sol_t: "VYBERTE SI ZBRAŇ", st1: "Projektů", st2: "Vygenerovaný obrat",
+      p1: "62.500 Kč", p2: "37.500 Kč", p3: "20.000 Kč/měs"
     }
   };
 
   function changeLang(lang) {
     document.getElementById('h1-1').innerText = content[lang].h1_1;
     document.getElementById('h1-2').innerText = content[lang].h1_2;
-    document.getElementById('h1-3').innerText = content[lang].h1_3;
     document.getElementById('hero-p').innerText = content[lang].hero_p;
     document.getElementById('cta-main').innerText = content[lang].cta;
-    document.getElementById('stat-1').innerText = content[lang].st1;
-    document.getElementById('stat-2').innerText = content[lang].st2;
     document.getElementById('sol-title').innerText = content[lang].sol_t;
-    document.getElementById('card1-t').innerText = content[lang].c1t;
-    document.getElementById('card1-d').innerText = content[lang].c1d;
-    document.getElementById('card2-t').innerText = content[lang].c2t;
-    document.getElementById('card2-d').innerText = content[lang].c2d;
-    document.getElementById('card3-t').innerText = content[lang].c3t;
-    document.getElementById('card3-d').innerText = content[lang].c3d;
-    document.getElementById('contact-t').innerText = content[lang].cont_t;
-    document.getElementById('form-btn').innerText = content[lang].f_btn;
-    document.getElementById('form-note').innerText = content[lang].note;
+    document.getElementById('stat-1').innerText = content[lang].st1;
+    document.getElementById('stat-2').innerHTML = lang === 'en' ? '32.000<span class="text-2xl">€</span>' : '800.000<span class="text-2xl">Kč</span>';
     document.getElementById('p1').innerText = content[lang].p1;
     document.getElementById('p2').innerText = content[lang].p2;
     document.getElementById('p3').innerText = content[lang].p3;
-
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-cz').classList.toggle('active', lang === 'cz');
   }
 </script>
-
 </body>
 </html>
