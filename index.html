@@ -1,1 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DONDA DIGITAL — Beyond Standard Webs</title>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: {
+              950: '#020818',
+              900: '#050f2c',
+              800: '#081540',
+              700: '#0a1c54',
+            },
+            neon: {
+              cyan: '#00f5e4',
+              blue: '#0066ff',
+              glow: '#00e5ff',
+            }
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'sans-serif'],
+            body: ['Syne', 'sans-serif'],
+            mono: ['DM Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --neon: #00f5e4;
+      --neon-dim: rgba(0, 245, 228, 0.12);
+      --neon-mid: rgba(0, 245, 228, 0.35);
+      --midnight: #020818;
+      --glass-bg: rgba(5, 20, 60, 0.55);
+      --glass-border: rgba(0, 245, 228, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--midnight);
+      font-family: 'Syne', sans-serif;
+      color: #e2eaff;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── Radial ambient glows ── */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    /* ── Neon text glow ── */
+    .neon-text {
+      color: var(--neon);
+      text-shadow: 0 0 20px rgba(0,245,228,0.6), 0 0 60px rgba(0,245,228,0.25);
+    }
+
+    /* ── Glass card ── */
+    .glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* ── Neon border glow ── */
+    .neon-border {
+      box-shadow: 0 0 0 1px rgba(0,245,228,0.4), 0 0 30px rgba(0,245,228,0.1);
+    }
+
+    /* ── Horizontal scan line ── */
+    .scan-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon), transparent);
+      animation: scanMove 4s ease-in-out infinite;
+    }
+    @keyframes scanMove {
+      0%, 100% { opacity: 0.3; transform: scaleX(0.3); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+
+    /* ── Blinking cursor ── */
+    .cursor-blink::after {
+      content: '|';
+      color: var(--neon);
+      animation: blink 1.1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(2,8,24,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,245,228,0.08);
+    }
+
+    /* ── Button ── */
+    .btn-neon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      border: 1px solid var(--neon);
+      color: var(--neon);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s, box-shadow 0.3s;
+    }
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--neon);
+      transform: translateX(-101%);
+      transition: transform 0.35s cubic-bezier(.77,0,.175,1);
+    }
+    .btn-neon:hover { color: #020818; box-shadow: 0 0 40px rgba(0,245,228,0.4); }
+    .btn-neon:hover::before { transform: translateX(0); }
+    .btn-neon span { position: relative; z-index: 1; }
+
+    .btn-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--neon);
+      border: 1px solid var(--neon);
+      color: #020818;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .btn-solid:hover { box-shadow: 0 0 50px rgba(0,245,228,0.5); transform: translateY(-2px); }
+
+    /* ── Spline placeholder ── */
+    .spline-zone {
+      background: radial-gradient(ellipse at center, rgba(0,102,255,0.08) 0%, transparent 70%);
+      border: 1px dashed rgba(0,245,228,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* ── Floating hexagon decoration ── */
+    .hex {
+      width: 60px; height: 60px;
+      background: transparent;
+      border: 1px solid rgba(0,245,228,0.25);
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      animation: floatHex 6s ease-in-out infinite;
+    }
+    @keyframes floatHex {
+      0%,100%{transform:translateY(0) rotate(0deg);}
+      50%{transform:translateY(-20px) rotate(15deg);}
+    }
+
+    /* ── Grid lines background ── */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0,245,228,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,228,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── Stat counter ── */
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--neon);
+      text-shadow: 0 0 30px rgba(0,245,228,0.4);
+      line-height: 1;
+    }
+
+    /* ── Pricing card featured ── */
+    .card-featured {
+      border-color: rgba(0,245,228,0.5) !important;
+      box-shadow: 0 0 60px rgba(0,245,228,0.12), inset 0 0 40px rgba(0,245,228,0.04);
+      transform: scale(1.03);
+    }
+    .card-featured .plan-badge {
+      display: inline-block;
+    }
+
+    /* ── Form inputs ── */
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(5, 20, 60, 0.6);
+      border: 1px solid rgba(0,245,228,0.18);
+      color: #e2eaff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-input:focus {
+      border-color: var(--neon);
+      box-shadow: 0 0 20px rgba(0,245,228,0.15);
+    }
+    .form-input::placeholder { color: rgba(226,234,255,0.3); }
+
+    /* ── Marquee ── */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon);
+      opacity: 0.7;
+    }
+
+    /* ── Checklist ── */
+    .check-item::before {
+      content: '✦';
+      color: var(--neon);
+      margin-right: 10px;
+      font-size: 0.7rem;
+    }
+
+    /* ── Diagonal divider ── */
+    .diagonal {
+      clip-path: polygon(0 0, 100% 6%, 100% 100%, 0% 100%);
+      margin-top: -40px;
+    }
+
+    /* ── Scroll indicator ── */
+    .scroll-dot {
+      width: 6px; height: 6px;
+      background: var(--neon);
+      border-radius: 50%;
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%,100%{transform:translateY(0);opacity:1;}
+      50%{transform:translateY(12px);opacity:0.3;}
+    }
+
+    /* ── Animations on scroll (JS-triggered) ── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Mobile responsive hero text ── */
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Pricing toggle ── */
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      line-height: 1;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(0,245,228,0.08);
+    }
+
+    @media (max-width: 768px) {
+      .card-featured { transform: scale(1); }
+      .spline-zone { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav class="animate__animated animate__fadeInDown">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 relative">
+        <div class="absolute inset-0 border border-neon-cyan opacity-60" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)"></div>
+        <div class="absolute inset-1 bg-neon-cyan opacity-20" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)"></div>
+      </div>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:0.08em;color:#00f5e4;">DONDA<span style="color:#e2eaff;"> DIGITAL</span></span>
+    </div>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-sm font-body text-slate-400 hover:text-neon-cyan transition-colors duration-200 tracking-wide">Services</a>
+      <a href="#results" class="text-sm font-body text-slate-400 hover:text-neon-cyan transition-colors duration-200 tracking-wide">Results</a>
+      <a href="#pricing" class="text-sm font-body text-slate-400 hover:text-neon-cyan transition-colors duration-200 tracking-wide">Pricing</a>
+      <a href="#contact" class="btn-neon text-xs py-2 px-5"><span>Get Started</span></a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2">
+      <span class="w-6 h-px bg-neon-cyan block transition-all"></span>
+      <span class="w-4 h-px bg-neon-cyan block transition-all"></span>
+      <span class="w-6 h-px bg-neon-cyan block transition-all"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-neon-cyan border-opacity-10">
+    <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="#services" class="text-slate-300 font-body tracking-wide">Services</a>
+      <a href="#results" class="text-slate-300 font-body tracking-wide">Results</a>
+      <a href="#pricing" class="text-slate-300 font-body tracking-wide">Pricing</a>
+      <a href="#contact" class="btn-neon text-xs py-3 px-6 self-start"><span>Get Started</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="relative min-h-screen grid-bg flex items-center overflow-hidden pt-20">
+
+  <!-- Ambient glows -->
+  <div class="glow-orb w-96 h-96 bg-blue-600 opacity-15" style="top:-100px;left:-80px;"></div>
+  <div class="glow-orb w-80 h-80 opacity-10" style="background:#00f5e4;top:30%;right:5%;"></div>
+  <div class="glow-orb w-64 h-64 bg-indigo-800 opacity-20" style="bottom:0;left:40%;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 py-20 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+      <!-- Left: Copy -->
+      <div class="relative z-10">
+        <!-- Label -->
+        <div class="animate__animated animate__fadeIn animate__delay-1s flex items-center gap-3 mb-6">
+          <div class="scan-line w-12"></div>
+          <span class="section-label">Digital Performance Agency</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-headline animate__animated animate__fadeInUp text-white mb-2">
+          BEYOND<br/>
+          <span class="neon-text">STANDARD</span><br/>
+          WEBS
+        </h1>
+
+        <div class="scan-line w-48 my-6 opacity-60"></div>
+
+        <!-- Sub-headline -->
+        <p class="animate__animated animate__fadeInUp animate__delay-1s text-slate-300 text-lg max-w-md mb-8 leading-relaxed" style="font-weight:400;">
+          We engineer digital ecosystems that convert attention into revenue. 
+          <span class="neon-text font-semibold">ROI-driven marketing</span> — not guesswork.
+        </p>
+
+        <!-- Mono tag -->
+        <p class="font-mono text-xs text-neon-cyan opacity-60 mb-8 animate__animated animate__fadeIn animate__delay-2s cursor-blink">
+          &gt; dd.init({ mode: "full_scale" })
+        </p>
+
+        <!-- CTAs -->
+        <div class="animate__animated animate__fadeInUp animate__delay-1s flex flex-wrap gap-4">
+          <a href="#contact" class="btn-solid"><span>Launch Your Project</span> <span>→</span></a>
+          <a href="#pricing" class="btn-neon"><span>View Packages</span></a>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="animate__animated animate__fadeIn animate__delay-2s flex gap-8 mt-12 pt-8 border-t border-white border-opacity-5">
+          <div>
+            <div class="font-mono text-xs text-slate-500 mb-1">avg. ROI</div>
+            <div class="stat-number" style="font-size:1.8rem;">340<span class="neon-text">%</span></div>
+          </div>
+          <div>
+            <div class="font-mono text-xs text-slate-500 mb-1">projects live</div>
+            <div class="stat-number" style="font-size:1.8rem;">120<span class="neon-text">+</span></div>
+          </div>
+          <div>
+            <div class="font-mono text-xs text-slate-500 mb-1">uptime SLA</div>
+            <div class="stat-number" style="font-size:1.8rem;">99<span class="neon-text">.9%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Spline 3D zone -->
+      <div class="hidden lg:flex spline-zone rounded-sm h-[500px] relative overflow-hidden">
+        <!-- Decorative corner accents -->
+        <div class="absolute top-3 left-3 w-6 h-6 border-t border-l border-neon-cyan opacity-50"></div>
+        <div class="absolute top-3 right-3 w-6 h-6 border-t border-r border-neon-cyan opacity-50"></div>
+        <div class="absolute bottom-3 left-3 w-6 h-6 border-b border-l border-neon-cyan opacity-50"></div>
+        <div class="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-neon-cyan opacity-50"></div>
+
+        <!-- Placeholder content — replace with <spline-viewer> -->
+        <div class="text-center px-8">
+          <div class="hex mx-auto mb-6" style="width:80px;height:80px;animation-delay:0s;"></div>
+          <div class="hex mx-auto mb-4" style="width:50px;height:50px;animation-delay:1.5s;opacity:0.5;"></div>
+          <p class="font-mono text-xs text-neon-cyan opacity-40 mb-2 tracking-widest">// 3D OBJECT ZONE</p>
+          <p class="font-mono text-xs text-slate-600 max-w-xs mx-auto">
+            Replace this block with your<br/>
+            <span class="text-neon-cyan opacity-60">&lt;spline-viewer url="…"&gt;</span>
+          </p>
+        </div>
+
+        <!-- Animated rings -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none" style="opacity:0.06">
+          <div class="absolute w-72 h-72 border border-neon-cyan rounded-full" style="animation:floatHex 8s ease-in-out infinite;"></div>
+          <div class="absolute w-48 h-48 border border-neon-cyan rounded-full" style="animation:floatHex 5s ease-in-out infinite reverse;"></div>
+          <div class="absolute w-24 h-24 border border-neon-cyan rounded-full" style="animation:floatHex 3s ease-in-out infinite;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+    <span class="font-mono text-xs text-slate-600 tracking-widest">SCROLL</span>
+    <div class="w-px h-8 bg-gradient-to-b from-neon-cyan to-transparent"></div>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     MARQUEE TICKER
+════════════════════════════════════════ -->
+<div class="overflow-hidden border-y border-white border-opacity-5 py-4" style="background:rgba(0,245,228,0.03)">
+  <div class="marquee-track">
+    <div class="flex gap-12 items-center pr-12 text-neon-cyan font-mono text-xs opacity-50 tracking-widest uppercase">
+      <span>ROI-Driven Marketing</span><span class="opacity-30">✦</span>
+      <span>Performance Ads</span><span class="opacity-30">✦</span>
+      <span>Full-Stack Web Dev</span><span class="opacity-30">✦</span>
+      <span>SEO Domination</span><span class="opacity-30">✦</span>
+      <span>Brand Architecture</span><span class="opacity-30">✦</span>
+      <span>Conversion Funnels</span><span class="opacity-30">✦</span>
+      <span>Data Analytics</span><span class="opacity-30">✦</span>
+      <span>Scale at Speed</span><span class="opacity-30">✦</span>
+    </div>
+    <div class="flex gap-12 items-center pr-12 text-neon-cyan font-mono text-xs opacity-50 tracking-widest uppercase">
+      <span>ROI-Driven Marketing</span><span class="opacity-30">✦</span>
+      <span>Performance Ads</span><span class="opacity-30">✦</span>
+      <span>Full-Stack Web Dev</span><span class="opacity-30">✦</span>
+      <span>SEO Domination</span><span class="opacity-30">✦</span>
+      <span>Brand Architecture</span><span class="opacity-30">✦</span>
+      <span>Conversion Funnels</span><span class="opacity-30">✦</span>
+      <span>Data Analytics</span><span class="opacity-30">✦</span>
+      <span>Scale at Speed</span><span class="opacity-30">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section id="services" class="py-28 relative overflow-hidden">
+  <div class="glow-orb w-96 h-96 bg-cyan-500 opacity-5" style="bottom:0;right:-100px;"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-start justify-between mb-16 flex-wrap gap-6">
+      <div class="reveal">
+        <p class="section-label mb-3">What We Build</p>
+        <h2 class="font-display text-5xl md:text-6xl text-white">
+          WEAPONS FOR<br/><span class="neon-text">DIGITAL WAR</span>
+        </h2>
+      </div>
+      <p class="reveal text-slate-400 max-w-xs text-sm leading-relaxed self-end">
+        Every service is engineered around one metric: measurable growth. We don't sell vanity — we sell results.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Service Card -->
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300" style="border-color:rgba(0,245,228,0.08)">
+        <div class="text-neon-cyan text-2xl mb-4">⬡</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">Web Engineering</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Blazing-fast, conversion-optimised sites and web apps. Built to impress humans and dominate search engines.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[01/06]</div>
+      </div>
+
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300" style="border-color:rgba(0,245,228,0.08)">
+        <div class="text-neon-cyan text-2xl mb-4">◈</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">Performance Marketing</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Meta, Google, TikTok — we run paid media like a trading desk. Every dollar tracked to its return.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[02/06]</div>
+      </div>
+
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300" style="border-color:rgba(0,245,228,0.08)">
+        <div class="text-neon-cyan text-2xl mb-4">◉</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">SEO & Content</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Organic rankings that compound over time. We build topical authority that outlasts algorithm updates.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[03/06]</div>
+      </div>
+
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300" style="border-color:rgba(0,245,228,0.08)">
+        <div class="text-neon-cyan text-2xl mb-4">▣</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">Brand & Creative</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Identity systems, visual language, and creative direction that make your brand impossible to ignore.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[04/06]</div>
+      </div>
+
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300" style="border-color:rgba(0,245,228,0.08)">
+        <div class="text-neon-cyan text-2xl mb-4">⬙</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">CRO & Analytics</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">We A/B test everything. Heatmaps, funnels, attribution — turn your existing traffic into more revenue.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[05/06]</div>
+      </div>
+
+      <div class="reveal glass p-7 group hover:border-neon-cyan hover:border-opacity-40 transition-all duration-300 relative overflow-hidden" style="border-color:rgba(0,245,228,0.08)">
+        <div class="absolute inset-0 bg-gradient-to-br from-neon-cyan to-blue-600 opacity-5 group-hover:opacity-10 transition-opacity"></div>
+        <div class="text-neon-cyan text-2xl mb-4">✦</div>
+        <h3 class="font-body font-700 text-white text-lg mb-3 group-hover:text-neon-cyan transition-colors">AI-Powered Growth</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Automation, AI content, chatbots and data pipelines. Operate at scale without scaling your headcount.</p>
+        <div class="font-mono text-xs text-neon-cyan opacity-40">[06/06]</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     RESULTS / STATS
+════════════════════════════════════════ -->
+<section id="results" class="py-24 diagonal grid-bg relative overflow-hidden" style="background-color:#05112a;">
+  <div class="glow-orb w-72 h-72 opacity-10" style="background:#00f5e4;top:-50px;left:20%;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 pt-8">
+    <div class="text-center mb-16 reveal">
+      <p class="section-label mb-3">By The Numbers</p>
+      <h2 class="font-display text-5xl md:text-6xl text-white">NUMBERS THAT<br/><span class="neon-text">DON'T LIE</span></h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="reveal">
+        <div class="stat-number">$42<span style="font-size:2rem">M</span></div>
+        <p class="font-mono text-xs text-slate-500 mt-2 tracking-widest">Revenue Generated</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="stat-number">340<span style="font-size:2.5rem">%</span></div>
+        <p class="font-mono text-xs text-slate-500 mt-2 tracking-widest">Average ROI</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="stat-number">120<span style="font-size:2.5rem">+</span></div>
+        <p class="font-mono text-xs text-slate-500 mt-2 tracking-widest">Brands Scaled</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.3s">
+        <div class="stat-number">3.2<span style="font-size:2rem">×</span></div>
+        <p class="font-mono text-xs text-slate-500 mt-2 tracking-widest">Avg. Traffic Lift</p>
+      </div>
+    </div>
+
+    <!-- Testimonial strip -->
+    <div class="mt-20 glass p-8 md:p-10 max-w-3xl mx-auto reveal" style="border-color:rgba(0,245,228,0.15)">
+      <div class="flex items-start gap-4">
+        <div class="text-neon-cyan text-5xl leading-none opacity-30 font-display">"</div>
+        <div>
+          <p class="text-slate-200 text-base md:text-lg leading-relaxed mb-5">
+            Donda Digital didn't just build our site — they rebuilt our entire acquisition engine. We went from $80k/month to $380k in under six months. The data is real.
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full border border-neon-cyan border-opacity-30 flex items-center justify-center font-display text-neon-cyan text-sm">J</div>
+            <div>
+              <p class="text-white text-sm font-semibold">James Okafor</p>
+              <p class="font-mono text-xs text-slate-500">CEO, Vektor Commerce</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PRICING
+════════════════════════════════════════ -->
+<section id="pricing" class="py-28 relative overflow-hidden">
+  <div class="glow-orb w-96 h-96 bg-indigo-700 opacity-10" style="top:0;left:-100px;"></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="section-label mb-3">Packages</p>
+      <h2 class="font-display text-5xl md:text-6xl text-white mb-4">CHOOSE YOUR<br/><span class="neon-text">ALTITUDE</span></h2>
+      <p class="text-slate-400 max-w-md mx-auto text-sm">All plans include dedicated account management, weekly reporting, and a 30-day performance guarantee.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+
+      <!-- Starter -->
+      <div class="reveal glass p-8 relative" style="border-color:rgba(0,245,228,0.12)">
+        <div class="absolute top-3 right-3 w-5 h-5 border-t border-r border-neon-cyan opacity-25"></div>
+        <div class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-neon-cyan opacity-25"></div>
+
+        <p class="section-label mb-2">Starter</p>
+        <div class="price-amount text-white mb-1">$2,400<span class="text-slate-500 text-base font-body font-normal">/mo</span></div>
+        <p class="font-mono text-xs text-slate-500 mb-7 tracking-wide">For emerging brands</p>
+
+        <div class="scan-line mb-7 opacity-30"></div>
+
+        <ul class="space-y-3 mb-8 text-sm text-slate-300">
+          <li class="check-item">Brand identity audit</li>
+          <li class="check-item">Up to 5-page website</li>
+          <li class="check-item">Google Ads management</li>
+          <li class="check-item">Monthly analytics report</li>
+          <li class="check-item">2× strategy calls/month</li>
+        </ul>
+
+        <a href="#contact" class="btn-neon w-full justify-center text-xs py-3"><span>Get Started</span></a>
+      </div>
+
+      <!-- Growth (featured) -->
+      <div class="reveal glass p-8 relative card-featured" style="border-color:rgba(0,245,228,0.5)">
+        <div class="absolute top-3 right-3 w-5 h-5 border-t border-r border-neon-cyan opacity-60"></div>
+        <div class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-neon-cyan opacity-60"></div>
+
+        <!-- Badge -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span class="bg-neon-cyan text-midnight-950 font-mono text-xs px-3 py-1 tracking-widest uppercase">Most Popular</span>
+        </div>
+
+        <p class="section-label mb-2 mt-2">Growth</p>
+        <div class="price-amount neon-text mb-1">$5,800<span class="text-slate-500 text-base font-body font-normal">/mo</span></div>
+        <p class="font-mono text-xs text-slate-500 mb-7 tracking-wide">For scaling businesses</p>
+
+        <div class="scan-line mb-7"></div>
+
+        <ul class="space-y-3 mb-8 text-sm text-slate-200">
+          <li class="check-item">Full brand overhaul</li>
+          <li class="check-item">Custom web app / e-comm</li>
+          <li class="check-item">Multi-channel paid media</li>
+          <li class="check-item">SEO + content strategy</li>
+          <li class="check-item">CRO & A/B testing</li>
+          <li class="check-item">Weekly analytics briefing</li>
+          <li class="check-item">4× strategy calls/month</li>
+        </ul>
+
+        <a href="#contact" class="btn-solid w-full justify-center text-xs py-3">Scale Now</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="reveal glass p-8 relative" style="border-color:rgba(0,245,228,0.12)">
+        <div class="absolute top-3 right-3 w-5 h-5 border-t border-r border-neon-cyan opacity-25"></div>
+        <div class="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-neon-cyan opacity-25"></div>
+
+        <p class="section-label mb-2">Enterprise</p>
+        <div class="price-amount text-white mb-1">Custom<span class="text-slate-500 text-base font-body font-normal"> pricing</span></div>
+        <p class="font-mono text-xs text-slate-500 mb-7 tracking-wide">For market leaders</p>
+
+        <div class="scan-line mb-7 opacity-30"></div>
+
+        <ul class="space-y-3 mb-8 text-sm text-slate-300">
+          <li class="check-item">Dedicated growth team</li>
+          <li class="check-item">AI automation systems</li>
+          <li class="check-item">Full-funnel ownership</li>
+          <li class="check-item">Real-time dashboards</li>
+          <li class="check-item">Priority SLA (24h)</li>
+          <li class="check-item">Quarterly off-site review</li>
+          <li class="check-item">White-glove onboarding</li>
+        </ul>
+
+        <a href="#contact" class="btn-neon w-full justify-center text-xs py-3"><span>Book a Call</span></a>
+      </div>
+
+    </div>
+
+    <p class="text-center font-mono text-xs text-slate-600 mt-8 tracking-wide">All prices in USD · Billed monthly · Cancel anytime after 90 days</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section id="contact" class="py-28 relative overflow-hidden" style="background:rgba(5,15,40,0.7)">
+  <div class="glow-orb w-80 h-80 opacity-10" style="background:#00f5e4;bottom:-60px;right:-60px;"></div>
+
+  <div class="max-w-2xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="section-label mb-3">Contact</p>
+      <h2 class="font-display text-5xl md:text-6xl text-white mb-4">START THE<br/><span class="neon-text">SIGNAL</span></h2>
+      <p class="text-slate-400 text-sm">Tell us about your brand. We'll respond within 24 hours with a tailored growth audit — free.</p>
+    </div>
+
+    <div class="reveal glass p-8 md:p-10 relative" style="border-color:rgba(0,245,228,0.18)">
+      <!-- Corner accents -->
+      <div class="absolute top-3 left-3 w-6 h-6 border-t border-l border-neon-cyan opacity-40"></div>
+      <div class="absolute top-3 right-3 w-6 h-6 border-t border-r border-neon-cyan opacity-40"></div>
+      <div class="absolute bottom-3 left-3 w-6 h-6 border-b border-l border-neon-cyan opacity-40"></div>
+      <div class="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-neon-cyan opacity-40"></div>
+
+      <form onsubmit="handleSubmit(event)" class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="font-mono text-xs text-slate-500 tracking-widest uppercase block mb-2">Full Name</label>
+            <input type="text" class="form-input" placeholder="Alex Johnson" required />
+          </div>
+          <div>
+            <label class="font-mono text-xs text-slate-500 tracking-widest uppercase block mb-2">Email</label>
+            <input type="email" class="form-input" placeholder="alex@company.com" required />
+          </div>
+        </div>
+
+        <div>
+          <label class="font-mono text-xs text-slate-500 tracking-widest uppercase block mb-2">Company / Brand</label>
+          <input type="text" class="form-input" placeholder="ACME Corp" />
+        </div>
+
+        <div>
+          <label class="font-mono text-xs text-slate-500 tracking-widest uppercase block mb-2">Monthly Budget</label>
+          <select class="form-input" style="appearance:none;cursor:pointer;">
+            <option value="" disabled selected>Select a range</option>
+            <option>$1,000 – $3,000</option>
+            <option>$3,000 – $7,000</option>
+            <option>$7,000 – $15,000</option>
+            <option>$15,000+</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="font-mono text-xs text-slate-500 tracking-widest uppercase block mb-2">Tell Us Your Goal</label>
+          <textarea class="form-input" rows="4" placeholder="We want to triple revenue in 12 months…" required></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="btn-solid w-full justify-center py-4 text-sm">
+            <span>Send Transmission</span> <span>→</span>
+          </button>
+        </div>
+
+        <p class="font-mono text-xs text-slate-600 text-center tracking-wide">No spam. No pushy sales calls. Just results-first dialogue.</p>
+      </form>
+
+      <!-- Success state (hidden) -->
+      <div id="successMsg" class="hidden text-center py-10">
+        <div class="neon-text text-4xl font-display mb-3">SIGNAL RECEIVED</div>
+        <p class="text-slate-300 text-sm">We'll reach back within 24 hours with your free audit.</p>
+        <div class="scan-line mt-6 w-24 mx-auto"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="py-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 relative">
+          <div class="absolute inset-0 border border-neon-cyan opacity-50" style="clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)"></div>
+        </div>
+        <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:0.08em;color:#00f5e4;">DONDA<span style="color:#e2eaff;"> DIGITAL</span></span>
+      </div>
+
+      <div class="flex gap-6 font-mono text-xs text-slate-500 tracking-widest">
+        <a href="#services" class="hover:text-neon-cyan transition-colors">Services</a>
+        <a href="#pricing" class="hover:text-neon-cyan transition-colors">Pricing</a>
+        <a href="#contact" class="hover:text-neon-cyan transition-colors">Contact</a>
+      </div>
+
+      <p class="font-mono text-xs text-slate-700 tracking-wide">© 2025 Donda Digital. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  // Close menu on link click
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const success = document.getElementById('successMsg');
+    form.style.display = 'none';
+    success.classList.remove('hidden');
+    success.classList.add('animate__animated', 'animate__fadeIn');
+  }
+
+  // ── Staggered reveal delays ──
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    if (!el.style.transitionDelay) {
+      el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    }
+  });
+</script>
+
+</body>
+</html>
