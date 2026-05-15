@@ -1395,5 +1395,216 @@ contactForm.addEventListener('submit', (e) => {
      guaranteeing it is defined before new Lenis() runs inside
      the 'load' event handler above. -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <!-- ═══════════════════════════════════════════
+     THREE.JS PARTICLE VORTEX BACKGROUND
+     Paste this block just before </body>
+═══════════════════════════════════════════ -->
+
+<!-- 1. Three.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+
+<!-- 2. Canvas CSS — fixed background, never blocks content -->
+<style>
+  #vortex-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;        /* sits behind all page content */
+    pointer-events: none;
+    display: block;
+  }
+</style>
+
+<!-- 3. Canvas element -->
+<canvas id="vortex-canvas"></canvas>
+
+<!-- 4. Vortex script -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── CONFIG ─────────────────────────────── */
+  const CFG = {
+    count:          6000,     // total particles
+    arms:           4,        // spiral arms
+    armTightness:   3.2,      // how tightly arms wind
+    spread:         2.8,      // radial spread of the disk
+    thickness:      0.28,     // vertical thickness
+    baseSpeed:      0.00018,  // rotation speed (rad/frame)
+    driftSpeed:     0.00006,  // secondary drift
+    particleSize:   1.4,      // base gl_PointSize
+    sizeVariance:   1.1,
+    mouseStrength:  0.18,     // how much mouse tilts the vortex
+    mouseLerp:      0.06,     // smoothing for mouse follow
+    colorInner:     { r: 0.0,  g: 0.94, b: 1.0  }, // #00f0ff cyan core
+    colorMid:       { r: 1.0,  g: 0.18, b: 0.49 }, // #ff2d7e magenta
+    colorOuter:     { r: 0.13, g: 0.08, b: 0.35 }, // deep indigo rim
+    bgColor:        0x04060f, // must match --bg CSS token
+  };
+
+  /* ── SCENE SETUP ─────────────────────────── */
+  const canvas   = document.getElementById('vortex-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(CFG.bgColor, 1);
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.set(0, 3.8, 0);
+  camera.lookAt(0, 0, 0);
+
+  /* ── PARTICLE GEOMETRY ───────────────────── */
+  const positions = new Float32Array(CFG.count * 3);
+  const colors    = new Float32Array(CFG.count * 3);
+  const sizes     = new Float32Array(CFG.count);
+  const phases    = new Float32Array(CFG.count); // per-particle phase offset
+
+  for (let i = 0; i < CFG.count; i++) {
+    const t      = Math.random();                       // 0..1 along arm
+    const arm    = Math.floor(Math.random() * CFG.arms);
+    const angle  = (arm / CFG.arms) * Math.PI * 2
+                 + t * Math.PI * 2 * CFG.armTightness;
+
+    const radius = Math.pow(t, 0.55) * CFG.spread
+                 + (Math.random() - 0.5) * 0.35;       // scatter
+    const y      = (Math.random() - 0.5) * CFG.thickness * (1 - t * 0.7);
+
+    positions[i * 3]     = Math.cos(angle) * radius;
+    positions[i * 3 + 1] = y;
+    positions[i * 3 + 2] = Math.sin(angle) * radius;
+
+    // colour: lerp inner→mid→outer based on normalised radius
+    const rt = Math.min(radius / CFG.spread, 1);
+    let r, g, b;
+    if (rt < 0.5) {
+      const f = rt / 0.5;
+      r = CFG.colorInner.r + (CFG.colorMid.r - CFG.colorInner.r) * f;
+      g = CFG.colorInner.g + (CFG.colorMid.g - CFG.colorInner.g) * f;
+      b = CFG.colorInner.b + (CFG.colorMid.b - CFG.colorInner.b) * f;
+    } else {
+      const f = (rt - 0.5) / 0.5;
+      r = CFG.colorMid.r + (CFG.colorOuter.r - CFG.colorMid.r) * f;
+      g = CFG.colorMid.g + (CFG.colorOuter.g - CFG.colorMid.g) * f;
+      b = CFG.colorMid.b + (CFG.colorOuter.b - CFG.colorMid.b) * f;
+    }
+    colors[i * 3]     = r;
+    colors[i * 3 + 1] = g;
+    colors[i * 3 + 2] = b;
+
+    sizes[i]  = CFG.particleSize + Math.random() * CFG.sizeVariance;
+    phases[i] = Math.random() * Math.PI * 2;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(colors,    3));
+  geo.setAttribute('size',     new THREE.BufferAttribute(sizes,     1));
+
+  /* ── SHADER MATERIAL ─────────────────────── */
+  const mat = new THREE.ShaderMaterial({
+    vertexColors: true,
+    transparent:  true,
+    depthWrite:   false,
+    blending:     THREE.AdditiveBlending,
+
+    uniforms: {
+      uTime:       { value: 0 },
+      uPixelRatio: { value: renderer.getPixelRatio() },
+    },
+
+    vertexShader: `
+      attribute float size;
+      uniform   float uTime;
+      uniform   float uPixelRatio;
+      varying   vec3  vColor;
+
+      void main() {
+        vColor = color;
+        // gentle vertical bob per particle
+        vec3 pos = position;
+        pos.y += sin(uTime * 0.6 + pos.x * 3.1 + pos.z * 2.3) * 0.018;
+
+        vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
+        gl_Position  = projectionMatrix * mvPos;
+        gl_PointSize = size * uPixelRatio * (260.0 / -mvPos.z);
+      }
+    `,
+
+    fragmentShader: `
+      varying vec3 vColor;
+
+      void main() {
+        // soft circular point
+        float d = length(gl_PointCoord - 0.5) * 2.0;
+        if (d > 1.0) discard;
+        float alpha = 1.0 - smoothstep(0.3, 1.0, d);
+        gl_FragColor = vec4(vColor, alpha * 0.82);
+      }
+    `,
+  });
+
+  const points = new THREE.Points(geo, mat);
+  scene.add(points);
+
+  /* ── MOUSE TRACKING ──────────────────────── */
+  let targetTiltX = 0;
+  let targetTiltZ = 0;
+  let currentTiltX = 0;
+  let currentTiltZ = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    // normalise to -1..1
+    targetTiltZ = ((e.clientX / window.innerWidth)  - 0.5) *  CFG.mouseStrength;
+    targetTiltX = ((e.clientY / window.innerHeight) - 0.5) * -CFG.mouseStrength;
+  }, { passive: true });
+
+  /* touch support */
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    targetTiltZ = ((t.clientX / window.innerWidth)  - 0.5) *  CFG.mouseStrength;
+    targetTiltX = ((t.clientY / window.innerHeight) - 0.5) * -CFG.mouseStrength;
+  }, { passive: true });
+
+  /* ── RESIZE HANDLER ──────────────────────── */
+  function onResize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    mat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+  }
+  window.addEventListener('resize', onResize, { passive: true });
+  onResize();
+
+  /* ── ANIMATION LOOP ──────────────────────── */
+  let frame = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    frame++;
+
+    // rotate the whole vortex
+    points.rotation.y += CFG.baseSpeed;
+    points.rotation.x += CFG.driftSpeed * Math.sin(frame * 0.002);
+
+    // smooth mouse tilt
+    currentTiltX += (targetTiltX - currentTiltX) * CFG.mouseLerp;
+    currentTiltZ += (targetTiltZ - currentTiltZ) * CFG.mouseLerp;
+
+    points.rotation.x = currentTiltX;
+    points.rotation.z = currentTiltZ;
+
+    mat.uniforms.uTime.value = frame * 0.016; // ~60fps equivalent
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+})();
+</script>
 </body>
 </html>
