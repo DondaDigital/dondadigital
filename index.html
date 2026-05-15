@@ -8,10 +8,13 @@
   <!-- Spline Viewer -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.28/build/spline-viewer.js"></script>
 
+  <!-- Three.js pro 3D elementy -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="htt...ap" rel="stylesheet"/>
 
   <style>
     /* ══════════════════════════════════════════
@@ -48,10 +51,14 @@
       font-family:var(--font-body);
       font-weight:400;
       overflow-x:hidden;
-      background-image:repeating-linear-gradient(
-        0deg,transparent,transparent 2px,
-        rgba(0,240,255,0.012) 2px,rgba(0,240,255,0.012) 4px
-      );
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(0,240,255,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,45,126,0.02) 0%, transparent 50%),
+        repeating-linear-gradient(
+          0deg,transparent,transparent 2px,
+          rgba(0,240,255,0.008) 2px,rgba(0,240,255,0.008) 4px
+        );
+      background-attachment: fixed;
     }
     a{text-decoration:none;color:inherit;}
 
@@ -302,12 +309,25 @@
     }
     .stat-label{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-dim);}
 
-    /* Spline right panel */
-    .hero-spline{
+    /* 3D Tech Model Container */
+    #hero-3d-tech{
       position:relative;height:100vh;
       display:flex;align-items:center;justify-content:center;overflow:hidden;
     }
-    /* Spline wrapper — scaled by JS on scroll */
+    #tech-canvas{
+      width:100%;height:100%;
+      display:block;
+    }
+    .tech-glow{
+      position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(circle at center, rgba(0,240,255,0.1) 0%, transparent 70%);
+    }
+
+    /* Spline right panel - HIDDEN for now, replaced by 3D */
+    .hero-spline{
+      position:relative;height:100vh;
+      display:none;align-items:center;justify-content:center;overflow:hidden;
+    }
     #spline-wrap{
       position:absolute;inset:0;z-index:0;
       transform-origin:center center;
@@ -336,11 +356,19 @@
     .spline-corners::before{top:0;right:0;border-width:1px 1px 0 0;}
     .spline-corners::after{bottom:0;left:0;border-width:0 0 1px 1px;}
 
+    /* Scroll Tech Particles */
+    .scroll-particle{
+      position:fixed;pointer-events:none;
+      font-family:var(--font-display);font-size:0.8rem;
+      color:var(--cyan);opacity:0;text-shadow:0 0 10px var(--cyan);
+      font-weight:bold;
+    }
+
     @media(max-width:900px){
       #hero{grid-template-columns:1fr;grid-template-rows:auto 60vw;min-height:auto;padding-bottom:60px;}
       .hero-copy{padding:60px 24px 40px;gap:22px;}
       .hero-headline{font-size:2.2rem;}
-      .hero-spline{height:60vw;}
+      #hero-3d-tech{height:60vw;}
       .hero-stats{gap:20px;}
       .stat-value{font-size:1.1rem;}
     }
@@ -705,13 +733,10 @@
     </div>
   </div>
 
-  <!-- Spline 3D -->
-  <div class="hero-spline">
-    <div id="spline-wrap">
-      <spline-viewer url="https://prod.spline.design/U1qOtOLNioClBYlQAtyy1tT5/scene.splinecode"></spline-viewer>
-    </div>
-    <div class="spline-vignette"></div>
-    <div class="spline-corners"></div>
+  <!-- 3D TECH MODEL -->
+  <div id="hero-3d-tech">
+    <canvas id="tech-canvas"></canvas>
+    <div class="tech-glow"></div>
   </div>
 </section>
 
@@ -863,7 +888,7 @@
     </div>
 
     <div class="contact-form corner-box reveal">
-      <form action="https://formspree.io/f/xaqvgjje" method="POST" class="contact-form">
+      <form action="https://formspree.io/f/xaqvgjje" method="POST" id="contactForm">
         <div class="form-row">
           <div class="form-group">
             <label data-i18n="field-name">Full Name</label>
@@ -945,66 +970,190 @@
 ══════════════════════════════════════════ -->
 <script>
 /* ─────────────────────────────────────────
-   1 + 2. LENIS + SPLINE — inside load guard
-   Ensures Lenis CDN is fully parsed before
-   new Lenis() is called.
+   3D TECH MODEL - Three.js
 ───────────────────────────────────────── */
-window.addEventListener('load', () => {
+let techScene, techCamera, techRenderer, techMesh, particles = [];
 
-  /* 1. LENIS SMOOTH SCROLL */
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
+function initTech3D() {
+  const canvas = document.getElementById('tech-canvas');
+  const container = document.getElementById('hero-3d-tech');
+  
+  // Scene setup
+  techScene = new THREE.Scene();
+  techCamera = new THREE.PerspectiveCamera(75, window.innerWidth / 2 / window.innerHeight, 0.1, 1000);
+  techRenderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  
+  techRenderer.setSize(window.innerWidth / 2, window.innerHeight);
+  techRenderer.setClearColor(0x000000, 0);
+  techCamera.position.z = 3;
+
+  // Create rotating tech cube
+  const geometry = new THREE.IcosahedronGeometry(1.5, 4);
+  const material = new THREE.MeshPhongMaterial({
+    color: 0x00f0ff,
+    wireframe: false,
+    emissive: 0x00f0ff,
+    emissiveIntensity: 0.3,
   });
-  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
+  techMesh = new THREE.Mesh(geometry, material);
+  techScene.add(techMesh);
 
-  /* 2. SPLINE SCROLL SCALE  (1.0 → 1.1) */
-  const splineWrap = document.getElementById('spline-wrap');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const maxScroll = window.innerHeight;
-    const ratio = Math.min(scrolled / maxScroll, 1);
-    const scale = 1 + ratio * 0.1;
-    if (splineWrap) splineWrap.style.transform = `scale(${scale})`;
-  }, { passive: true });
+  // Wireframe overlay
+  const wireframeGeometry = new THREE.IcosahedronGeometry(1.5, 4);
+  const wireframeMaterial = new THREE.MeshPhongMaterial({
+    color: 0x00f0ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.5,
+  });
+  const wireframeMesh = new THREE.Mesh(wireframeGeometry, wireframeMaterial);
+  wireframeMesh.scale.set(1.02, 1.02, 1.02);
+  techMesh.add(wireframeMesh);
 
-  /* 10. SMOOTH ANCHOR SCROLL (needs lenis in scope) */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const targetId = anchor.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        e.preventDefault();
-        lenis.scrollTo(target, { offset: -70, duration: 1.4 });
+  // Lighting
+  const light1 = new THREE.PointLight(0x00f0ff, 1.5);
+  light1.position.set(5, 5, 5);
+  techScene.add(light1);
+
+  const light2 = new THREE.PointLight(0xff2d7e, 0.8);
+  light2.position.set(-5, -5, 5);
+  techScene.add(light2);
+
+  // Create particles
+  createParticles();
+
+  // Animation loop
+  function animateTech() {
+    requestAnimationFrame(animateTech);
+
+    // Rotate mesh
+    if (techMesh) {
+      techMesh.rotation.x += 0.003;
+      techMesh.rotation.y += 0.005;
+    }
+
+    // Update particles
+    particles.forEach(p => {
+      p.position.x += p.velocity.x;
+      p.position.y += p.velocity.y;
+      p.position.z += p.velocity.z;
+      p.alpha -= 0.01;
+
+      if (p.alpha <= 0) {
+        techScene.remove(p);
+        particles.splice(particles.indexOf(p), 1);
       }
     });
-  });
 
-}); // end window.addEventListener('load')
+    techRenderer.render(techScene, techCamera);
+  }
+
+  animateTech();
+
+  // Resize handler
+  window.addEventListener('resize', () => {
+    const w = window.innerWidth / 2;
+    const h = window.innerHeight;
+    techCamera.aspect = w / h;
+    techCamera.updateProjectionMatrix();
+    techRenderer.setSize(w, h);
+  });
+}
+
+function createParticles() {
+  for (let i = 0; i < 15; i++) {
+    const geometry = new THREE.SphereGeometry(0.05, 8, 8);
+    const material = new THREE.MeshBasicMaterial({
+      color: Math.random() > 0.5 ? 0x00f0ff : 0xff2d7e,
+      transparent: true,
+    });
+    const particle = new THREE.Mesh(geometry, material);
+    particle.position.set(
+      (Math.random() - 0.5) * 4,
+      (Math.random() - 0.5) * 4,
+      (Math.random() - 0.5) * 4
+    );
+    particle.velocity = {
+      x: (Math.random() - 0.5) * 0.1,
+      y: (Math.random() - 0.5) * 0.1,
+      z: (Math.random() - 0.5) * 0.1,
+    };
+    particle.alpha = 1;
+    techScene.add(particle);
+    particles.push(particle);
+  }
+}
+
+// Initialize 3D on load
+window.addEventListener('load', initTech3D);
 
 /* ─────────────────────────────────────────
-   3. TRANSLATIONS
+   SCROLL TECH PARTICLES ANIMATION
+───────────────────────────────────────── */
+const techSymbols = ['<', '>', '{', '}', '[ ]', '( )', 'λ', 'Σ', '∞', '◊'];
+
+function spawnScrollParticle() {
+  const particle = document.createElement('div');
+  particle.className = 'scroll-particle';
+  particle.textContent = techSymbols[Math.floor(Math.random() * techSymbols.length)];
+  
+  const startX = Math.random() * window.innerWidth;
+  const startY = window.innerHeight - 100;
+  
+  particle.style.left = startX + 'px';
+  particle.style.top = startY + 'px';
+  document.body.appendChild(particle);
+
+  // Animate
+  let opacity = 0;
+  let y = startY;
+  const duration = 2000;
+  const startTime = Date.now();
+
+  function animateParticle() {
+    const elapsed = Date.now() - startTime;
+    const progress = elapsed / duration;
+
+    if (progress < 1) {
+      opacity = Math.sin(progress * Math.PI) * 0.8;
+      y = startY - progress * 300;
+      particle.style.opacity = opacity;
+      particle.style.transform = `translateY(${-progress * 300}px)`;
+      requestAnimationFrame(animateParticle);
+    } else {
+      particle.remove();
+    }
+  }
+
+  animateParticle();
+}
+
+// Trigger on scroll
+let lastParticleTime = 0;
+window.addEventListener('scroll', () => {
+  const now = Date.now();
+  if (now - lastParticleTime > 100) {
+    spawnScrollParticle();
+    lastParticleTime = now;
+  }
+}, { passive: true });
+
+/* ─────────────────────────────────────────
+   TRANSLATIONS
 ───────────────────────────────────────── */
 const i18n = {
   en: {
-    /* nav */
     'nav-home':'HOME','nav-solutions':'SOLUTIONS','nav-process':'PROCESS',
     'nav-contact':'CONTACT','nav-cta':'GET STARTED',
-    /* status */
     'status-online':'SYSTEM ONLINE','status-secure':'SECURE',
-    /* hero */
     'hero-label':'Digital Agency',
     'hero-h1-1':'WE BUILD','hero-h1-2':'DIGITAL FUTURES','hero-h1-3':'THAT CONVERT',
     'hero-sub':'E-commerce platforms, high-performance websites and precision marketing for brands that demand results.',
     'hero-cta1':'VIEW SOLUTIONS','hero-cta2':'CONTACT US',
     'stat-projects':'Projects','stat-satisfaction':'Satisfaction',
     'stat-revenue-val':'$35,000+','stat-revenue':'Avg. Revenue',
-    /* ticker */
     'tick-1':'E-COMMERCE','tick-2':'WEB DESIGN','tick-3':'PERFORMANCE MARKETING',
     'tick-4':'SEO','tick-5':'BRAND IDENTITY','tick-6':'CONVERSION OPTIMISATION','tick-7':'UI / UX',
-    /* solutions */
     'sol-label':'Our Solutions','sol-title-1':'PRECISION','sol-title-2':' ENGINEERED','sol-title-3':'SERVICES',
     'sol-sub':'Every package is built around measurable outcomes. No bloat, no guesswork — only systems that perform.',
     'sol-from':'STARTING FROM','sol-popular':'MOST POPULAR','sol-cta':'GET STARTED',
@@ -1023,14 +1172,12 @@ const i18n = {
     'sol3-f1':'Google & Meta Ads management','sol3-f2':'SEO & content strategy',
     'sol3-f3':'Weekly performance reporting','sol3-f4':'CRO & A/B testing',
     'price-mkt':'800 <span class="sol-price-suffix">€ /mo</span>',
-    /* process */
     'proc-label':'How We Work','proc-title-1':'THE','proc-title-2':' PROTOCOL',
     'proc-sub':'A precise four-phase system designed to take your project from brief to live — with zero ambiguity at every step.',
     'step1-title':'DISCOVERY','step1-desc':'We map your goals, audience and competitive landscape before writing a single line of code.',
     'step2-title':'STRATEGY','step2-desc':'A custom growth architecture — content, UX and channel mix — aligned to your KPIs.',
     'step3-title':'EXECUTION','step3-desc':'Design, development and campaign launch in agile sprints with weekly progress updates.',
     'step4-title':'SCALE','step4-desc':'Ongoing optimisation, A/B testing and growth iteration based on live performance data.',
-    /* contact */
     'contact-label':'Contact','contact-title-1':'START YOUR','contact-title-2':' PROJECT',
     'contact-sub':'Tell us about your goals. We respond within 24 hours with a tailored plan — no obligation.',
     'field-name':'Full Name','field-email':'Email Address','field-website':'Website URL',
@@ -1043,7 +1190,6 @@ const i18n = {
     'form-submit':'SEND MESSAGE',
     'success-h':'TRANSMISSION RECEIVED',
     'success-p':'We will be in contact within 24 hours with a personalised plan for your brand.',
-    /* footer */
     'footer-desc':'A results-first digital agency specialising in e-commerce, web engineering and performance marketing. Based in the EU, working globally.',
     'footer-col1':'Services','footer-col2':'Contact',
     'footer-link-brief':'Start a project','footer-link-consult':'Free consultation',
@@ -1276,44 +1422,37 @@ function applyLang(lang) {
   const t = i18n[lang] || i18n.en;
   currentLang = lang;
 
-  // RTL for Arabic
   document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
   document.documentElement.lang = lang;
 
-  // Text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
-  // Placeholder attributes
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
   });
 
-  // Mark active buttons in both switchers
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 }
 
-// Attach click handlers to ALL lang buttons
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     applyLang(btn.dataset.lang);
-    // Close mobile menu if open
     document.getElementById('mobile-nav').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
     document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
   });
 });
 
-// Init with EN
 applyLang('en');
 
 /* ─────────────────────────────────────────
-   5. SCROLL REVEALS (IntersectionObserver)
+   5. SCROLL REVEALS
 ───────────────────────────────────────── */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1346,7 +1485,6 @@ hamburger.addEventListener('click', () => {
   hamburger.setAttribute('aria-expanded', isOpen);
 });
 
-// Close mobile nav on any mobile link click
 mobileNav.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     mobileNav.classList.remove('open');
@@ -1370,30 +1508,50 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* ─────────────────────────────────────────
-   9. CONTACT FORM — success state intercept
-   (Only fires on non-Formspree / local preview.
-    Formspree will handle real submission.)
+   9. CONTACT FORM
 ───────────────────────────────────────── */
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('form-success');
 
-// Show success inline if action is still placeholder
 contactForm.addEventListener('submit', (e) => {
   if (contactForm.action.includes('YOUR_ID_HERE')) {
     e.preventDefault();
     contactForm.style.display = 'none';
     formSuccess.style.display = 'block';
   }
-  // If real Formspree ID is set, let the form submit normally.
-  // Optionally add AJAX submission here for SPA feel.
 });
 
+/* ─────────────────────────────────────────
+   10. LENIS SMOOTH SCROLL + SPLINE SCALE
+───────────────────────────────────────── */
+window.addEventListener('load', () => {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+  });
+  
+  function raf(t) {
+    lenis.raf(t);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const targetId = anchor.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -70, duration: 1.4 });
+      }
+    });
+  });
+});
 
 </script>
 
-<!-- Lenis CDN loaded AFTER the custom script tag opens,
-     guaranteeing it is defined before new Lenis() runs inside
-     the 'load' event handler above. -->
+<!-- Lenis CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 </body>
 </html>
