@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Donda.Digital — We Build Digital Futures</title>
-<meta name="description" content="E-commerce platforms, high-performance websites and precision marketing for brands that demand results.">
+<title>Donda.Digital — We Build Digital Products That Matter</title>
+<meta name="description" content="Websites, web apps and AI-powered digital experiences by an independent studio.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Donda.Digital">
+<meta property="og:title" content="Donda.Digital — We Build Digital Products That Matter">
+<meta property="og:description" content="Websites, web apps and AI-powered digital experiences by an independent studio.">
+<meta property="og:url" content="https://dondadigital.vercel.app/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Donda.Digital — We Build Digital Products That Matter">
+<meta name="twitter:description" content="Websites, web apps and AI-powered digital experiences by an independent studio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -12,35 +20,21 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#ffffff;
-  --bg-2:#fafafa;
-  --surface:#f5f5f5;
-  --ink:#0a0a0a;
-  --ink-2:#1a1a1a;
-  --muted:#6b6b6b;
-  --muted-2:#9a9a9a;
-  --stroke:#ececec;
-  --stroke-2:#e0e0e0;
-  --accent:#0a0a0a;
-  --font-body:'Inter',system-ui,sans-serif;
-  --font-display:'Instrument Serif',serif;
-  --font-mono:'JetBrains Mono',monospace;
+  --bg:#ffffff;--bg-2:#fafafa;--surface:#f5f5f5;--ink:#0a0a0a;--ink-2:#1a1a1a;--muted:#6b6b6b;--muted-2:#9a9a9a;--stroke:#ececec;--stroke-2:#e0e0e0;--accent:#0a0a0a;
+  --font-body:'Inter',system-ui,sans-serif;--font-display:'Instrument Serif',serif;--font-mono:'JetBrains Mono',monospace;
   --ease-out:cubic-bezier(.16,1,.3,1);
-  --shadow-sm:0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:0 8px 30px rgba(0,0,0,.06);
-  --shadow-lg:0 20px 60px rgba(0,0,0,.08);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow-md:0 8px 30px rgba(0,0,0,.06);--shadow-lg:0 20px 60px rgba(0,0,0,.08);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-weight:400;letter-spacing:-.01em}
 ::selection{background:var(--ink);color:var(--bg)}
-
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 #prog{position:fixed;top:0;left:0;height:1px;background:var(--ink);width:0%;z-index:9998;transition:width .1s linear}
 
-/* ========= LOADER ========= */
+/* LOADER */
 #loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;justify-content:space-between;padding:2.5rem;overflow:hidden}
 .l-corner{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;position:absolute;font-weight:400}
-.l-tl{top:2.5rem;left:2.5rem}
-.l-tr{top:2.5rem;right:2.5rem}
+.l-tl{top:2.5rem;left:2.5rem}.l-tr{top:2.5rem;right:2.5rem}
 #l-status{display:flex;gap:1.5rem}
 #l-status span{opacity:.35;transition:opacity .3s}
 #l-status span.on{opacity:1;color:var(--ink)}
@@ -48,7 +42,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);overflow
 #l-count{position:absolute;bottom:2.5rem;right:2.5rem;font-family:var(--font-mono);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
 #l-bar{position:absolute;bottom:0;left:0;height:1px;background:var(--ink);width:0%}
 
-/* ========= NAV ========= */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.4rem 2.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s var(--ease-out)}
 nav.scrolled{background:rgba(255,255,255,.8);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--stroke);padding:1rem 2.5rem}
 .nav-logo{display:flex;align-items:center;gap:.65rem;text-decoration:none}
@@ -65,8 +59,8 @@ nav.scrolled{background:rgba(255,255,255,.8);backdrop-filter:blur(20px) saturate
 #lang-btn:hover{background:var(--bg);border-color:var(--stroke-2)}
 #lang-btn .arr{transition:transform .35s var(--ease-out);display:inline-block;font-size:.7rem;opacity:.5}
 #lang-btn.open .arr{transform:rotate(180deg)}
-#lang-drawer{position:absolute;top:calc(100% + 10px);right:0;background:var(--bg);border:1px solid var(--stroke);border-radius:20px;width:320px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:all .35s var(--ease-out);box-shadow:var(--shadow-lg);overflow:hidden}
-#lang-drawer.open{opacity:1;transform:translateY(0);pointer-events:all}
+#lang-drawer{position:absolute;top:calc(100% + 10px);right:0;background:var(--bg);border:1px solid var(--stroke);border-radius:20px;width:320px;opacity:0;transform:translateY(-8px);pointer-events:none;visibility:hidden;transition:all .35s var(--ease-out);box-shadow:var(--shadow-lg);overflow:hidden}
+#lang-drawer.open{opacity:1;transform:translateY(0);pointer-events:all;visibility:visible}
 .ld-inner{padding:1.2rem}
 .ld-title{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--stroke)}
 .ld-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
@@ -85,35 +79,29 @@ nav.scrolled{background:rgba(255,255,255,.8);backdrop-filter:blur(20px) saturate
 .nav-cta .arr{transition:transform .3s}
 .nav-cta:hover .arr{transform:translateX(3px)}
 
-/* ========= HERO ========= */
+/* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:0;padding:9rem 3.5rem 5rem;position:relative;overflow:hidden;background:var(--bg)}
 .hero-bg-orb{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,0,0,.03) 0%,transparent 70%);top:20%;right:-10%;pointer-events:none;filter:blur(40px)}
 .hero-content{position:relative;z-index:10;padding-right:2rem}
 .hero-eye{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:.7rem;opacity:0;transform:translateY(14px);animation:fadeUp .9s .9s var(--ease-out) forwards;font-weight:400}
 .hero-eye::before{content:'';width:8px;height:8px;background:var(--ink);border-radius:50%;flex-shrink:0}
-
 .hero-title{font-family:var(--font-display);font-size:clamp(3.5rem,7.5vw,8rem);line-height:.98;letter-spacing:-.035em;margin-bottom:2.5rem;font-weight:400;color:var(--ink)}
 .ht-row{display:block;overflow:hidden;padding:.05em 0}
 .ht-word{display:inline-block;opacity:0;transform:translateY(100%);animation:slideUpFade 1.1s var(--ease-out) forwards}
 .ht-row:nth-child(1) .ht-word{animation-delay:1.0s}
 .ht-row:nth-child(2) .ht-word{animation-delay:1.15s}
 .ht-row:nth-child(3) .ht-word{animation-delay:1.30s}
+.ht-row:nth-child(4) .ht-word{animation-delay:1.45s}
 @keyframes slideUpFade{0%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}
 .ht-accent{font-style:italic;color:var(--ink);position:relative}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-
 .hero-desc{color:var(--muted);font-size:1.02rem;line-height:1.65;max-width:460px;margin-bottom:2.5rem;opacity:0;transform:translateY(14px);animation:fadeUp .9s 1.6s var(--ease-out) forwards;font-weight:400}
 .hero-ctas{display:flex;gap:.8rem;opacity:0;transform:translateY(14px);animation:fadeUp .9s 1.8s var(--ease-out) forwards;flex-wrap:wrap}
-.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--stroke);opacity:0;transform:translateY(14px);animation:fadeUp .9s 2.0s var(--ease-out) forwards;flex-wrap:wrap}
-.hs-num{font-family:var(--font-display);font-size:2.2rem;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.35rem}
-.hs-label{font-family:var(--font-body);font-size:.72rem;letter-spacing:.02em;color:var(--muted);font-weight:400}
-
-/* ========= HERO 3D ========= */
 .hero-3d{position:relative;z-index:10;height:600px;display:flex;align-items:center;justify-content:center;overflow:visible}
 #planet-cv{width:100%;height:100%;display:block}
 .h3d-halo{position:absolute;width:80%;height:80%;top:10%;left:10%;border-radius:50%;background:radial-gradient(circle,rgba(0,0,0,.04) 0%,transparent 60%);filter:blur(30px);pointer-events:none;z-index:-1}
 
-/* ========= BUTTONS ========= */
+/* BUTTONS */
 .btn{font-family:var(--font-body);font-size:.82rem;letter-spacing:-.005em;padding:.95rem 1.7rem;text-decoration:none;transition:all .3s var(--ease-out);display:inline-flex;align-items:center;gap:.55rem;cursor:pointer;border:none;border-radius:100px;font-weight:500}
 .btn-primary{color:var(--bg);background:var(--ink)}
 .btn-primary:hover{background:var(--ink-2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.15)}
@@ -123,14 +111,14 @@ nav.scrolled{background:rgba(255,255,255,.8);backdrop-filter:blur(20px) saturate
 .btn:hover .arr{transform:translateX(4px)}
 .btn-sm{padding:.68rem 1.2rem;font-size:.72rem}
 
-/* ========= MARQUEE ========= */
+/* MARQUEE */
 .marquee-wrap{overflow:hidden;border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);padding:1.3rem 0;background:var(--bg-2)}
 .marquee-track{display:flex;animation:mq 40s linear infinite;width:max-content}
 .mq-item{font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--ink);padding:0 2rem;display:flex;align-items:center;gap:2.5rem;white-space:nowrap;font-weight:400;letter-spacing:-.01em}
 .mq-item::after{content:'';width:6px;height:6px;background:var(--ink);border-radius:50%;opacity:.3}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ========= SECTIONS ========= */
+/* SECTIONS */
 section{position:relative;overflow:hidden}
 .container{max-width:1320px;margin:0 auto;padding:0 2.5rem}
 .sec-eye{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.3rem;display:flex;align-items:center;gap:.7rem;font-weight:400}
@@ -139,33 +127,56 @@ section{position:relative;overflow:hidden}
 .sec-head em{font-style:italic}
 .label-pill{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:var(--bg-2);border:1px solid var(--stroke);padding:.5rem 1rem;border-radius:100px;margin-bottom:1.2rem;font-weight:400}
 .label-pill::before{content:'';width:6px;height:6px;background:var(--ink);border-radius:50%}
-
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 .reveal.vis{opacity:1;transform:translateY(0)}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
-/* ========= SOLUTIONS ========= */
+/* SOLUTIONS */
 #solutions{padding:9rem 0 6rem;background:var(--bg)}
 .sol-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4.5rem}
 .sol-sub{color:var(--muted);font-size:1rem;line-height:1.65;align-self:end;max-width:460px}
-.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;align-items:start}
 .sol-card{background:var(--bg-2);border:1px solid var(--stroke);border-radius:24px;padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all .5s var(--ease-out);display:flex;flex-direction:column}
 .sol-card:hover{background:var(--bg);border-color:var(--ink);transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.sol-card.pop{background:var(--bg);border-color:var(--ink)}
 .sol-num{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;color:var(--muted);margin-bottom:2rem;font-weight:400}
-.sol-icon{width:50px;height:50px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:1.6rem;transition:all .4s var(--ease-out)}
-.sol-card:hover .sol-icon{transform:rotate(-8deg) scale(1.08)}
+.sol-icon{width:40px;height:40px;border-radius:50%;border:1px solid var(--stroke-2);color:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem;transition:all .4s var(--ease-out)}
+.sol-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sol-card:hover .sol-icon{transform:rotate(-8deg) scale(1.08);background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .sol-title{font-family:var(--font-display);font-size:1.9rem;line-height:1.1;margin-bottom:1rem;letter-spacing:-.02em;font-weight:400}
-.sol-title em{font-style:italic}
-.sol-desc{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:1.6rem;flex-grow:0}
-.sol-feats{list-style:none;margin-bottom:2rem;flex-grow:1}
+.sol-desc{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:1.6rem}
+.sol-feats{list-style:none;margin-bottom:1rem}
 .sol-feats li{font-size:.85rem;color:var(--ink);padding:.55rem 0;border-bottom:1px solid var(--stroke);display:flex;align-items:center;gap:.7rem;font-weight:400}
 .sol-feats li::before{content:'';width:14px;height:1px;background:var(--ink);flex-shrink:0}
 .sol-price{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;color:var(--muted);padding-bottom:1.3rem;display:flex;align-items:baseline;justify-content:space-between;font-weight:400}
 .sol-price-num{font-family:var(--font-display);font-size:1.6rem;color:var(--ink);letter-spacing:-.02em;font-weight:400;font-style:italic}
 .badge-pop{position:absolute;top:1.5rem;right:1.5rem;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:.4rem .8rem;border-radius:100px;font-weight:400}
-.sol-cta-wrap{margin-top:auto}
+.sol-cta-wrap{margin-top:auto;padding-top:.6rem}
+/* expandable */
+.pk-head{display:block;width:100%;background:none;border:0;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;letter-spacing:inherit}
+.pk-head>span{display:block}
+.pk-head>.sol-price,.pk-head>.sol-icon{display:flex}
+.pk-head>.pk-tg{display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:.9rem 0;border-top:1px solid var(--stroke)}
+.pk-ic{position:relative;width:12px;height:12px;display:block;transition:transform .5s var(--ease-out)}
+.pk-ic::before,.pk-ic::after{content:'';position:absolute;background:var(--ink);top:50%;left:0;width:12px;height:1px}
+.pk-ic::after{transform:rotate(90deg);transition:opacity .4s}
+.open .pk-ic{transform:rotate(180deg)}.open .pk-ic::after{opacity:0}
+.pk-panel{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows .6s var(--ease-out),opacity .5s var(--ease-out),visibility 0s .6s}
+.open .pk-panel{grid-template-rows:1fr;opacity:1;visibility:visible;transition-delay:0s}
+.pk-in{overflow:hidden;min-height:0}
+.pk-in h4{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:400;margin:.6rem 0 .4rem}
+.pk-in p{font-size:.85rem;line-height:1.6;color:var(--ink);margin-bottom:.6rem}
+.pk-in li{opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+.open .pk-in li{opacity:1;transform:none;transition-delay:calc(var(--i)*60ms + .15s)}
+.care{margin-top:1.2rem;display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;padding:2rem}
+.care .sol-title{font-size:1.5rem;margin-bottom:.6rem}
+.care .sol-price{padding-bottom:.8rem}
+.care .sol-desc{margin-bottom:1rem}
+.care .sol-feats{display:grid;grid-template-columns:1fr 1fr;column-gap:2rem}
+.care-note{font-size:.78rem;color:var(--muted);margin-bottom:1rem}
+.sol-close{font-family:var(--font-display);font-style:italic;font-size:clamp(1.5rem,3vw,2.2rem);text-align:center;margin-top:3.5rem;letter-spacing:-.02em}
 
-/* ========= TECH 3D SECTION ========= */
+/* TECH 3D */
 #tech3d{padding:7rem 0;background:var(--bg-2);position:relative;border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke)}
 #t3d-wrap{width:100%;height:520px;position:relative;margin-top:2rem}
 #t3d-cv{width:100%;height:100%;display:block}
@@ -179,7 +190,14 @@ section{position:relative;overflow:hidden}
 .t3d-header{text-align:center;margin-bottom:1rem;display:flex;flex-direction:column;align-items:center}
 .t3d-sub{text-align:center;color:var(--muted);font-size:1rem;line-height:1.65;max-width:520px;margin:1rem auto 0}
 
-/* ========= PROCESS ========= */
+/* PORTFOLIO */
+#portfolio{padding:9rem 0 6rem;background:var(--bg)}
+.pf-head{margin-bottom:3.5rem}
+.pf-card .sol-title{font-size:1.7rem}
+.pf-card .sol-desc{flex-grow:1}
+.pf-card .btn{align-self:flex-start}
+
+/* PROCESS */
 #process{padding:9rem 0;background:var(--bg)}
 .proc-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem}
 .proc-steps{position:relative;padding-left:4rem}
@@ -194,24 +212,24 @@ section{position:relative;overflow:hidden}
 .proc-title{font-family:var(--font-display);font-size:2.4rem;margin-bottom:.7rem;letter-spacing:-.025em;font-weight:400;line-height:1}
 .proc-desc{color:var(--muted);font-size:.98rem;line-height:1.65;max-width:520px}
 
-/* ========= STATS ========= */
+/* STATS */
 #stats{padding:6rem 0;background:var(--ink);color:var(--bg)}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.stat-item{padding:3rem 2.5rem;text-align:center;position:relative;border-right:1px solid rgba(255,255,255,.08)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-item{padding:3rem 2rem;text-align:center;position:relative;border-right:1px solid rgba(255,255,255,.08)}
 .stat-item:last-child{border-right:none}
-.stat-num{font-family:var(--font-display);font-size:clamp(3.5rem,6vw,6.5rem);line-height:1;color:var(--bg);letter-spacing:-.035em;margin-bottom:.7rem;font-weight:400;font-style:italic}
+.stat-num{font-family:var(--font-display);font-size:clamp(3rem,5vw,5.5rem);line-height:1;color:var(--bg);letter-spacing:-.035em;margin-bottom:.7rem;font-weight:400;font-style:italic}
 .stat-lbl{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:400}
 
-/* ========= DONDAWEAR ========= */
-#dondawear{padding:9rem 0;background:var(--bg-2);border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke)}
-.dw-inner{max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
-.dw-title{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5.2rem);line-height:1;letter-spacing:-.03em;font-weight:400;color:var(--ink);margin-bottom:.9rem}
-.dw-title em{font-style:italic}
-.dw-tagline{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6rem}
-.dw-desc{color:var(--muted);font-size:1.02rem;line-height:1.7;max-width:520px;margin-bottom:2.6rem;font-weight:400}
-.dw-cta-wrap{display:flex;justify-content:center}
+/* ABOUT */
+#about{padding:9rem 0;background:var(--bg-2);border-top:1px solid var(--stroke)}
+.ab-inner{max-width:760px;margin:0 auto}
+.ab-inner p{color:var(--muted);font-size:1.05rem;line-height:1.75;margin-bottom:1.3rem}
+.ab-inner p.ab-end{font-family:var(--font-display);font-style:italic;font-size:2rem;color:var(--ink);letter-spacing:-.02em;margin-top:2rem;margin-bottom:2rem}
+.ab-sig{border-top:1px solid var(--stroke);padding-top:1.4rem}
+.ab-name{font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--ink);letter-spacing:-.02em}
+.ab-role{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
 
-/* ========= CONTACT ========= */
+/* CONTACT */
 #contact{padding:9rem 0;background:var(--bg)}
 .contact-inner{max-width:1000px;margin:0 auto;padding:0 2.5rem}
 .section-header.center{text-align:center;display:flex;flex-direction:column;align-items:center;margin-bottom:3.5rem}
@@ -229,6 +247,10 @@ section{position:relative;overflow:hidden}
 .form-group select{cursor:pointer}
 .form-group select option{background:var(--bg);color:var(--ink)}
 .form-group textarea{resize:none;height:120px;line-height:1.55}
+.consent{display:flex;align-items:flex-start;gap:.8rem;font-size:.82rem;color:var(--muted);line-height:1.5}
+.consent input{width:18px;height:18px;margin-top:.1rem;accent-color:var(--ink);flex-shrink:0;cursor:pointer}
+.consent label{cursor:pointer}
+.consent-link{background:none;border:none;font:inherit;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;margin-left:.3rem}
 .form-submit{display:flex;align-items:center;justify-content:space-between;margin-top:2rem;flex-wrap:wrap;gap:1rem}
 .form-note{font-family:var(--font-body);font-size:.78rem;color:var(--muted)}
 #form-success{display:none;text-align:center;padding:3rem 1rem}
@@ -239,7 +261,7 @@ section{position:relative;overflow:hidden}
 #form-error.show{display:block}
 .btn-primary[disabled]{opacity:.5;pointer-events:none}
 
-/* ========= FOOTER ========= */
+/* FOOTER */
 footer{background:var(--bg);border-top:1px solid var(--stroke);padding:2.5rem 2.5rem}
 .footer-inner{max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
 .f-logo{display:flex;align-items:center;gap:.65rem;text-decoration:none}
@@ -247,15 +269,28 @@ footer{background:var(--bg);border-top:1px solid var(--stroke);padding:2.5rem 2.
 .avail-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pdot 2s infinite;flex-shrink:0}
 .f-copy{font-family:var(--font-body);font-size:.78rem;color:var(--muted);font-weight:400}
 .f-right{display:flex;flex-direction:column;align-items:flex-end;gap:.6rem}
-.f-links{display:flex;align-items:center;gap:1rem}
+.f-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:flex-end}
 .f-mail{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-body);font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .25s;font-weight:400}
+button.f-mail{background:none;border:none;cursor:pointer;padding:0}
 .f-mail:hover{color:var(--ink)}
 .f-mail svg{width:15px;height:15px;flex-shrink:0;display:block}
 @keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
 
-html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.7rem;margin-right:0}
+/* LEGAL MODAL */
+#legal{position:fixed;inset:0;z-index:10000;background:rgba(10,10,10,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .35s var(--ease-out),visibility 0s .35s}
+#legal.open{opacity:1;visibility:visible;transition-delay:0s}
+.lg-box{background:var(--bg);border:1px solid var(--stroke);border-radius:28px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;padding:2.5rem;box-shadow:var(--shadow-lg);transform:translateY(16px);transition:transform .5s var(--ease-out)}
+#legal.open .lg-box{transform:none}
+.lg-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.lg-box h2{font-family:var(--font-display);font-weight:400;font-size:2.2rem;letter-spacing:-.025em;line-height:1.05}
+.lg-box h3{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:400;margin:1.4rem 0 .4rem}
+.lg-box p{font-size:.9rem;line-height:1.65;color:var(--ink)}
+.lg-box mark{background:var(--surface);padding:0 .25em;border-radius:4px;color:var(--ink)}
+.lg-note{font-size:.75rem;color:var(--muted);margin-top:1.8rem;padding-top:1rem;border-top:1px solid var(--stroke)}
+#lg-close{background:var(--bg-2);border:1px solid var(--stroke);border-radius:100px;font-family:var(--font-body);font-size:.75rem;padding:.55rem 1.1rem;cursor:pointer;color:var(--ink);font-weight:500;flex-shrink:0}
+#lg-close:hover{background:var(--ink);color:var(--bg)}
 
-/* ========= RESPONSIVE ========= */
+/* RESPONSIVE */
 @media(max-width:960px){
   nav{padding:1.2rem 1.5rem}
   #hero{grid-template-columns:1fr;padding:8rem 1.5rem 4rem;gap:2rem}
@@ -263,47 +298,88 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
   .hero-content{padding-right:0}
   .sol-header{grid-template-columns:1fr;gap:2rem}
   .sol-grid{grid-template-columns:1fr}
+  .care{grid-template-columns:1fr;gap:1rem}
   .proc-head{grid-template-columns:1fr;gap:2rem}
   .stats-grid{grid-template-columns:1fr}
   .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
   .stat-item:last-child{border-bottom:none}
   .nav-links{display:none}
   .footer-inner{flex-direction:column;text-align:center;gap:1.3rem}
-  .f-right{align-items:center}
+  .f-right{align-items:center}.f-links{justify-content:center}
   .container{padding:0 1.5rem}
   .contact-inner{padding:0 1.5rem}
-  #solutions,#process,#contact,#dondawear{padding:5rem 0}
+  #solutions,#process,#contact,#about,#portfolio{padding:5rem 0}
 }
 @media(max-width:640px){
   nav{padding:1rem 1.2rem}
   #hero{padding:7rem 1.2rem 3rem}
   .hero-title{font-size:clamp(3rem,13vw,4.5rem)}
   .hero-ctas{flex-direction:column;width:100%}
-  .btn{width:100%;justify-content:center}
+  .hero-ctas .btn{width:100%;justify-content:center}
   .hero-3d{height:320px}
-  .hero-stats{gap:2rem}
   .form-row{grid-template-columns:1fr;gap:1rem}
   .contact-form{padding:1.8rem 1.4rem}
   .form-submit{flex-direction:column;align-items:stretch}
+  .form-submit .btn{width:100%;justify-content:center}
+  .care .sol-feats{grid-template-columns:1fr}
+  .lg-box{padding:1.6rem}
   #t3d-wrap{height:380px}
   #lang-drawer{width:280px;right:-40px}
   .nav-cta{padding:.6rem 1rem;font-size:.72rem}
   #lang-btn{padding:.55rem .85rem}
-  .dw-cta-wrap .btn{width:100%;justify-content:center}
+}
+/* RESPONSIVE POLISH */
+.sol-card{min-width:0;overflow-wrap:break-word}
+.btn{max-width:100%}
+.ht-word{max-width:100%}
+.pf-grid{align-items:stretch}
+#nav-toggle{display:none;width:40px;height:40px;border-radius:50%;background:var(--bg-2);border:1px solid var(--stroke);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0}
+#nav-toggle span{display:block;width:14px;height:1.5px;background:var(--ink);transition:transform .3s var(--ease-out),opacity .3s}
+#nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+#nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+#nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+@media(min-width:1400px){
+  #hero,nav,nav.scrolled{padding-left:calc((100% - 1320px)/2 + 2.5rem);padding-right:calc((100% - 1320px)/2 + 2.5rem)}
+}
+@media(max-width:960px){
+  #nav-toggle{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:1rem;right:1rem;margin-top:.4rem;border-radius:24px;padding:.5rem;background:var(--bg);box-shadow:var(--shadow-lg);gap:.1rem}
+  .nav-links.open a{display:block;padding:.9rem 1.1rem}
+  .sol-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.08)}
+  .stat-item:nth-last-child(-n+2){border-bottom:none}
+  .hero-3d{height:min(380px,75vw)}
+}
+@media(max-width:640px){
+  .sol-grid,.stats-grid{grid-template-columns:1fr}
+  .stat-item,.stat-item:nth-child(odd){border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:2rem 1rem}
+  .stat-item:last-child{border-bottom:none}
+  .nav-r{gap:.4rem}
+  .lang-wrap{position:static}
+  #lang-drawer{left:1rem;right:1rem;width:auto;top:calc(100% + 8px)}
+  .sol-card{padding:2rem 1.5rem}
+  .care{padding:1.6rem 1.5rem}
+  .proc-steps{padding-left:3rem}.proc-dot{left:-1.69rem}.proc-title{font-size:2rem}
+  .ab-inner p{font-size:1rem}.ab-inner p.ab-end{font-size:1.6rem}
+  .lg-box h2{font-size:1.8rem}
+  .t3d-lbl{font-size:.55rem;max-width:44%}.t3d-lbl::before{display:none}
+  .sol-close{margin-top:2.5rem}
+}
+@media(max-width:520px){.nav-cta{display:none}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pk-panel,.pk-in li,.pk-ic,.pk-ic::after,#legal,.lg-box{transition:none!important}
 }
 </style>
 </head>
 <body>
-
 <div id="prog"></div>
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="l-corner l-tl" id="l-status">
-    <span class="on" id="ls0">Initializing</span>
-    <span id="ls1">Loading</span>
-    <span id="ls2">Ready</span>
-  </div>
+  <div class="l-corner l-tl" id="l-status"><span class="on" id="ls0">Initializing</span><span id="ls1">Loading</span><span id="ls2">Ready</span></div>
   <div class="l-corner l-tr">Donda.Digital</div>
   <div id="l-word">Build</div>
   <div id="l-count">000</div>
@@ -312,37 +388,32 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-logo">
-    <div class="logo-mark"></div>
-    <span class="logo-text">Donda<span class="a">.</span>Digital</span>
-  </a>
-  <ul class="nav-links">
+  <a href="#hero" class="nav-logo"><div class="logo-mark"></div><span class="logo-text">Donda<span class="a">.</span>Digital</span></a>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#hero" data-i18n="nav-home">Home</a></li>
     <li><a href="#solutions" data-i18n="nav-solutions">Solutions</a></li>
+    <li><a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a></li>
     <li><a href="#process" data-i18n="nav-process">Process</a></li>
-    <li><a href="#dondawear" data-i18n="nav-dondawear">DondaWear</a></li>
+    <li><a href="#about" data-i18n="nav-about">About</a></li>
     <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
   </ul>
   <div class="nav-r">
     <div class="lang-wrap">
-      <button id="lang-btn"><span id="lang-cur">EN</span><span class="arr">▾</span></button>
+      <button id="lang-btn" aria-haspopup="true" aria-expanded="false" aria-controls="lang-drawer"><span id="lang-cur">EN</span><span class="arr">▾</span></button>
       <div id="lang-drawer">
         <div class="ld-inner">
           <div class="ld-title" data-i18n="lang-select">Select Language</div>
           <div class="ld-grid" id="ld-grid">
             <button class="lang-opt active" data-lang="en"><span class="l-flag">🇬🇧</span><div class="l-info"><span class="l-name">English</span><span class="l-nat">English</span></div><span class="l-tick">✓</span></button>
             <button class="lang-opt" data-lang="cs"><span class="l-flag">🇨🇿</span><div class="l-info"><span class="l-name">Czech</span><span class="l-nat">Čeština</span></div><span class="l-tick">✓</span></button>
-            <button class="lang-opt" data-lang="pl"><span class="l-flag">🇵🇱</span><div class="l-info"><span class="l-name">Polish</span><span class="l-nat">Polski</span></div><span class="l-tick">✓</span></button>
-            <button class="lang-opt" data-lang="es"><span class="l-flag">🇪🇸</span><div class="l-info"><span class="l-name">Spanish</span><span class="l-nat">Español</span></div><span class="l-tick">✓</span></button>
-            <button class="lang-opt" data-lang="de"><span class="l-flag">🇩🇪</span><div class="l-info"><span class="l-name">German</span><span class="l-nat">Deutsch</span></div><span class="l-tick">✓</span></button>
+            <button class="lang-opt" data-lang="sk"><span class="l-flag">🇸🇰</span><div class="l-info"><span class="l-name">Slovak</span><span class="l-nat">Slovenčina</span></div><span class="l-tick">✓</span></button>
             <button class="lang-opt" data-lang="fr"><span class="l-flag">🇫🇷</span><div class="l-info"><span class="l-name">French</span><span class="l-nat">Français</span></div><span class="l-tick">✓</span></button>
-            <button class="lang-opt" data-lang="ar"><span class="l-flag">🇦🇪</span><div class="l-info"><span class="l-name">Arabic</span><span class="l-nat">العربية</span></div><span class="l-tick">✓</span></button>
-            <button class="lang-opt" data-lang="zh"><span class="l-flag">🇨🇳</span><div class="l-info"><span class="l-name">Chinese</span><span class="l-nat">中文</span></div><span class="l-tick">✓</span></button>
           </div>
         </div>
       </div>
     </div>
     <a href="#contact" class="nav-cta"><span data-i18n="nav-cta">Get Started</span><span class="arr">→</span></a>
+    <button type="button" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -350,33 +421,25 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
 <section id="hero">
   <div class="hero-bg-orb"></div>
   <div class="hero-content">
-    <p class="hero-eye" id="hero-eye" data-i18n="hero-eye">Collection '26 — Digital Agency</p>
+    <p class="hero-eye" data-i18n="hero-eye">Collection '26 — Digital Agency</p>
     <h1 class="hero-title" id="hero-title">
       <span class="ht-row"><span class="ht-word" data-i18n="hl1">We build</span></span>
       <span class="ht-row"><span class="ht-word ht-accent" data-i18n="hl2">digital</span></span>
-      <span class="ht-row"><span class="ht-word" data-i18n="hl3">futures.</span></span>
+      <span class="ht-row"><span class="ht-word" data-i18n="hl3">products</span></span>
+      <span class="ht-row"><span class="ht-word" data-i18n="hl4">that matter.</span></span>
     </h1>
-    <p class="hero-desc" id="hero-desc" data-i18n="hero-desc">E-commerce platforms, high-performance websites and precision marketing for brands that demand results.</p>
-    <div class="hero-ctas" id="hero-ctas">
+    <p class="hero-desc" data-i18n="hero-desc">Websites, web apps and AI-powered digital experiences by an independent studio.</p>
+    <div class="hero-ctas">
       <a href="#solutions" class="btn btn-primary"><span data-i18n="cta1">View Solutions</span><span class="arr">→</span></a>
       <a href="#contact" class="btn btn-outline"><span data-i18n="cta2">Contact Us</span></a>
     </div>
-    <div class="hero-stats" id="hero-stats">
-      <div><div class="hs-num">120+</div><div class="hs-label" data-i18n="stat-projects">Projects Delivered</div></div>
-      <div><div class="hs-num">98%</div><div class="hs-label" data-i18n="stat-sat">Client Satisfaction</div></div>
-      <div><div class="hs-num" id="hero-revenue" data-price="35000" data-price-suffix-key="k-plus">€35k+</div><div class="hs-label" data-i18n="stat-rev">Avg. Client Revenue</div></div>
-    </div>
   </div>
-
-  <div class="hero-3d">
-    <div class="h3d-halo"></div>
-    <canvas id="planet-cv"></canvas>
-  </div>
+  <div class="hero-3d"><div class="h3d-halo"></div><canvas id="planet-cv" aria-hidden="true"></canvas></div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track" id="mq-track">
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
     <span class="mq-item" data-i18n="mq1">E-Commerce</span><span class="mq-item" data-i18n="mq2">Web Design</span><span class="mq-item" data-i18n="mq3">Performance Marketing</span><span class="mq-item">SEO</span><span class="mq-item" data-i18n="mq4">Brand Identity</span><span class="mq-item" data-i18n="mq5">Conversion Optimisation</span><span class="mq-item">UI / UX</span><span class="mq-item" data-i18n="mq6">Web Apps</span>
     <span class="mq-item" data-i18n="mq1">E-Commerce</span><span class="mq-item" data-i18n="mq2">Web Design</span><span class="mq-item" data-i18n="mq3">Performance Marketing</span><span class="mq-item">SEO</span><span class="mq-item" data-i18n="mq4">Brand Identity</span><span class="mq-item" data-i18n="mq5">Conversion Optimisation</span><span class="mq-item">UI / UX</span><span class="mq-item" data-i18n="mq6">Web Apps</span>
   </div>
@@ -387,60 +450,18 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
   <div class="container">
     <div class="sol-header">
       <div class="reveal">
-        <p class="sec-eye" data-i18n="sol-eye">Our Solutions</p>
-        <h2 class="sec-head"><span data-i18n="sol-head1">Precision engineered</span><br><em data-i18n="sol-head2">services.</em></h2>
+        <p class="sec-eye" data-i18n="sol-eye">Solutions</p>
+        <h2 class="sec-head"><span data-i18n="sol-head1">Simple packages,</span><br><em data-i18n="sol-head2">clear pricing.</em></h2>
       </div>
-      <p class="sol-sub reveal d1" data-i18n="sol-sub">Every package is built around measurable outcomes. No bloat, no guesswork — only systems that perform.</p>
+      <p class="sol-sub reveal d1" data-i18n="sol-sub">Every package starts from a clear price. The final quote depends on the scope of your project.</p>
     </div>
-    <div class="sol-grid">
-      <div class="sol-card reveal d1">
-        <div class="sol-num">01 — E-COMMERCE</div>
-        <div class="sol-icon">◐</div>
-        <h3 class="sol-title"><span data-i18n="s1-title1">Online store</span><br><em data-i18n="s1-title2">development.</em></h3>
-        <p class="sol-desc" data-i18n="s1-desc">Full-stack e-commerce on Shopify, WooCommerce or custom stack. Optimised for conversion, speed and scale from day one.</p>
-        <ul class="sol-feats">
-          <li data-i18n="s1-f1">Custom storefront design</li>
-          <li data-i18n="s1-f2">Payment & logistics integration</li>
-          <li data-i18n="s1-f3">SEO-ready product architecture</li>
-          <li data-i18n="s1-f4">Analytics & conversion tracking</li>
-        </ul>
-        <div class="sol-price"><span data-i18n="starting-from">Starting from</span><span class="sol-price-num" data-price="2500">2,500 €</span></div>
-        <div class="sol-cta-wrap"><a href="#contact" class="btn btn-outline btn-sm"><span data-i18n="get-started">Get started</span><span class="arr">→</span></a></div>
-      </div>
-      <div class="sol-card reveal d2">
-        <div class="badge-pop" data-i18n="most-pop">Most Popular</div>
-        <div class="sol-num">02 — WEB</div>
-        <div class="sol-icon">◉</div>
-        <h3 class="sol-title"><span data-i18n="s2-title1">Website</span><br><em data-i18n="s2-title2">design & dev.</em></h3>
-        <p class="sol-desc" data-i18n="s2-desc">Bespoke marketing sites, landing pages and web apps with elite UX, blazing performance scores and scroll-stopping visual design.</p>
-        <ul class="sol-feats">
-          <li data-i18n="s2-f1">Responsive, mobile-first build</li>
-          <li data-i18n="s2-f2">CMS integration (headless-ready)</li>
-          <li data-i18n="s2-f3">Core Web Vitals optimised</li>
-          <li data-i18n="s2-f4">Motion & interaction design</li>
-        </ul>
-        <div class="sol-price"><span data-i18n="starting-from">Starting from</span><span class="sol-price-num" data-price="1500">1,500 €</span></div>
-        <div class="sol-cta-wrap"><a href="#contact" class="btn btn-primary btn-sm"><span data-i18n="get-started">Get started</span><span class="arr">→</span></a></div>
-      </div>
-      <div class="sol-card reveal d3">
-        <div class="sol-num">03 — MARKETING</div>
-        <div class="sol-icon">◑</div>
-        <h3 class="sol-title"><span data-i18n="s3-title1">Growth</span><br><em data-i18n="s3-title2">marketing.</em></h3>
-        <p class="sol-desc" data-i18n="s3-desc">Data-driven paid media, SEO and social strategy managed as a unified growth system. Every euro tracked to its return.</p>
-        <ul class="sol-feats">
-          <li data-i18n="s3-f1">Google & Meta Ads management</li>
-          <li data-i18n="s3-f2">SEO & content strategy</li>
-          <li data-i18n="s3-f3">Weekly performance reporting</li>
-          <li data-i18n="s3-f4">CRO & A/B testing</li>
-        </ul>
-        <div class="sol-price"><span data-i18n="starting-from">Starting from</span><span class="sol-price-num" data-price="800" data-price-suffix="/mo">800 €/mo</span></div>
-        <div class="sol-cta-wrap"><a href="#contact" class="btn btn-outline btn-sm"><span data-i18n="get-started">Get started</span><span class="arr">→</span></a></div>
-      </div>
-    </div>
+    <div class="sol-grid" id="pk-grid"></div>
+    <div id="pk-care"></div>
+    <p class="sol-close reveal" data-i18n="sol-close">Professional quality without agency-level overhead.</p>
   </div>
 </section>
 
-<!-- TECH 3D (planet) -->
+<!-- TECH 3D -->
 <section id="tech3d">
   <div class="container">
     <div class="t3d-header reveal">
@@ -450,13 +471,29 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
     </div>
   </div>
   <div id="t3d-wrap" class="reveal d1">
-    <canvas id="t3d-cv"></canvas>
+    <canvas id="t3d-cv" aria-hidden="true"></canvas>
     <div class="t3d-overlay"></div>
     <div class="t3d-labels">
       <div class="t3d-lbl tl1" data-i18n="tl1">Core Architecture</div>
       <div class="t3d-lbl tl2" data-i18n="tl2">Performance Layer</div>
       <div class="t3d-lbl tl3" data-i18n="tl3">Data Processing</div>
       <div class="t3d-lbl tl4" data-i18n="tl4">Security Protocol</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="pf-head reveal">
+      <p class="sec-eye" data-i18n="pf-eye">Portfolio</p>
+      <h2 class="sec-head"><span data-i18n="pf-head1">Projects</span> <em data-i18n="pf-head2">worth visiting.</em></h2>
+      <p class="sol-sub" data-i18n="pf-sub">Products I designed and built myself.</p>
+    </div>
+    <div class="sol-grid pf-grid">
+      <article class="sol-card pf-card reveal d1"><div class="sol-num" data-i18n="pf-own">Own project</div><div class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3a4 4 0 01-8 0z"/></svg></div><h3 class="sol-title">DondaWear</h3><p class="sol-desc" data-i18n="pf-dw">Premium streetwear for developers, creators, founders and builders.</p><a class="btn btn-outline btn-sm" href="https://dondawear.vercel.app/" target="_blank" rel="noopener noreferrer"><span data-i18n="pf-visit">Visit project</span><span class="arr">→</span></a></article>
+      <article class="sol-card pf-card reveal d2"><div class="sol-num" data-i18n="pf-own">Own project</div><div class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 class="sol-title">RentShield BG</h3><p class="sol-desc" data-i18n="pf-rs">Digital platform concept designed to make renting safer, clearer and more transparent for tenants and landlords.</p><a class="btn btn-outline btn-sm" href="https://rentshieldbg.vercel.app/" target="_blank" rel="noopener noreferrer"><span data-i18n="pf-visit">Visit project</span><span class="arr">→</span></a></article>
+      <article class="sol-card pf-card reveal d3"><div class="sol-num" data-i18n="pf-own">Own project</div><div class="sol-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M12 17v-5M10 14l2-2 2 2"/></svg></div><h3 class="sol-title">FileDrop</h3><p class="sol-desc" data-i18n="pf-fd">Simple and modern file-sharing platform designed for fast, private and effortless file transfers.</p><a class="btn btn-outline btn-sm" href="https://filedrop-tau.vercel.app/" target="_blank" rel="noopener noreferrer"><span data-i18n="pf-visit">Visit project</span><span class="arr">→</span></a></article>
     </div>
   </div>
 </section>
@@ -472,8 +509,7 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
       <p class="sol-sub reveal d1" data-i18n="proc-sub">A precise four-phase system designed to take your project from brief to live — with zero ambiguity at every step.</p>
     </div>
     <div class="proc-steps reveal">
-      <div class="proc-spine"></div>
-      <div class="proc-fill" id="proc-fill"></div>
+      <div class="proc-spine"></div><div class="proc-fill" id="proc-fill"></div>
       <div class="proc-step"><div class="proc-dot"></div><div class="proc-num">01</div><span class="proc-tag" data-i18n="ph1">Phase One</span><h3 class="proc-title" data-i18n="proc-t1">Discovery</h3><p class="proc-desc" data-i18n="proc-d1">We map your goals, audience and competitive landscape before writing a single line of code.</p></div>
       <div class="proc-step"><div class="proc-dot"></div><div class="proc-num">02</div><span class="proc-tag" data-i18n="ph2">Phase Two</span><h3 class="proc-title" data-i18n="proc-t2">Strategy</h3><p class="proc-desc" data-i18n="proc-d2">A custom growth architecture — content, UX and channel mix — aligned to your KPIs.</p></div>
       <div class="proc-step"><div class="proc-dot"></div><div class="proc-num">03</div><span class="proc-tag" data-i18n="ph3">Phase Three</span><h3 class="proc-title" data-i18n="proc-t3">Execution</h3><p class="proc-desc" data-i18n="proc-d3">Design, development and campaign launch in agile sprints with weekly progress updates.</p></div>
@@ -486,23 +522,29 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
 <section id="stats">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item reveal"><div class="stat-num" data-target="5" data-suffix="+">0</div><div class="stat-lbl" data-i18n="st1">Years Experience</div></div>
-      <div class="stat-item reveal d1"><div class="stat-num" data-target="95" data-suffix="+">0</div><div class="stat-lbl" data-i18n="st2">Projects Done</div></div>
-      <div class="stat-item reveal d2"><div class="stat-num" data-target="200" data-suffix="%">0</div><div class="stat-lbl" data-i18n="st3">Satisfied Clients</div></div>
+      <div class="stat-item reveal"><div class="stat-num" data-target="52" data-suffix="+">0</div><div class="stat-lbl" data-i18n="st1">Projects Delivered</div></div>
+      <div class="stat-item reveal d1"><div class="stat-num" data-target="3" data-suffix="+">0</div><div class="stat-lbl" data-i18n="st2">Years Experience</div></div>
+      <div class="stat-item reveal d2"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-lbl" data-i18n="st3">Client Satisfaction</div></div>
+      <div class="stat-item reveal d3"><div class="stat-num" data-target="3" data-prefix="€" data-suffix="k+">0</div><div class="stat-lbl" data-i18n="st4">Avg. Client Revenue</div></div>
     </div>
   </div>
 </section>
 
-<!-- DONDAWEAR -->
-<section id="dondawear">
+<!-- ABOUT -->
+<section id="about">
   <div class="container">
-    <div class="dw-inner">
-      <div class="label-pill reveal" data-i18n="dw-eye">Merch</div>
-      <h2 class="dw-title reveal d1"><span data-i18n="dw-title1">Donda</span><em data-i18n="dw-title2">Wear.</em></h2>
-      <p class="dw-tagline reveal d2" data-i18n="dw-tagline">Built for Builders.</p>
-      <p class="dw-desc reveal d2" data-i18n="dw-desc">Premium streetwear for developers, creators, founders and builders. Minimal design. High quality materials. Created for people who build technology.</p>
-      <div class="dw-cta-wrap reveal d3">
-        <a href="https://dondawear.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary"><span data-i18n="dw-cta">Visit DondaWear</span><span class="arr">→</span></a>
+    <div class="ab-inner">
+      <p class="sec-eye reveal" data-i18n="ab-eye">About</p>
+      <h2 class="sec-head reveal d1" data-i18n="ab-head">The person behind Donda.Digital</h2>
+      <div class="reveal d2">
+        <p data-i18n="ab1">Donda.Digital is an independent digital studio founded by Adam Donda.</p>
+        <p data-i18n="ab2">I build modern websites, digital products and AI-powered digital experiences for businesses, creators and people with ideas worth building.</p>
+        <p data-i18n="ab3">My approach combines web development, modern UI/UX, AI tools and automation. I focus on creating digital products that are clean, functional, fast and built around a real purpose.</p>
+        <p data-i18n="ab4">I believe you don't always need a large agency or a complicated process to build something great.</p>
+        <p data-i18n="ab5">You need someone who understands your idea, communicates directly with you and takes care of the project from the first concept to the final launch.</p>
+        <p data-i18n="ab6">That's what Donda.Digital is about.</p>
+        <p class="ab-end" data-i18n="ab7">Ideas into digital products.</p>
+        <div class="ab-sig"><div class="ab-name">Adam Donda</div><div class="ab-role" data-i18n="ab-role">Founder · Donda.Digital</div></div>
       </div>
     </div>
   </div>
@@ -519,20 +561,29 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
     <div class="contact-form reveal">
       <form action="https://formspree.io/f/xaqvgjje" method="POST" id="contactForm">
         <div class="form-row">
-          <div class="form-group"><label data-i18n="field-name">Full Name</label><input type="text" name="name" required data-i18n-placeholder="ph-name" placeholder="Your full name"/></div>
-          <div class="form-group"><label data-i18n="field-email">Email Address</label><input type="email" name="email" required data-i18n-placeholder="ph-email" placeholder="hello@yourbrand.com"/></div>
+          <div class="form-group"><label for="f-name" data-i18n="field-name">Full Name</label><input id="f-name" type="text" name="name" required autocomplete="name" data-i18n-placeholder="ph-name" placeholder="Your full name"/></div>
+          <div class="form-group"><label for="f-email" data-i18n="field-email">Email Address</label><input id="f-email" type="email" name="email" required autocomplete="email" data-i18n-placeholder="ph-email" placeholder="hello@yourbrand.com"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label data-i18n="field-website">Website URL</label><input type="text" name="company" data-i18n-placeholder="ph-company" placeholder="Company name or Website"></div>
-          <div class="form-group"><label data-i18n="field-budget">Budget</label><select name="budget"><option value="" disabled selected data-i18n="budget-select">Select range</option><option value="starter" data-i18n="budget-1">Starter</option><option value="growth" data-i18n="budget-2">Growth</option><option value="enterprise" data-i18n="budget-3">Enterprise</option></select></div>
+          <div class="form-group"><label for="f-company" data-i18n="field-website">Website URL</label><input id="f-company" type="text" name="company" data-i18n-placeholder="ph-company" placeholder="Company name or Website"></div>
+          <div class="form-group"><label for="f-pkg" data-i18n="field-package">Package</label>
+            <select id="f-pkg" name="package">
+              <option value="" selected data-i18n="pkg-select">Select package (optional)</option>
+              <option value="START">START</option><option value="BUSINESS">BUSINESS</option><option value="PREMIUM">PREMIUM</option><option value="E-COMMERCE">E-COMMERCE</option><option value="CUSTOM">CUSTOM</option><option value="WEBSITE CARE">WEBSITE CARE</option>
+              <option value="Not sure yet" data-i18n="pkg-none">Not sure yet</option>
+            </select></div>
         </div>
         <div class="form-row full">
-          <div class="form-group"><label data-i18n="field-message">Your Goal</label><textarea name="message" rows="5" data-i18n-placeholder="ph-message" placeholder="Describe your vision and what success looks like…"></textarea></div>
+          <div class="form-group"><label for="f-msg" data-i18n="field-message">Your Goal</label><textarea id="f-msg" name="message" rows="5" data-i18n-placeholder="ph-message" placeholder="Describe your vision and what success looks like…"></textarea></div>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="f-consent" name="consent" value="agreed" required>
+          <div><label for="f-consent" data-i18n="consent">I agree to the processing of my data according to the Privacy Policy</label><button type="button" class="consent-link" data-legal="privacy" data-i18n="l-priv">Privacy Policy</button></div>
         </div>
         <div class="form-submit"><p class="form-note" data-i18n="form-note">Your data is handled with full discretion.</p><button type="submit" class="btn btn-primary" id="form-submit-btn"><span data-i18n="form-submit">Send message</span><span class="arr">→</span></button></div>
-        <div id="form-error" data-i18n="form-error-msg">Something went wrong. Please try again or email us directly.</div>
+        <div id="form-error" role="alert" data-i18n="form-error-msg">Something went wrong. Please try again or email us directly.</div>
       </form>
-      <div id="form-success"><h3 data-i18n="success-h">Transmission received.</h3><p data-i18n="success-p">We will be in contact within 24 hours with a personalised plan for your brand.</p></div>
+      <div id="form-success" role="status"><h3 data-i18n="success-h">Transmission received.</h3><p data-i18n="success-p">We will be in contact within 24 hours with a personalised plan for your brand.</p></div>
     </div>
   </div>
 </section>
@@ -540,442 +591,341 @@ html[dir="rtl"] .hero-eye::before,html[dir="rtl"] .sec-eye::before{margin-left:.
 <!-- FOOTER -->
 <footer id="footer">
   <div class="footer-inner">
-    <a href="#hero" class="f-logo">
-      <div class="logo-mark"></div>
-      <span class="logo-text">Donda<span class="a">.</span>Digital</span>
-    </a>
+    <a href="#hero" class="f-logo"><div class="logo-mark"></div><span class="logo-text">Donda<span class="a">.</span>Digital</span></a>
     <div class="avail"><span class="avail-dot"></span><span data-i18n="avail">Available for new projects</span></div>
     <div class="f-right">
       <div class="f-links">
-        <a href="mailto:donda.digital@gmail.com" class="f-mail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="M3 6.5l9 6.2 9-6.2"></path></svg>
-          <span>donda.digital@gmail.com</span>
-        </a>
-        <a href="https://www.instagram.com/donda_digital/" target="_blank" rel="noopener" class="f-mail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
-          <span>Instagram</span>
-        </a>
+        <a href="mailto:donda.digital@gmail.com" class="f-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="M3 6.5l9 6.2 9-6.2"></path></svg><span>donda.digital@gmail.com</span></a>
+        <a href="https://www.instagram.com/donda_digital/" target="_blank" rel="noopener noreferrer" class="f-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"></circle></svg><span>Instagram</span></a>
+      </div>
+      <div class="f-links">
+        <button type="button" class="f-mail" data-legal="privacy" data-i18n="l-priv">Privacy Policy</button>
+        <button type="button" class="f-mail" data-legal="terms" data-i18n="l-terms">Terms of Service</button>
+        <button type="button" class="f-mail" data-legal="cookies" data-i18n="l-cook">Cookies</button>
       </div>
       <p class="f-copy">© 2026 Donda.Digital — <span data-i18n="rights">All rights reserved</span></p>
     </div>
   </div>
 </footer>
 
+<!-- LEGAL MODAL -->
+<div id="legal" aria-hidden="true">
+  <div class="lg-box" role="dialog" aria-modal="true" aria-labelledby="lg-title">
+    <div class="lg-top"><h2 id="lg-title"></h2><button type="button" id="lg-close" data-i18n="close">Close</button></div>
+    <div id="lg-body"></div>
+    <p class="lg-note" id="lg-note"></p>
+  </div>
+</div>
+
 <script>
 /* ========= I18N ========= */
-const I18N = {
-  en:{"nav-home":"Home","nav-solutions":"Solutions","nav-process":"Process","nav-dondawear":"DondaWear","nav-contact":"Contact","nav-cta":"Get Started","lang-select":"Select Language","hero-eye":"Collection '26 — Digital Agency","hl1":"We build","hl2":"digital","hl3":"futures.","hero-desc":"E-commerce platforms, high-performance websites and precision marketing for brands that demand results.","cta1":"View Solutions","cta2":"Contact Us","stat-projects":"Projects Delivered","stat-sat":"Client Satisfaction","stat-rev":"Avg. Client Revenue","mq1":"E-Commerce","mq2":"Web Design","mq3":"Performance Marketing","mq4":"Brand Identity","mq5":"Conversion Optimisation","mq6":"Web Apps","sol-eye":"Our Solutions","sol-head1":"Precision engineered","sol-head2":"services.","sol-sub":"Every package is built around measurable outcomes. No bloat, no guesswork — only systems that perform.","s1-title1":"Online store","s1-title2":"development.","s1-desc":"Full-stack e-commerce on Shopify, WooCommerce or custom stack. Optimised for conversion, speed and scale from day one.","s1-f1":"Custom storefront design","s1-f2":"Payment & logistics integration","s1-f3":"SEO-ready product architecture","s1-f4":"Analytics & conversion tracking","s2-title1":"Website","s2-title2":"design & dev.","s2-desc":"Bespoke marketing sites, landing pages and web apps with elite UX, blazing performance scores and scroll-stopping visual design.","s2-f1":"Responsive, mobile-first build","s2-f2":"CMS integration (headless-ready)","s2-f3":"Core Web Vitals optimised","s2-f4":"Motion & interaction design","s3-title1":"Growth","s3-title2":"marketing.","s3-desc":"Data-driven paid media, SEO and social strategy managed as a unified growth system. Every euro tracked to its return.","s3-f1":"Google & Meta Ads management","s3-f2":"SEO & content strategy","s3-f3":"Weekly performance reporting","s3-f4":"CRO & A/B testing","starting-from":"Starting from","most-pop":"Most Popular","get-started":"Get started","t3d-eye":"Technology","t3d-head1":"Built with","t3d-head2":"precision.","t3d-sub":"Every project engineered to the highest technical standard — from architecture to deployment.","tl1":"Core Architecture","tl2":"Performance Layer","tl3":"Data Processing","tl4":"Security Protocol","proc-eye":"How We Work","proc-head1":"The","proc-head2":"protocol.","proc-sub":"A precise four-phase system designed to take your project from brief to live — with zero ambiguity at every step.","ph1":"Phase One","ph2":"Phase Two","ph3":"Phase Three","ph4":"Phase Four","proc-t1":"Discovery","proc-d1":"We map your goals, audience and competitive landscape before writing a single line of code.","proc-t2":"Strategy","proc-d2":"A custom growth architecture — content, UX and channel mix — aligned to your KPIs.","proc-t3":"Execution","proc-d3":"Design, development and campaign launch in agile sprints with weekly progress updates.","proc-t4":"Scale","proc-d4":"Ongoing optimisation, A/B testing and growth iteration based on live performance data.","st1":"Years Experience","st2":"Projects Done","st3":"Satisfied Clients","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Built for Builders.","dw-desc":"Premium streetwear for developers, creators, founders and builders. Minimal design. High quality materials. Created for people who build technology.","dw-cta":"Visit DondaWear","contact-label":"Contact","contact-title-1":"Start your","contact-title-2":"project.","contact-sub":"Tell us about your goals. We respond within 24 hours with a tailored plan — no obligation.","field-name":"Full Name","field-email":"Email Address","field-website":"Website URL","field-budget":"Budget","field-message":"Your Goal","ph-name":"Your full name","ph-email":"hello@yourbrand.com","ph-company":"Company name or Website","ph-message":"Describe your vision and what success looks like…","budget-select":"Select range","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"Your data is handled with full discretion.","form-submit":"Send message","form-error-msg":"Something went wrong. Please try again or email us directly.","success-h":"Transmission received.","success-p":"We will be in contact within 24 hours with a personalised plan for your brand.","avail":"Available for new projects","rights":"All rights reserved","k-plus":"k+"},
-  cs:{"nav-home":"Domů","nav-solutions":"Řešení","nav-process":"Proces","nav-dondawear":"DondaWear","nav-contact":"Kontakt","nav-cta":"Začít","lang-select":"Vyberte jazyk","hero-eye":"Kolekce '26 — Digitální agentura","hl1":"Stavíme","hl2":"digitální","hl3":"budoucnost.","hero-desc":"E-shopy, vysoce výkonné weby a přesný marketing pro značky, které vyžadují výsledky.","cta1":"Zobrazit řešení","cta2":"Kontakt","stat-projects":"Projektů","stat-sat":"Spokojenost","stat-rev":"Prům. tržby","mq1":"E-shopy","mq2":"Web design","mq3":"Výkonnostní marketing","mq4":"Identita značky","mq5":"Optimalizace konverzí","mq6":"Webové aplikace","sol-eye":"Naše řešení","sol-head1":"Přesně navržené","sol-head2":"služby.","sol-sub":"Každý balíček je postaven na měřitelných výsledcích. Žádná zbytečnost — jen systémy, které fungují.","s1-title1":"Online obchod","s1-title2":"vývoj.","s1-desc":"Komplexní e-commerce na Shopify, WooCommerce nebo na míru. Optimalizováno pro konverze a růst.","s1-f1":"Design obchodu na míru","s1-f2":"Platby a logistika","s1-f3":"SEO produktová architektura","s1-f4":"Analytika a konverze","s2-title1":"Web","s2-title2":"design a vývoj.","s2-desc":"Marketingové weby, landing pages a aplikace s prvotřídním UX a vizuálem.","s2-f1":"Responzivní mobile-first","s2-f2":"CMS integrace (headless)","s2-f3":"Core Web Vitals","s2-f4":"Motion a interakce","s3-title1":"Růstový","s3-title2":"marketing.","s3-desc":"Data-driven reklama, SEO a sociální sítě jako jednotný růstový systém.","s3-f1":"Google a Meta Ads","s3-f2":"SEO a obsah","s3-f3":"Týdenní reporty","s3-f4":"CRO a A/B testy","starting-from":"Od","most-pop":"Nejoblíbenější","get-started":"Začít","t3d-eye":"Technologie","t3d-head1":"Postaveno s","t3d-head2":"přesností.","t3d-sub":"Každý projekt na nejvyšší technické úrovni — od architektury po nasazení.","tl1":"Core architektura","tl2":"Výkonnostní vrstva","tl3":"Zpracování dat","tl4":"Bezpečnostní protokol","proc-eye":"Jak pracujeme","proc-head1":"Náš","proc-head2":"protokol.","proc-sub":"Čtyřfázový systém, který provede váš projekt od briefu po spuštění.","ph1":"Fáze první","ph2":"Fáze druhá","ph3":"Fáze třetí","ph4":"Fáze čtvrtá","proc-t1":"Discovery","proc-d1":"Zmapujeme cíle, publikum a konkurenci, než napíšeme první řádek kódu.","proc-t2":"Strategie","proc-d2":"Růstová architektura sladěná s vašimi KPI.","proc-t3":"Realizace","proc-d3":"Design, vývoj a spuštění v agilních sprintech.","proc-t4":"Škálování","proc-d4":"Průběžná optimalizace, A/B testy a iterace na základě dat.","st1":"Let zkušeností","st2":"Hotových projektů","st3":"Spokojených klientů","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Stavíme pro buildery.","dw-desc":"Prémiový streetwear pro vývojáře, tvůrce, zakladatele a buildery. Minimalistický design. Kvalitní materiály. Vytvořeno pro lidi, kteří budují technologie.","dw-cta":"Navštívit DondaWear","contact-label":"Kontakt","contact-title-1":"Začněte svůj","contact-title-2":"projekt.","contact-sub":"Řekněte nám o svých cílech. Do 24 hodin se ozveme s plánem na míru — nezávazně.","field-name":"Celé jméno","field-email":"E-mail","field-website":"Web","field-budget":"Rozpočet","field-message":"Váš cíl","ph-name":"Vaše celé jméno","ph-email":"ahoj@vasznacka.cz","ph-company":"Firma nebo web","ph-message":"Popište svou vizi a jak vypadá úspěch…","budget-select":"Vyberte","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"S vašimi daty zacházíme diskrétně.","form-submit":"Odeslat","form-error-msg":"Něco se pokazilo. Zkuste to znovu.","success-h":"Přenos přijat.","success-p":"Do 24 hodin se ozveme s plánem na míru pro vaši značku.","avail":"K dispozici pro nové projekty","rights":"Všechna práva vyhrazena","k-plus":"k+"},
-  pl:{"nav-home":"Start","nav-solutions":"Usługi","nav-process":"Proces","nav-dondawear":"DondaWear","nav-contact":"Kontakt","nav-cta":"Zacznij","lang-select":"Wybierz język","hero-eye":"Kolekcja '26 — Agencja Cyfrowa","hl1":"Budujemy","hl2":"cyfrową","hl3":"przyszłość.","hero-desc":"Platformy e-commerce, wydajne strony i precyzyjny marketing dla marek wymagających wyników.","cta1":"Zobacz usługi","cta2":"Kontakt","stat-projects":"Projekty","stat-sat":"Zadowolenie","stat-rev":"Śr. przychód","mq1":"E-Commerce","mq2":"Projektowanie Stron","mq3":"Marketing Wydajnościowy","mq4":"Identyfikacja Marki","mq5":"Optymalizacja Konwersji","mq6":"Aplikacje Web","sol-eye":"Nasze usługi","sol-head1":"Precyzyjna inżynieria","sol-head2":"usług.","sol-sub":"Każdy pakiet zbudowany wokół mierzalnych rezultatów. Tylko działające systemy.","s1-title1":"Sklep","s1-title2":"internetowy.","s1-desc":"Pełny e-commerce na Shopify, WooCommerce lub custom. Optymalizacja konwersji od pierwszego dnia.","s1-f1":"Indywidualny design sklepu","s1-f2":"Integracja płatności","s1-f3":"Architektura SEO","s1-f4":"Analityka i konwersje","s2-title1":"Strona WWW","s2-title2":"design i dev.","s2-desc":"Strony marketingowe, landing page i aplikacje z elitarnym UX.","s2-f1":"Mobile-first responsywność","s2-f2":"Integracja CMS (headless)","s2-f3":"Core Web Vitals","s2-f4":"Motion i interakcje","s3-title1":"Marketing","s3-title2":"wzrostu.","s3-desc":"Reklama oparta na danych, SEO i social media jako jeden system wzrostu.","s3-f1":"Google i Meta Ads","s3-f2":"Strategia SEO","s3-f3":"Cotygodniowe raporty","s3-f4":"CRO i testy A/B","starting-from":"Od","most-pop":"Najpopularniejszy","get-started":"Zacznij","t3d-eye":"Technologia","t3d-head1":"Zbudowane z","t3d-head2":"precyzją.","t3d-sub":"Każdy projekt na najwyższym poziomie technicznym.","tl1":"Architektura","tl2":"Wydajność","tl3":"Przetwarzanie Danych","tl4":"Protokół Bezpieczeństwa","proc-eye":"Jak pracujemy","proc-head1":"Nasz","proc-head2":"protokół.","proc-sub":"Precyzyjny czterofazowy system — od briefu do uruchomienia.","ph1":"Faza I","ph2":"Faza II","ph3":"Faza III","ph4":"Faza IV","proc-t1":"Odkrywanie","proc-d1":"Mapujemy cele, odbiorców i konkurencję zanim napiszemy kod.","proc-t2":"Strategia","proc-d2":"Niestandardowa architektura wzrostu.","proc-t3":"Realizacja","proc-d3":"Design, rozwój i uruchomienie w sprintach.","proc-t4":"Skalowanie","proc-d4":"Stała optymalizacja i testy A/B na żywych danych.","st1":"Lat Doświadczenia","st2":"Projektów","st3":"Klientów","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Zbudowane dla budowniczych.","dw-desc":"Premium streetwear dla developerów, twórców, założycieli i budowniczych. Minimalistyczny design. Wysokiej jakości materiały. Stworzone dla ludzi, którzy budują technologię.","dw-cta":"Odwiedź DondaWear","contact-label":"Kontakt","contact-title-1":"Zacznij swój","contact-title-2":"projekt.","contact-sub":"Powiedz nam o swoich celach. Odpowiemy w 24 godziny.","field-name":"Imię i Nazwisko","field-email":"E-mail","field-website":"Strona","field-budget":"Budżet","field-message":"Twój cel","ph-name":"Twoje imię","ph-email":"witaj@twojamarka.pl","ph-company":"Firma lub strona","ph-message":"Opisz swoją wizję…","budget-select":"Wybierz","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"Twoje dane traktujemy z dyskrecją.","form-submit":"Wyślij","form-error-msg":"Coś poszło nie tak.","success-h":"Odebrano.","success-p":"Skontaktujemy się w ciągu 24 godzin.","avail":"Dostępni dla nowych projektów","rights":"Wszelkie prawa zastrzeżone","k-plus":"k+"},
-  es:{"nav-home":"Inicio","nav-solutions":"Servicios","nav-process":"Proceso","nav-dondawear":"DondaWear","nav-contact":"Contacto","nav-cta":"Comenzar","lang-select":"Seleccionar idioma","hero-eye":"Colección '26 — Agencia Digital","hl1":"Construimos","hl2":"futuros","hl3":"digitales.","hero-desc":"Plataformas e-commerce, sitios de alto rendimiento y marketing de precisión para marcas exigentes.","cta1":"Ver servicios","cta2":"Contáctanos","stat-projects":"Proyectos","stat-sat":"Satisfacción","stat-rev":"Ingreso Medio","mq1":"E-Commerce","mq2":"Diseño Web","mq3":"Marketing de Rendimiento","mq4":"Identidad","mq5":"Optimización","mq6":"Apps Web","sol-eye":"Nuestros servicios","sol-head1":"Ingeniería de","sol-head2":"precisión.","sol-sub":"Cada paquete diseñado en torno a resultados medibles. Solo sistemas que funcionan.","s1-title1":"Tienda","s1-title2":"online.","s1-desc":"E-commerce completo en Shopify, WooCommerce o stack personalizado.","s1-f1":"Diseño personalizado","s1-f2":"Integración pagos","s1-f3":"Arquitectura SEO","s1-f4":"Analítica","s2-title1":"Sitio Web","s2-title2":"diseño y dev.","s2-desc":"Sitios de marketing, landing pages y apps con UX de élite.","s2-f1":"Mobile-first responsive","s2-f2":"CMS (headless)","s2-f3":"Core Web Vitals","s2-f4":"Motion e interacciones","s3-title1":"Marketing","s3-title2":"de crecimiento.","s3-desc":"Publicidad basada en datos, SEO y social como sistema unificado.","s3-f1":"Google y Meta Ads","s3-f2":"Estrategia SEO","s3-f3":"Reportes semanales","s3-f4":"CRO y tests A/B","starting-from":"Desde","most-pop":"Más Popular","get-started":"Comenzar","t3d-eye":"Tecnología","t3d-head1":"Construido con","t3d-head2":"precisión.","t3d-sub":"Cada proyecto al más alto estándar técnico.","tl1":"Arquitectura","tl2":"Rendimiento","tl3":"Datos","tl4":"Seguridad","proc-eye":"Cómo trabajamos","proc-head1":"El","proc-head2":"protocolo.","proc-sub":"Sistema preciso de cuatro fases — del brief al lanzamiento.","ph1":"Fase Uno","ph2":"Fase Dos","ph3":"Fase Tres","ph4":"Fase Cuatro","proc-t1":"Descubrimiento","proc-d1":"Mapeamos tus objetivos y competencia antes de escribir código.","proc-t2":"Estrategia","proc-d2":"Arquitectura de crecimiento alineada a tus KPIs.","proc-t3":"Ejecución","proc-d3":"Diseño, desarrollo y lanzamiento en sprints ágiles.","proc-t4":"Escala","proc-d4":"Optimización continua y tests A/B.","st1":"Años Experiencia","st2":"Proyectos","st3":"Clientes","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Hecho para builders.","dw-desc":"Streetwear premium para desarrolladores, creadores, fundadores y builders. Diseño minimalista. Materiales de alta calidad. Creado para quienes construyen tecnología.","dw-cta":"Visitar DondaWear","contact-label":"Contacto","contact-title-1":"Inicia tu","contact-title-2":"proyecto.","contact-sub":"Cuéntanos tus objetivos. Respondemos en 24 horas.","field-name":"Nombre","field-email":"Email","field-website":"Sitio Web","field-budget":"Presupuesto","field-message":"Tu Objetivo","ph-name":"Tu nombre completo","ph-email":"hola@tumarca.com","ph-company":"Empresa o sitio","ph-message":"Describe tu visión…","budget-select":"Selecciona","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"Tus datos con total discreción.","form-submit":"Enviar","form-error-msg":"Algo salió mal.","success-h":"Recibido.","success-p":"Te contactaremos en 24 horas.","avail":"Disponibles para nuevos proyectos","rights":"Todos los derechos reservados","k-plus":"k+"},
-  de:{"nav-home":"Start","nav-solutions":"Lösungen","nav-process":"Prozess","nav-dondawear":"DondaWear","nav-contact":"Kontakt","nav-cta":"Loslegen","lang-select":"Sprache wählen","hero-eye":"Kollektion '26 — Digitalagentur","hl1":"Wir bauen","hl2":"digitale","hl3":"Zukunft.","hero-desc":"E-Commerce-Plattformen, leistungsstarke Websites und präzises Marketing.","cta1":"Lösungen ansehen","cta2":"Kontakt","stat-projects":"Projekte","stat-sat":"Zufriedenheit","stat-rev":"Ø Umsatz","mq1":"E-Commerce","mq2":"Webdesign","mq3":"Performance Marketing","mq4":"Markenidentität","mq5":"Conversion-Optimierung","mq6":"Web-Apps","sol-eye":"Unsere Lösungen","sol-head1":"Präzisions-","sol-head2":"Services.","sol-sub":"Jedes Paket basiert auf messbaren Ergebnissen.","s1-title1":"Online-Shop","s1-title2":"Entwicklung.","s1-desc":"Full-Stack E-Commerce auf Shopify, WooCommerce oder Custom-Stack.","s1-f1":"Individuelles Shop-Design","s1-f2":"Zahlung & Logistik","s1-f3":"SEO-Architektur","s1-f4":"Analytics","s2-title1":"Website","s2-title2":"Design & Dev.","s2-desc":"Maßgeschneiderte Marketing-Sites mit Elite-UX.","s2-f1":"Responsive Mobile-First","s2-f2":"CMS-Integration","s2-f3":"Core Web Vitals","s2-f4":"Motion & Interaktion","s3-title1":"Growth","s3-title2":"Marketing.","s3-desc":"Datengetriebene Paid Media, SEO und Social Strategy.","s3-f1":"Google & Meta Ads","s3-f2":"SEO & Content","s3-f3":"Wöchentliche Reports","s3-f4":"CRO & A/B-Tests","starting-from":"Ab","most-pop":"Beliebteste","get-started":"Loslegen","t3d-eye":"Technologie","t3d-head1":"Gebaut mit","t3d-head2":"Präzision.","t3d-sub":"Jedes Projekt auf höchstem technischem Niveau.","tl1":"Kernarchitektur","tl2":"Performance","tl3":"Datenverarbeitung","tl4":"Sicherheit","proc-eye":"Wie wir arbeiten","proc-head1":"Das","proc-head2":"Protokoll.","proc-sub":"Ein präzises vierstufiges System.","ph1":"Phase 1","ph2":"Phase 2","ph3":"Phase 3","ph4":"Phase 4","proc-t1":"Discovery","proc-d1":"Wir mappen Ziele, Zielgruppe und Wettbewerb.","proc-t2":"Strategie","proc-d2":"Wachstumsarchitektur an Ihren KPIs ausgerichtet.","proc-t3":"Umsetzung","proc-d3":"Design, Entwicklung und Launch in agilen Sprints.","proc-t4":"Skalierung","proc-d4":"Laufende Optimierung und A/B-Tests.","st1":"Jahre Erfahrung","st2":"Projekte","st3":"Kunden","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Gemacht für Builder.","dw-desc":"Premium Streetwear für Entwickler, Creator, Gründer und Builder. Minimalistisches Design. Hochwertige Materialien. Gemacht für Menschen, die Technologie bauen.","dw-cta":"DondaWear besuchen","contact-label":"Kontakt","contact-title-1":"Starte dein","contact-title-2":"Projekt.","contact-sub":"Erzählen Sie uns von Ihren Zielen.","field-name":"Name","field-email":"E-Mail","field-website":"Website","field-budget":"Budget","field-message":"Ihr Ziel","ph-name":"Ihr Name","ph-email":"hallo@ihremarke.de","ph-company":"Firma oder Website","ph-message":"Beschreiben Sie Ihre Vision…","budget-select":"Wählen","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"Volle Diskretion.","form-submit":"Senden","form-error-msg":"Etwas ist schiefgelaufen.","success-h":"Erhalten.","success-p":"Wir melden uns innerhalb von 24 Stunden.","avail":"Verfügbar für neue Projekte","rights":"Alle Rechte vorbehalten","k-plus":"k+"},
-  fr:{"nav-home":"Accueil","nav-solutions":"Services","nav-process":"Processus","nav-dondawear":"DondaWear","nav-contact":"Contact","nav-cta":"Commencer","lang-select":"Choisir la langue","hero-eye":"Collection '26 — Agence Digitale","hl1":"Nous bâtissons","hl2":"l'avenir","hl3":"numérique.","hero-desc":"Plateformes e-commerce, sites haute performance et marketing de précision.","cta1":"Voir les services","cta2":"Nous contacter","stat-projects":"Projets","stat-sat":"Satisfaction","stat-rev":"Revenu Moyen","mq1":"E-Commerce","mq2":"Web Design","mq3":"Marketing Performance","mq4":"Identité","mq5":"Conversion","mq6":"Apps Web","sol-eye":"Nos services","sol-head1":"Ingénierie de","sol-head2":"précision.","sol-sub":"Chaque offre conçue autour de résultats mesurables.","s1-title1":"Boutique","s1-title2":"en ligne.","s1-desc":"E-commerce complet sur Shopify, WooCommerce ou sur mesure.","s1-f1":"Design sur mesure","s1-f2":"Paiement & logistique","s1-f3":"Architecture SEO","s1-f4":"Analytique","s2-title1":"Site Web","s2-title2":"design & dev.","s2-desc":"Sites marketing avec UX élite.","s2-f1":"Mobile-first responsive","s2-f2":"CMS (headless)","s2-f3":"Core Web Vitals","s2-f4":"Motion & interactions","s3-title1":"Marketing","s3-title2":"de croissance.","s3-desc":"Publicité data-driven, SEO et social en système unifié.","s3-f1":"Google & Meta Ads","s3-f2":"SEO & contenu","s3-f3":"Rapports hebdomadaires","s3-f4":"CRO & tests A/B","starting-from":"À partir de","most-pop":"Plus Populaire","get-started":"Commencer","t3d-eye":"Technologie","t3d-head1":"Construit avec","t3d-head2":"précision.","t3d-sub":"Chaque projet au plus haut standard technique.","tl1":"Architecture","tl2":"Performance","tl3":"Données","tl4":"Sécurité","proc-eye":"Comment nous travaillons","proc-head1":"Le","proc-head2":"protocole.","proc-sub":"Un système précis en quatre phases.","ph1":"Phase Un","ph2":"Phase Deux","ph3":"Phase Trois","ph4":"Phase Quatre","proc-t1":"Découverte","proc-d1":"Nous cartographions vos objectifs et concurrence.","proc-t2":"Stratégie","proc-d2":"Architecture de croissance sur mesure.","proc-t3":"Exécution","proc-d3":"Design, dev et lancement en sprints agiles.","proc-t4":"Échelle","proc-d4":"Optimisation continue et tests A/B.","st1":"Années Expérience","st2":"Projets","st3":"Clients","dw-eye":"Merch","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"Fait pour les builders.","dw-desc":"Streetwear premium pour développeurs, créateurs, fondateurs et builders. Design minimaliste. Matériaux de haute qualité. Créé pour ceux qui construisent la technologie.","dw-cta":"Visiter DondaWear","contact-label":"Contact","contact-title-1":"Lancez votre","contact-title-2":"projet.","contact-sub":"Parlez-nous de vos objectifs. Réponse sous 24h.","field-name":"Nom","field-email":"Email","field-website":"Site Web","field-budget":"Budget","field-message":"Votre Objectif","ph-name":"Votre nom","ph-email":"bonjour@votremarque.fr","ph-company":"Entreprise ou site","ph-message":"Décrivez votre vision…","budget-select":"Choisir","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"Vos données en toute discrétion.","form-submit":"Envoyer","form-error-msg":"Une erreur est survenue.","success-h":"Reçu.","success-p":"Nous reviendrons vers vous sous 24 heures.","avail":"Disponibles pour de nouveaux projets","rights":"Tous droits réservés","k-plus":"k+"},
-  ar:{"nav-home":"الرئيسية","nav-solutions":"الحلول","nav-process":"العملية","nav-dondawear":"DondaWear","nav-contact":"اتصال","nav-cta":"ابدأ","lang-select":"اختر اللغة","hero-eye":"مجموعة '26 — وكالة رقمية","hl1":"نبني","hl2":"المستقبل","hl3":"الرقمي.","hero-desc":"منصات تجارة إلكترونية ومواقع عالية الأداء وتسويق دقيق.","cta1":"عرض الحلول","cta2":"تواصل","stat-projects":"المشاريع","stat-sat":"الرضا","stat-rev":"متوسط الإيرادات","mq1":"التجارة الإلكترونية","mq2":"تصميم الويب","mq3":"تسويق الأداء","mq4":"هوية العلامة","mq5":"تحسين التحويل","mq6":"تطبيقات الويب","sol-eye":"حلولنا","sol-head1":"هندسة","sol-head2":"دقيقة.","sol-sub":"كل باقة مبنية على نتائج قابلة للقياس.","s1-title1":"متجر","s1-title2":"إلكتروني.","s1-desc":"تجارة إلكترونية كاملة على Shopify أو WooCommerce.","s1-f1":"تصميم متجر مخصص","s1-f2":"دمج الدفع","s1-f3":"هيكلية SEO","s1-f4":"تحليلات","s2-title1":"موقع","s2-title2":"تصميم وتطوير.","s2-desc":"مواقع تسويقية بتجربة استخدام نخبوية.","s2-f1":"متجاوب أولاً للجوال","s2-f2":"دمج CMS","s2-f3":"Core Web Vitals","s2-f4":"حركة وتفاعل","s3-title1":"تسويق","s3-title2":"النمو.","s3-desc":"إعلانات مدفوعة قائمة على البيانات.","s3-f1":"إعلانات Google و Meta","s3-f2":"استراتيجية SEO","s3-f3":"تقارير أسبوعية","s3-f4":"CRO واختبار A/B","starting-from":"يبدأ من","most-pop":"الأكثر شعبية","get-started":"ابدأ","t3d-eye":"التكنولوجيا","t3d-head1":"مبني بـ","t3d-head2":"دقة.","t3d-sub":"كل مشروع بأعلى معيار تقني.","tl1":"الهيكلية","tl2":"الأداء","tl3":"البيانات","tl4":"الأمان","proc-eye":"كيف نعمل","proc-head1":"","proc-head2":"البروتوكول.","proc-sub":"نظام دقيق من أربع مراحل.","ph1":"المرحلة 1","ph2":"المرحلة 2","ph3":"المرحلة 3","ph4":"المرحلة 4","proc-t1":"الاكتشاف","proc-d1":"نرسم خريطة الأهداف قبل كتابة الكود.","proc-t2":"الاستراتيجية","proc-d2":"هندسة نمو مخصصة.","proc-t3":"التنفيذ","proc-d3":"تصميم وتطوير وإطلاق في sprints.","proc-t4":"التوسع","proc-d4":"تحسين مستمر واختبار A/B.","st1":"سنوات","st2":"مشاريع","st3":"عملاء","dw-eye":"منتجات","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"صُنع للبنّائين.","dw-desc":"ملابس شارع فاخرة للمطورين والمبدعين والمؤسسين والبنّائين. تصميم بسيط. خامات عالية الجودة. صُنعت لمن يبنون التكنولوجيا.","dw-cta":"زيارة DondaWear","contact-label":"اتصال","contact-title-1":"ابدأ","contact-title-2":"مشروعك.","contact-sub":"أخبرنا عن أهدافك. نرد خلال 24 ساعة.","field-name":"الاسم","field-email":"البريد","field-website":"الموقع","field-budget":"الميزانية","field-message":"هدفك","ph-name":"اسمك","ph-email":"hello@yourbrand.com","ph-company":"الشركة أو الموقع","ph-message":"صف رؤيتك…","budget-select":"اختر","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"بياناتك بسرية.","form-submit":"إرسال","form-error-msg":"حدث خطأ.","success-h":"تم الاستلام.","success-p":"سنتواصل معك خلال 24 ساعة.","avail":"متاحون لمشاريع جديدة","rights":"جميع الحقوق محفوظة","k-plus":"ألف+"},
-  zh:{"nav-home":"首页","nav-solutions":"解决方案","nav-process":"流程","nav-dondawear":"DondaWear","nav-contact":"联系","nav-cta":"立即开始","lang-select":"选择语言","hero-eye":"'26 系列 — 数字代理","hl1":"我们构建","hl2":"数字","hl3":"未来。","hero-desc":"为追求成果的品牌打造电商平台、高性能网站与精准营销。","cta1":"查看方案","cta2":"联系我们","stat-projects":"项目","stat-sat":"满意度","stat-rev":"平均收入","mq1":"电子商务","mq2":"网页设计","mq3":"效果营销","mq4":"品牌","mq5":"转化优化","mq6":"Web 应用","sol-eye":"我们的服务","sol-head1":"精密工程","sol-head2":"服务。","sol-sub":"每个套餐都围绕可衡量的成果构建。","s1-title1":"在线商店","s1-title2":"开发。","s1-desc":"基于 Shopify、WooCommerce 的全栈电商。","s1-f1":"定制店面设计","s1-f2":"支付与物流","s1-f3":"SEO 架构","s1-f4":"分析与追踪","s2-title1":"网站","s2-title2":"设计与开发。","s2-desc":"定制营销网站,顶级 UX。","s2-f1":"移动优先响应式","s2-f2":"CMS 集成","s2-f3":"Core Web Vitals","s2-f4":"动效与交互","s3-title1":"增长","s3-title2":"营销。","s3-desc":"数据驱动付费媒体、SEO 与社交策略。","s3-f1":"Google 与 Meta 广告","s3-f2":"SEO 与内容","s3-f3":"每周报告","s3-f4":"CRO 与 A/B 测试","starting-from":"起价","most-pop":"最受欢迎","get-started":"开始","t3d-eye":"技术","t3d-head1":"以","t3d-head2":"精度构建。","t3d-sub":"每个项目达到最高技术标准。","tl1":"核心架构","tl2":"性能层","tl3":"数据处理","tl4":"安全协议","proc-eye":"我们如何工作","proc-head1":"","proc-head2":"协议。","proc-sub":"精准的四阶段系统。","ph1":"第一阶段","ph2":"第二阶段","ph3":"第三阶段","ph4":"第四阶段","proc-t1":"发现","proc-d1":"在写代码前梳理你的目标和竞争。","proc-t2":"策略","proc-d2":"定制化增长架构。","proc-t3":"执行","proc-d3":"设计、开发与发布以敏捷冲刺进行。","proc-t4":"扩展","proc-d4":"持续优化、A/B 测试与迭代。","st1":"年经验","st2":"已完成项目","st3":"满意客户","dw-eye":"周边","dw-title1":"Donda","dw-title2":"Wear.","dw-tagline":"为建造者而生。","dw-desc":"为开发者、创作者、创始人和建造者打造的高级街头服饰。极简设计。高品质材料。为构建科技的人而生。","dw-cta":"访问 DondaWear","contact-label":"联系","contact-title-1":"开启你的","contact-title-2":"项目。","contact-sub":"告诉我们你的目标。24 小时内回复。","field-name":"全名","field-email":"电子邮件","field-website":"网址","field-budget":"预算","field-message":"你的目标","ph-name":"你的全名","ph-email":"hello@yourbrand.com","ph-company":"公司或网站","ph-message":"描述你的愿景…","budget-select":"选择","budget-1":"Starter","budget-2":"Growth","budget-3":"Enterprise","form-note":"我们将以保密方式处理你的数据。","form-submit":"发送","form-error-msg":"出错了。","success-h":"已收到。","success-p":"我们将在 24 小时内联系你。","avail":"接受新项目","rights":"版权所有","k-plus":"千+"}
+const T = {
+en:{"nav-home":"Home","nav-solutions":"Solutions","nav-portfolio":"Portfolio","nav-process":"Process","nav-about":"About","nav-contact":"Contact","nav-cta":"Get Started","lang-select":"Select Language",
+"hero-eye":"Collection '26 — Digital Agency","hl1":"We build","hl2":"digital","hl3":"products","hl4":"that matter.","hero-desc":"Websites, web apps and AI-powered digital experiences by an independent studio.","cta1":"View Solutions","cta2":"Contact Us",
+"mq1":"E-Commerce","mq2":"Web Design","mq3":"Performance Marketing","mq4":"Brand Identity","mq5":"Conversion Optimisation","mq6":"Web Apps",
+"sol-eye":"Solutions","sol-head1":"Simple packages,","sol-head2":"clear pricing.","sol-sub":"Every package starts from a clear price. The final quote depends on the scope of your project.","from":"From","mo":"/ month","most-pop":"MOST POPULAR","details":"Details","what":"What I do","best":"Best for","incl":"Includes","care-note":"Larger changes and new features are quoted separately.","sol-close":"Professional quality without agency-level overhead.",
+"t3d-eye":"Technology","t3d-head1":"Built with","t3d-head2":"precision.","t3d-sub":"Every project engineered to the highest technical standard — from architecture to deployment.","tl1":"Core Architecture","tl2":"Performance Layer","tl3":"Data Processing","tl4":"Security Protocol",
+"pf-eye":"Portfolio","pf-head1":"Projects","pf-head2":"worth visiting.","pf-sub":"Products I designed and built myself.","pf-own":"Own project","pf-dw":"Premium streetwear for developers, creators, founders and builders.","pf-client":"Selected client work","pf-rs":"Digital platform concept designed to make renting safer, clearer and more transparent for tenants and landlords.","pf-fd":"Simple and modern file-sharing platform designed for fast, private and effortless file transfers.","pf-visit":"Visit project",
+"proc-eye":"How We Work","proc-head1":"The","proc-head2":"protocol.","proc-sub":"A precise four-phase system designed to take your project from brief to live — with zero ambiguity at every step.","ph1":"Phase One","ph2":"Phase Two","ph3":"Phase Three","ph4":"Phase Four","proc-t1":"Discovery","proc-d1":"We map your goals, audience and competitive landscape before writing a single line of code.","proc-t2":"Strategy","proc-d2":"A custom growth architecture — content, UX and channel mix — aligned to your KPIs.","proc-t3":"Execution","proc-d3":"Design, development and campaign launch in agile sprints with weekly progress updates.","proc-t4":"Scale","proc-d4":"Ongoing optimisation, A/B testing and growth iteration based on live performance data.",
+"st1":"Projects Delivered","st2":"Years Experience","st3":"Client Satisfaction","st4":"Avg. Client Revenue",
+"ab-eye":"About","ab-head":"The person behind Donda.Digital","ab1":"Donda.Digital is an independent digital studio founded by Adam Donda.","ab2":"I build modern websites, digital products and AI-powered digital experiences for businesses, creators and people with ideas worth building.","ab3":"My approach combines web development, modern UI/UX, AI tools and automation. I focus on creating digital products that are clean, functional, fast and built around a real purpose.","ab4":"I believe you don't always need a large agency or a complicated process to build something great.","ab5":"You need someone who understands your idea, communicates directly with you and takes care of the project from the first concept to the final launch.","ab6":"That's what Donda.Digital is about.","ab7":"Ideas into digital products.","ab-role":"Founder · Donda.Digital",
+"contact-label":"Contact","contact-title-1":"Start your","contact-title-2":"project.","contact-sub":"Tell us about your goals. We respond within 24 hours with a tailored plan — no obligation.","field-name":"Full Name","field-email":"Email Address","field-website":"Website URL","field-package":"Package","pkg-select":"Select package (optional)","pkg-none":"Not sure yet","field-message":"Your Goal","ph-name":"Your full name","ph-email":"hello@yourbrand.com","ph-company":"Company name or Website","ph-message":"Describe your vision and what success looks like…","consent":"I agree to the processing of my data according to the Privacy Policy","form-note":"Your data is handled with full discretion.","form-submit":"Send message","form-error-msg":"Something went wrong. Please try again or email us directly.","success-h":"Transmission received.","success-p":"We will be in contact within 24 hours with a personalised plan for your brand.",
+"avail":"Available for new projects","rights":"All rights reserved","l-priv":"Privacy Policy","l-terms":"Terms of Service","l-cook":"Cookies","close":"Close","lg-tpl":"Template text, not legal advice. Please have it reviewed by a legal professional before relying on it."},
+cs:{"nav-home":"Domů","nav-solutions":"Řešení","nav-portfolio":"Portfolio","nav-process":"Proces","nav-about":"O mně","nav-contact":"Kontakt","nav-cta":"Začít","lang-select":"Vyberte jazyk",
+"hero-eye":"Kolekce '26 — Digitální agentura","hl1":"Tvoříme","hl2":"digitální","hl3":"produkty,","hl4":"na kterých záleží.","hero-desc":"Weby, webové aplikace a digitální zážitky s podporou AI od nezávislého studia.","cta1":"Zobrazit řešení","cta2":"Kontakt",
+"mq1":"E-shopy","mq2":"Web design","mq3":"Výkonnostní marketing","mq4":"Identita značky","mq5":"Optimalizace konverzí","mq6":"Webové aplikace",
+"sol-eye":"Řešení","sol-head1":"Jednoduché balíčky,","sol-head2":"jasné ceny.","sol-sub":"Každý balíček má jasnou výchozí cenu. Konečná nabídka závisí na rozsahu vašeho projektu.","from":"Od","mo":"/ měsíc","most-pop":"NEJOBLÍBENĚJŠÍ","details":"Detaily","what":"Co dělám","best":"Vhodné pro","incl":"Obsahuje","care-note":"Větší změny a nové funkce se nacenují zvlášť.","sol-close":"Profesionální kvalita bez režie velké agentury.",
+"t3d-eye":"Technologie","t3d-head1":"Postaveno s","t3d-head2":"přesností.","t3d-sub":"Každý projekt na nejvyšší technické úrovni — od architektury po nasazení.","tl1":"Core architektura","tl2":"Výkonnostní vrstva","tl3":"Zpracování dat","tl4":"Bezpečnostní protokol",
+"pf-eye":"Portfolio","pf-head1":"Projekty,","pf-head2":"které stojí za návštěvu.","pf-sub":"Produkty, které jsem navrhl a postavil sám.","pf-own":"Vlastní projekt","pf-dw":"Prémiový streetwear pro vývojáře, tvůrce, zakladatele a buildery.","pf-client":"Vybrané klientské projekty","pf-rs":"Koncept digitální platformy, která má udělat pronájem bezpečnější, přehlednější a transparentnější pro nájemníky i pronajímatele.","pf-fd":"Jednoduchá a moderní platforma pro sdílení souborů, navržená pro rychlé, soukromé a bezproblémové přenosy.","pf-visit":"Navštívit projekt",
+"proc-eye":"Jak pracujeme","proc-head1":"Náš","proc-head2":"protokol.","proc-sub":"Čtyřfázový systém, který provede váš projekt od briefu po spuštění.","ph1":"Fáze první","ph2":"Fáze druhá","ph3":"Fáze třetí","ph4":"Fáze čtvrtá","proc-t1":"Discovery","proc-d1":"Zmapujeme cíle, publikum a konkurenci, než napíšeme první řádek kódu.","proc-t2":"Strategie","proc-d2":"Růstová architektura sladěná s vašimi KPI.","proc-t3":"Realizace","proc-d3":"Design, vývoj a spuštění v agilních sprintech.","proc-t4":"Škálování","proc-d4":"Průběžná optimalizace, A/B testy a iterace na základě dat.",
+"st1":"Dokončených projektů","st2":"Let zkušeností","st3":"Spokojenost klientů","st4":"Prům. tržby klientů",
+"ab-eye":"O mně","ab-head":"Člověk za Donda.Digital","ab1":"Donda.Digital je nezávislé digitální studio, které založil Adam Donda.","ab2":"Vytvářím moderní weby, digitální produkty a digitální zážitky s podporou AI pro firmy, tvůrce a lidi s nápady, které stojí za realizaci.","ab3":"Můj přístup spojuje webový vývoj, moderní UI/UX, nástroje AI a automatizaci. Soustředím se na digitální produkty, které jsou čisté, funkční, rychlé a postavené kolem skutečného účelu.","ab4":"Věřím, že k vytvoření něčeho skvělého nemusíte potřebovat velkou agenturu ani složitý proces.","ab5":"Potřebujete někoho, kdo pochopí váš nápad, komunikuje přímo s vámi a postará se o projekt od prvního konceptu až po finální spuštění.","ab6":"O tom Donda.Digital je.","ab7":"Z nápadů digitální produkty.","ab-role":"Zakladatel · Donda.Digital",
+"contact-label":"Kontakt","contact-title-1":"Začněte svůj","contact-title-2":"projekt.","contact-sub":"Řekněte nám o svých cílech. Do 24 hodin se ozveme s plánem na míru — nezávazně.","field-name":"Celé jméno","field-email":"E-mail","field-website":"Web","field-package":"Balíček","pkg-select":"Vyberte balíček (nepovinné)","pkg-none":"Zatím nevím","field-message":"Váš cíl","ph-name":"Vaše celé jméno","ph-email":"ahoj@vasznacka.cz","ph-company":"Firma nebo web","ph-message":"Popište svou vizi a jak vypadá úspěch…","consent":"Souhlasím se zpracováním svých údajů podle Zásad ochrany osobních údajů","form-note":"S vašimi daty zacházíme diskrétně.","form-submit":"Odeslat zprávu","form-error-msg":"Něco se pokazilo. Zkuste to znovu nebo nám napište e-mail.","success-h":"Přenos přijat.","success-p":"Do 24 hodin se ozveme s plánem na míru pro vaši značku.",
+"avail":"K dispozici pro nové projekty","rights":"Všechna práva vyhrazena","l-priv":"Zásady ochrany osobních údajů","l-terms":"Obchodní podmínky","l-cook":"Cookies","close":"Zavřít","lg-tpl":"Vzorový text — nejde o právní poradenství. Právní texty jsou prozatím dostupné v angličtině.",
+"For simple landing pages and smaller projects.":"Pro jednoduché landing pages a menší projekty.","For businesses that need a complete professional website.":"Pro firmy, které potřebují kompletní profesionální web.","For advanced websites and more customised digital experiences.":"Pro pokročilé weby a více přizpůsobené digitální zážitky.","For businesses ready to sell online.":"Pro firmy připravené prodávat online.","For web applications, custom platforms and complex digital products.":"Pro webové aplikace, vlastní platformy a složité digitální produkty.","For clients who want ongoing support after launch.":"Pro klienty, kteří chtějí průběžnou podporu po spuštění.",
+"Start with START":"Začít s balíčkem START","Build my website":"Postavit můj web","Start a premium project":"Zahájit prémiový projekt","Build my store":"Postavit můj obchod","Discuss my project":"Probrat můj projekt","Ask about WEBSITE CARE":"Zeptat se na WEBSITE CARE"},
+sk:{"nav-home":"Domov","nav-solutions":"Riešenia","nav-portfolio":"Portfólio","nav-process":"Proces","nav-about":"O mne","nav-contact":"Kontakt","nav-cta":"Začať","lang-select":"Vyberte jazyk",
+"hl1":"Tvoríme","hl2":"digitálne","hl3":"produkty,","hl4":"na ktorých záleží.","hero-desc":"Weby, webové aplikácie a digitálne zážitky s podporou AI od nezávislého štúdia.","cta1":"Zobraziť riešenia","cta2":"Kontakt",
+"sol-eye":"Riešenia","sol-head1":"Jednoduché balíčky,","sol-head2":"jasné ceny.","sol-sub":"Každý balíček má jasnú východiskovú cenu. Konečná ponuka závisí od rozsahu vášho projektu.","from":"Od","mo":"/ mesiac","most-pop":"NAJOBĽÚBENEJŠÍ","details":"Detaily","what":"Čo robím","best":"Vhodné pre","incl":"Obsahuje","care-note":"Väčšie zmeny a nové funkcie sa cenia osobitne.","sol-close":"Profesionálna kvalita bez réžie veľkej agentúry.",
+"pf-eye":"Portfólio","pf-head1":"Projekty,","pf-head2":"ktoré stoja za návštevu.","pf-sub":"Produkty, ktoré som navrhol a postavil sám.","pf-own":"Vlastný projekt","pf-dw":"Prémiový streetwear pre vývojárov, tvorcov, zakladateľov a builderov.","pf-client":"Vybrané klientske projekty","pf-rs":"Koncept digitálnej platformy, ktorá má urobiť prenájom bezpečnejším, prehľadnejším a transparentnejším pre nájomníkov aj prenajímateľov.","pf-fd":"Jednoduchá a moderná platforma na zdieľanie súborov, navrhnutá pre rýchle, súkromné a bezproblémové prenosy.","pf-visit":"Navštíviť projekt",
+"st1":"Dokončených projektov","st2":"Rokov skúseností","st3":"Spokojnosť klientov","st4":"Priem. tržby klientov",
+"ab-eye":"O mne","ab-head":"Človek za Donda.Digital","ab1":"Donda.Digital je nezávislé digitálne štúdio, ktoré založil Adam Donda.","ab2":"Vytváram moderné weby, digitálne produkty a digitálne zážitky s podporou AI pre firmy, tvorcov a ľudí s nápadmi, ktoré stoja za realizáciu.","ab3":"Môj prístup spája webový vývoj, moderné UI/UX, nástroje AI a automatizáciu. Sústreďujem sa na digitálne produkty, ktoré sú čisté, funkčné, rýchle a postavené okolo skutočného účelu.","ab4":"Verím, že na vytvorenie niečoho skvelého nepotrebujete veľkú agentúru ani zložitý proces.","ab5":"Potrebujete niekoho, kto pochopí váš nápad, komunikuje priamo s vami a postará sa o projekt od prvého konceptu až po finálne spustenie.","ab6":"O tom je Donda.Digital.","ab7":"Z nápadov digitálne produkty.","ab-role":"Zakladateľ · Donda.Digital",
+"contact-label":"Kontakt","contact-title-1":"Začnite svoj","contact-title-2":"projekt.","contact-sub":"Povedzte nám o svojich cieľoch. Do 24 hodín sa ozveme s plánom na mieru — nezáväzne.","field-name":"Celé meno","field-email":"E-mail","field-website":"Web","field-package":"Balíček","pkg-select":"Vyberte balíček (nepovinné)","pkg-none":"Zatiaľ neviem","field-message":"Váš cieľ","ph-name":"Vaše celé meno","ph-email":"ahoj@vasaznacka.sk","ph-company":"Firma alebo web","ph-message":"Opíšte svoju víziu a ako vyzerá úspech…","consent":"Súhlasím so spracovaním svojich údajov podľa Zásad ochrany osobných údajov","form-note":"S vašimi údajmi zaobchádzame diskrétne.","form-submit":"Odoslať správu","form-error-msg":"Niečo sa pokazilo. Skúste to znova alebo nám napíšte e-mail.","success-h":"Prenos prijatý.","success-p":"Do 24 hodín sa ozveme s plánom na mieru pre vašu značku.",
+"avail":"K dispozícii pre nové projekty","rights":"Všetky práva vyhradené","l-priv":"Zásady ochrany osobných údajov","l-terms":"Obchodné podmienky","l-cook":"Cookies","close":"Zavrieť","lg-tpl":"Vzorový text — nejde o právne poradenstvo. Právne texty sú zatiaľ dostupné v angličtine.",
+"For simple landing pages and smaller projects.":"Pre jednoduché landing pages a menšie projekty.","For businesses that need a complete professional website.":"Pre firmy, ktoré potrebujú kompletný profesionálny web.","For advanced websites and more customised digital experiences.":"Pre pokročilé weby a viac prispôsobené digitálne zážitky.","For businesses ready to sell online.":"Pre firmy pripravené predávať online.","For web applications, custom platforms and complex digital products.":"Pre webové aplikácie, vlastné platformy a zložité digitálne produkty.","For clients who want ongoing support after launch.":"Pre klientov, ktorí chcú priebežnú podporu po spustení.",
+"Start with START":"Začať s balíčkom START","Build my website":"Postaviť môj web","Start a premium project":"Začať prémiový projekt","Build my store":"Postaviť môj obchod","Discuss my project":"Prediskutovať môj projekt","Ask about WEBSITE CARE":"Opýtať sa na WEBSITE CARE"},
+fr:{"nav-home":"Accueil","nav-solutions":"Services","nav-portfolio":"Portfolio","nav-process":"Processus","nav-about":"À propos","nav-contact":"Contact","nav-cta":"Commencer","lang-select":"Choisir la langue",
+"hero-eye":"Collection '26 — Agence Digitale","hl1":"Nous créons","hl2":"des produits","hl3":"numériques","hl4":"qui comptent.","hero-desc":"Sites web, applications web et expériences numériques propulsées par l'IA, par un studio indépendant.","cta1":"Voir les services","cta2":"Nous contacter",
+"mq1":"E-Commerce","mq2":"Web Design","mq3":"Marketing Performance","mq4":"Identité","mq5":"Conversion","mq6":"Apps Web",
+"sol-eye":"Services","sol-head1":"Des offres simples,","sol-head2":"des prix clairs.","sol-sub":"Chaque offre part d'un prix clair. Le devis final dépend de l'ampleur de votre projet.","from":"À partir de","mo":"/ mois","most-pop":"LE PLUS POPULAIRE","details":"Détails","what":"Ce que je fais","best":"Idéal pour","incl":"Inclus","care-note":"Les changements plus importants et les nouvelles fonctionnalités font l'objet d'un devis séparé.","sol-close":"Une qualité professionnelle sans les lourdeurs d'une agence.",
+"t3d-eye":"Technologie","t3d-head1":"Construit avec","t3d-head2":"précision.","t3d-sub":"Chaque projet au plus haut standard technique.","tl1":"Architecture","tl2":"Performance","tl3":"Données","tl4":"Sécurité",
+"pf-eye":"Portfolio","pf-head1":"Des projets","pf-head2":"à visiter.","pf-sub":"Des produits que j'ai conçus et construits moi-même.","pf-own":"Projet personnel","pf-dw":"Streetwear premium pour développeurs, créateurs, fondateurs et builders.","pf-client":"Projets clients sélectionnés","pf-rs":"Concept de plateforme numérique conçue pour rendre la location plus sûre, plus claire et plus transparente pour les locataires et les propriétaires.","pf-fd":"Plateforme de partage de fichiers simple et moderne, conçue pour des transferts rapides, privés et sans effort.","pf-visit":"Visiter le projet",
+"proc-eye":"Comment nous travaillons","proc-head1":"Le","proc-head2":"protocole.","proc-sub":"Un système précis en quatre phases.","ph1":"Phase Un","ph2":"Phase Deux","ph3":"Phase Trois","ph4":"Phase Quatre","proc-t1":"Découverte","proc-d1":"Nous cartographions vos objectifs et concurrence.","proc-t2":"Stratégie","proc-d2":"Architecture de croissance sur mesure.","proc-t3":"Exécution","proc-d3":"Design, dev et lancement en sprints agiles.","proc-t4":"Échelle","proc-d4":"Optimisation continue et tests A/B.",
+"st1":"Projets livrés","st2":"Années d'expérience","st3":"Satisfaction client","st4":"Revenu client moyen",
+"ab-eye":"À propos","ab-head":"La personne derrière Donda.Digital","ab1":"Donda.Digital est un studio numérique indépendant fondé par Adam Donda.","ab2":"Je crée des sites web modernes, des produits numériques et des expériences numériques propulsées par l'IA pour des entreprises, des créateurs et des personnes dont les idées méritent d'être construites.","ab3":"Mon approche associe développement web, UI/UX moderne, outils d'IA et automatisation. Je me concentre sur des produits numériques propres, fonctionnels, rapides et construits autour d'un véritable objectif.","ab4":"Je crois qu'il n'est pas toujours nécessaire d'avoir une grande agence ou un processus compliqué pour construire quelque chose de remarquable.","ab5":"Il faut quelqu'un qui comprend votre idée, communique directement avec vous et prend en charge le projet du premier concept jusqu'au lancement final.","ab6":"C'est tout l'esprit de Donda.Digital.","ab7":"Des idées aux produits numériques.","ab-role":"Fondateur · Donda.Digital",
+"contact-label":"Contact","contact-title-1":"Lancez votre","contact-title-2":"projet.","contact-sub":"Parlez-nous de vos objectifs. Nous répondons sous 24 h avec un plan sur mesure — sans engagement.","field-name":"Nom complet","field-email":"Adresse e-mail","field-website":"Site web","field-package":"Offre","pkg-select":"Choisir une offre (facultatif)","pkg-none":"Pas encore sûr","field-message":"Votre objectif","ph-name":"Votre nom complet","ph-email":"bonjour@votremarque.fr","ph-company":"Entreprise ou site web","ph-message":"Décrivez votre vision et ce à quoi ressemble le succès…","consent":"J'accepte le traitement de mes données conformément à la Politique de confidentialité","form-note":"Vos données sont traitées en toute discrétion.","form-submit":"Envoyer le message","form-error-msg":"Une erreur est survenue. Réessayez ou écrivez-nous directement par e-mail.","success-h":"Message reçu.","success-p":"Nous reviendrons vers vous sous 24 heures avec un plan personnalisé pour votre marque.",
+"avail":"Disponible pour de nouveaux projets","rights":"Tous droits réservés","l-priv":"Politique de confidentialité","l-terms":"Conditions d'utilisation","l-cook":"Cookies","close":"Fermer","lg-tpl":"Texte modèle — ne constitue pas un conseil juridique. Les textes juridiques sont pour l'instant disponibles en anglais.",
+"For simple landing pages and smaller projects.":"Pour des pages d'atterrissage simples et de petits projets.","For businesses that need a complete professional website.":"Pour les entreprises qui ont besoin d'un site professionnel complet.","For advanced websites and more customised digital experiences.":"Pour des sites avancés et des expériences numériques plus personnalisées.","For businesses ready to sell online.":"Pour les entreprises prêtes à vendre en ligne.","For web applications, custom platforms and complex digital products.":"Pour les applications web, plateformes sur mesure et produits numériques complexes.","For clients who want ongoing support after launch.":"Pour les clients qui souhaitent un accompagnement continu après le lancement.",
+"Start with START":"Commencer avec START","Build my website":"Créer mon site","Start a premium project":"Lancer un projet premium","Build my store":"Créer ma boutique","Discuss my project":"Discuter de mon projet","Ask about WEBSITE CARE":"Se renseigner sur WEBSITE CARE"}
 };
 
-/* ========= CURRENCY ========= */
-const FX = { EUR:1, CZK:25.2, PLN:4.3, USD:1.08, GBP:0.85, AED:3.96, CNY:7.85, JPY:163 };
-const CUR_SYMBOL = { EUR:'€', CZK:'Kč', PLN:'zł', USD:'$', GBP:'£', AED:'د.إ', CNY:'¥', JPY:'¥' };
-const COUNTRY_CUR = {CZ:'CZK',PL:'PLN',GB:'GBP',UK:'GBP',US:'USD',CA:'USD',AE:'AED',SA:'AED',QA:'AED',KW:'AED',BH:'AED',OM:'AED',CN:'CNY',HK:'CNY',TW:'CNY',JP:'JPY'};
-const LANG_DEFAULT_CUR = { en:'EUR', cs:'CZK', pl:'PLN', es:'EUR', de:'EUR', fr:'EUR', ar:'AED', zh:'CNY' };
+const ic=p=>`<svg viewBox="0 0 24 24">${p}</svg>`;
+const IC={'START':ic('<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>'),
+'BUSINESS':ic('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 14l-2 2 2 2M15 14l2 2-2 2"/>'),
+'PREMIUM':ic('<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>'),
+'E-COMMERCE':ic('<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/>'),
+'CUSTOM':ic('<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>'),
+'WEBSITE CARE':ic('<path d="M20 12a8 8 0 11-2.3-5.6M20 4v4h-4"/>')};
+/* ========= PACKAGES (EUR, "from" pricing) ========= */
+const PK=[
+{id:'START',p:'€350',d:'For simple landing pages and smaller projects.',c:'Start with START',w:'I design and build a single-page website around your idea. It is responsive, fast and published online for you.',b:'Landing pages, personal pages and smaller projects.',f:['1-page website','Custom responsive design','Mobile optimisation','Contact form','Basic SEO','Deployment']},
+{id:'BUSINESS',p:'€750',pop:1,d:'For businesses that need a complete professional website.',c:'Build my website',w:'I build a multi-page website with a custom interface around your business. It covers structure, design, development and launch.',b:'Businesses that need a complete, professional web presence.',f:['Up to 5 pages','Custom UI/UX','Responsive development','Contact forms','Basic SEO setup','Analytics','Performance optimisation','Deployment']},
+{id:'PREMIUM',p:'€1,200',d:'For advanced websites and more customised digital experiences.',c:'Start a premium project',w:'I create a fully custom website with advanced animations and richer interactions. Where it makes sense, I add a CMS and integrations with the tools you use.',b:'Brands that want a more customised, distinctive digital experience.',f:['Up to 10 pages','Fully custom design','Advanced animations','CMS where appropriate','Integrations','SEO setup','Analytics','Performance optimisation','Deployment']},
+{id:'E-COMMERCE',p:'€1,500',d:'For businesses ready to sell online.',c:'Build my store',w:'I build an online store with a custom storefront, product structure and checkout. Payments are connected so you can start selling.',b:'Businesses ready to sell online.',f:['Custom storefront','Product structure','Shopping cart','Payment integration','Checkout','Responsive design','Analytics','Deployment']},
+{id:'CUSTOM',p:'€2,000+',d:'For web applications, custom platforms and complex digital products.',c:'Discuss my project',w:'I develop web applications, dashboards and custom platforms around your requirements. This can include API and AI integrations and advanced workflows.',b:'Complex digital products and ideas that do not fit a standard package.',f:['Custom functionality','Web applications','Dashboards','API integrations','AI integrations','Advanced workflows','Custom development']}
+];
+const CARE={id:'WEBSITE CARE',p:'€100',d:'For clients who want ongoing support after launch.',c:'Ask about WEBSITE CARE',f:['Website updates','Content changes','Technical maintenance','Bug fixes','Performance checks','Small improvements']};
 
-function detectCurrency(){
-  try{
-    const stored = localStorage.getItem('donda_cur');
-    if(stored && FX[stored]) return stored;
-    const locale = (navigator.language || 'en').toUpperCase();
-    const region = locale.split('-')[1] || locale.split('_')[1];
-    if(region && COUNTRY_CUR[region]) return COUNTRY_CUR[region];
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-    if(tz.includes('Prague')) return 'CZK';
-    if(tz.includes('Warsaw')) return 'PLN';
-    if(tz.includes('London')) return 'GBP';
-    if(tz.includes('New_York')||tz.includes('Los_Angeles')||tz.includes('Chicago')) return 'USD';
-    if(tz.includes('Dubai')||tz.includes('Riyadh')) return 'AED';
-    if(tz.includes('Shanghai')||tz.includes('Hong_Kong')) return 'CNY';
-    if(tz.includes('Tokyo')) return 'JPY';
-  }catch(e){}
-  return 'EUR';
-}
+/* ========= LEGAL (templates, English; placeholders highlighted) ========= */
+const LEGAL={
+privacy:[
+["Controller","Adam Donda, trading as Donda.Digital (independent studio). Contact: donda.digital@gmail.com. Address and business ID / VAT details are provided on request and on quotes and invoices."],
+["Data we collect","Through the contact form we collect only what you enter: your name, email address, website or company, your message and the package you select."],
+["How it is processed","Form submissions are processed by Formspree, which receives them and forwards them to us by email. Formspree may process data outside the EEA under its own safeguards; please see its privacy policy."],
+["Purpose and legal basis","We use your data only to answer your enquiry and to prepare a quote or proposal. The legal basis is your consent (Art. 6(1)(a) GDPR), given by ticking the checkbox, and steps taken at your request before entering a contract (Art. 6(1)(b) GDPR)."],
+["Retention","Enquiries are kept only as long as needed to handle them and, if a contract follows, for the duration of the contract and any legal retention periods. Inactive enquiries are deleted within 24 months of the last contact."],
+["Your rights","You have the right to access, rectification, erasure and restriction of your data, to object to processing, to withdraw your consent at any time, and to lodge a complaint with your national data protection supervisory authority (in the Czech Republic: Úřad pro ochranu osobních údajů, uoou.gov.cz)."],
+["Contact","To exercise your rights, write to donda.digital@gmail.com."]],
+terms:[
+["Scope of services","Donda.Digital provides web design, web development and related digital services as described in a written quote or agreement for each project. Anything outside the agreed scope is quoted separately."],
+["Quotes and 'from' pricing","Prices on this website are starting prices ('from') in EUR and are not a binding offer. A final quote is prepared after your requirements are discussed. Taxes are added where applicable."],
+["Payment","Payment terms, deposits and milestones are set out in the quote or agreement. As a rule, a deposit is due before work starts and the balance on delivery, unless the quote states otherwise."],
+["Revisions","The number of revision rounds included is stated in the quote. Additional revisions or changes in scope may be charged separately."],
+["Intellectual property","Ownership of the final deliverables passes to the client after full payment. Until then, all rights remain with Adam Donda (Donda.Digital). Third-party components keep their own licences."],
+["Limitation of liability","To the extent permitted by law, liability is limited to the amount paid for the affected service, and there is no liability for indirect or consequential loss. Nothing limits liability that cannot be limited by law."],
+["Governing law","These terms are governed by the laws of the Czech Republic, and disputes are subject to the competent Czech courts, without prejudice to mandatory consumer rights. Operator: Adam Donda, trading as Donda.Digital, donda.digital@gmail.com."]],
+cookies:[
+["Cookies","This website does not set any cookies of its own."],
+["Local storage","Your chosen language is stored in your browser's localStorage (key: donda_lang) so it can be remembered on your next visit. It is not used for tracking and is not sent to us."],
+["Analytics and tracking","No analytics, advertising or tracking tools are installed, so no cookie banner is shown."],
+["Third-party resources","To display the page, your browser loads fonts from Google Fonts and a script library from cdnjs; these providers may receive technical data such as your IP address. When you send the contact form, the data goes to Formspree (see the Privacy Policy)."],
+["Contact","Questions: donda.digital@gmail.com. Operator: Adam Donda, trading as Donda.Digital."]]
+};
+const LTITLE={privacy:'l-priv',terms:'l-terms',cookies:'l-cook'};
 
-function formatPrice(amountEUR, cur){
-  const v = Math.round(amountEUR * (FX[cur] || 1));
-  let rounded;
-  if(v >= 10000) rounded = Math.round(v/100)*100;
-  else if(v >= 1000) rounded = Math.round(v/10)*10;
-  else rounded = v;
-  const sym = CUR_SYMBOL[cur] || '€';
-  const formatted = rounded.toLocaleString('en-US').replace(/,/g,' ');
-  if(cur==='CZK' || cur==='PLN' || cur==='AED') return formatted + ' ' + sym;
-  return sym + formatted;
-}
+/* ========= APP ========= */
+let L='en';
+try{const s=localStorage.getItem('donda_lang');if(s&&T[s])L=s;}catch(e){}
+const t=k=>(T[L]&&T[L][k])||T.en[k]||k;
 
-let CURRENT_CUR = detectCurrency();
-let CURRENT_LANG = localStorage.getItem('donda_lang') || (function(){
-  const code = (navigator.language || 'en').slice(0,2).toLowerCase();
-  return I18N[code] ? code : 'en';
-})();
+document.addEventListener('DOMContentLoaded',()=>{
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let openId=null,firstRender=true,legalKey=null,lastFocus=null;
 
-function applyPrices(){
-  const t = I18N[CURRENT_LANG] || I18N.en;
-  document.querySelectorAll('[data-price]').forEach(el=>{
-    const base = parseFloat(el.getAttribute('data-price'));
-    let suffix = el.getAttribute('data-price-suffix') || '';
-    const suffixKey = el.getAttribute('data-price-suffix-key');
-    if(suffixKey && t[suffixKey]){
-      const v = Math.round(base * (FX[CURRENT_CUR]||1) / 1000);
-      const sym = CUR_SYMBOL[CURRENT_CUR] || '€';
-      const order = (CURRENT_CUR==='CZK'||CURRENT_CUR==='PLN'||CURRENT_CUR==='AED');
-      el.textContent = order ? (v + t[suffixKey] + ' ' + sym) : (sym + v + t[suffixKey]);
-      return;
-    }
-    if(suffix === '/mo'){
-      const moMap = {en:'/mo', cs:'/měs', pl:'/mc', es:'/mes', de:'/Mon', fr:'/mois', ar:'/شهر', zh:'/月'};
-      suffix = moMap[CURRENT_LANG] || '/mo';
-    }
-    el.textContent = formatPrice(base, CURRENT_CUR) + suffix;
-  });
-}
-
-function applyLang(lang){
-  if(!I18N[lang]) lang = 'en';
-  CURRENT_LANG = lang;
-  localStorage.setItem('donda_lang', lang);
-  const t = I18N[lang];
-  const html = document.documentElement;
-  html.setAttribute('lang', lang);
-  html.setAttribute('dir', lang==='ar' ? 'rtl' : 'ltr');
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k = el.getAttribute('data-i18n');
-    if(t[k] !== undefined) el.textContent = t[k];
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const k = el.getAttribute('data-i18n-placeholder');
-    if(t[k] !== undefined) el.setAttribute('placeholder', t[k]);
-  });
-  const langCur = document.getElementById('lang-cur');
-  if(langCur) langCur.textContent = lang.toUpperCase();
-  document.querySelectorAll('.lang-opt').forEach(o=>{
-    o.classList.toggle('active', o.getAttribute('data-lang')===lang);
-  });
-  if(!localStorage.getItem('donda_cur')){
-    const def = LANG_DEFAULT_CUR[lang];
-    if(def) CURRENT_CUR = def;
-  }
-  applyPrices();
-}
-
-/* ========= DOM READY ========= */
-document.addEventListener('DOMContentLoaded', ()=>{
   /* LOADER */
-  const words = ['Build','Create','Design','Launch'];
-  const loaderWord = document.getElementById('l-word');
-  const loaderCount = document.getElementById('l-count');
-  const loaderBar = document.getElementById('l-bar');
-  const loaderEl = document.getElementById('loader');
-  const statuses = ['ls0','ls1','ls2'];
-  let progress = 0;
-  let wordIdx = 0;
-  const loaderInt = setInterval(()=>{
-    progress += 100/40;
-    if(progress>=100) progress=100;
-    loaderBar.style.width = progress + '%';
-    loaderCount.textContent = String(Math.floor(progress)).padStart(3,'0');
-    const si = Math.min(2, Math.floor(progress/35));
-    statuses.forEach((id,i)=>document.getElementById(id).classList.toggle('on', i<=si));
-    if(progress>=100){
-      clearInterval(loaderInt);
-      setTimeout(()=>{
-        loaderEl.style.transition='opacity .6s,transform .6s';
-        loaderEl.style.opacity='0';
-        loaderEl.style.transform='translateY(-2%)';
-        setTimeout(()=>loaderEl.style.display='none', 650);
-      }, 250);
-    }
-  }, 50);
-  const wordInt = setInterval(()=>{
-    loaderWord.style.opacity='0';loaderWord.style.transform='translate(-50%,-60%)';
-    setTimeout(()=>{
-      wordIdx=(wordIdx+1)%words.length;
-      loaderWord.textContent=words[wordIdx];
-      loaderWord.style.opacity='1';loaderWord.style.transform='translate(-50%,-50%)';
-    }, 280);
-  }, 500);
-  setTimeout(()=>clearInterval(wordInt), 2200);
+  const words=['Build','Create','Design','Launch'];
+  const lw=document.getElementById('l-word'),lc=document.getElementById('l-count'),lb=document.getElementById('l-bar'),le=document.getElementById('loader');
+  const sts=['ls0','ls1','ls2'];let progress=0,wi=0;
+  const li=setInterval(()=>{
+    progress+=100/40;if(progress>=100)progress=100;
+    lb.style.width=progress+'%';lc.textContent=String(Math.floor(progress)).padStart(3,'0');
+    const si=Math.min(2,Math.floor(progress/35));
+    sts.forEach((id,i)=>document.getElementById(id).classList.toggle('on',i<=si));
+    if(progress>=100){clearInterval(li);setTimeout(()=>{le.style.transition='opacity .6s,transform .6s';le.style.opacity='0';le.style.transform='translateY(-2%)';setTimeout(()=>le.style.display='none',650)},250)}
+  },50);
+  const wInt=setInterval(()=>{
+    lw.style.opacity='0';lw.style.transform='translate(-50%,-60%)';
+    setTimeout(()=>{wi=(wi+1)%words.length;lw.textContent=words[wi];lw.style.opacity='1';lw.style.transform='translate(-50%,-50%)'},280);
+  },500);
+  setTimeout(()=>clearInterval(wInt),2200);
 
   /* NAV SCROLL + PROGRESS */
-  const nav = document.getElementById('nav');
-  const prog = document.getElementById('prog');
-  const procFill = document.getElementById('proc-fill');
-  const procSteps = document.querySelectorAll('.proc-step');
+  const nav=document.getElementById('nav'),prog=document.getElementById('prog'),pf=document.getElementById('proc-fill'),ps=document.querySelectorAll('.proc-step');
   function onScroll(){
-    const sc = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    prog.style.width = (sc/total*100) + '%';
-    nav.classList.toggle('scrolled', sc>30);
-    const procEl = document.querySelector('.proc-steps');
-    if(procEl && procFill){
-      const r = procEl.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const start = vh*0.7;
-      const end = -r.height + vh*0.3;
-      const p = Math.max(0, Math.min(1, (start - r.top)/(start - end)));
-      procFill.style.height = (p*100) + '%';
-      procSteps.forEach((st)=>{
-        const sr = st.getBoundingClientRect();
-        st.classList.toggle('reached', sr.top < vh*0.6);
-      });
+    const sc=window.scrollY,total=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(sc/total*100)+'%';nav.classList.toggle('scrolled',sc>30);
+    const pe=document.querySelector('.proc-steps');
+    if(pe&&pf){
+      const r=pe.getBoundingClientRect(),vh=window.innerHeight,start=vh*.7,end=-r.height+vh*.3;
+      pf.style.height=(Math.max(0,Math.min(1,(start-r.top)/(start-end)))*100)+'%';
+      ps.forEach(st=>st.classList.toggle('reached',st.getBoundingClientRect().top<vh*.6));
     }
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  /* REVEAL OBSERVER */
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('vis');
-        if(e.target.classList.contains('stat-item')){
-          const numEl = e.target.querySelector('[data-target]');
-          if(numEl && !numEl.dataset.done){
-            numEl.dataset.done='1';
-            const target = parseInt(numEl.dataset.target);
-            const suf = numEl.dataset.suffix || '';
-            let cur = 0;
-            const step = Math.max(1, Math.floor(target/40));
-            const ci = setInterval(()=>{
-              cur += step;
-              if(cur>=target){cur=target;clearInterval(ci)}
-              numEl.textContent = cur + suf;
-            }, 35);
-          }
-        }
-      }
-    });
-  }, {threshold:.18});
+  /* REVEAL + COUNT-UP */
+  function count(numEl){
+    if(numEl.dataset.done)return;numEl.dataset.done='1';
+    const target=parseInt(numEl.dataset.target),suf=numEl.dataset.suffix||'',pre=numEl.dataset.prefix||'';
+    if(reduce){numEl.textContent=pre+target+suf;return}
+    let cur=0;const step=Math.max(1,Math.floor(target/40));
+    const ci=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(ci)}numEl.textContent=pre+cur+suf},35);
+  }
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('vis');
+      if(e.target.classList.contains('stat-item')){const n=e.target.querySelector('[data-target]');if(n)count(n)}}
+  })},{threshold:.18});
   document.querySelectorAll('.reveal, .stat-item').forEach(el=>io.observe(el));
 
-  /* LANG DRAWER */
-  const langBtn = document.getElementById('lang-btn');
-  const langDrawer = document.getElementById('lang-drawer');
-  langBtn.addEventListener('click', e=>{
-    e.stopPropagation();
-    langBtn.classList.toggle('open');
-    langDrawer.classList.toggle('open');
-  });
-  document.addEventListener('click', e=>{
-    if(!langBtn.contains(e.target) && !langDrawer.contains(e.target)){
-      langBtn.classList.remove('open');
-      langDrawer.classList.remove('open');
-    }
-  });
-  document.querySelectorAll('.lang-opt').forEach(o=>{
-    o.addEventListener('click', ()=>{
-      applyLang(o.getAttribute('data-lang'));
-      langBtn.classList.remove('open');
-      langDrawer.classList.remove('open');
+  /* PACKAGES */
+  const grid=document.getElementById('pk-grid'),careEl=document.getElementById('pk-care');
+  function renderPk(){
+    const cls=firstRender?'reveal':'reveal vis';
+    grid.innerHTML=PK.map((k,i)=>`<article class="sol-card pk ${cls} d${i%3+1}${k.pop?' pop':''}${openId===k.id?' open':''}">
+${k.pop?`<div class="badge-pop">${t('most-pop')}</div>`:''}
+<button type="button" class="pk-head" id="pb${i}" aria-expanded="${openId===k.id}" aria-controls="pp${i}" data-id="${k.id}">
+<span class="sol-num">0${i+1} — ${k.id}</span><span class="sol-icon" aria-hidden="true">${IC[k.id]}</span><span class="sol-title">${k.id}</span>
+<span class="sol-price"><span>${t('from')}</span><span class="sol-price-num">${k.p}</span></span>
+<span class="sol-desc">${t(k.d)}</span>
+<span class="pk-tg"><span>${t('details')}</span><span class="pk-ic" aria-hidden="true"></span></span></button>
+<div class="pk-panel" id="pp${i}" role="region" aria-labelledby="pb${i}"><div class="pk-in">
+<h4>${t('what')}</h4><p>${t(k.w)}</p><h4>${t('best')}</h4><p>${t(k.b)}</p><h4>${t('incl')}</h4>
+<ul class="sol-feats">${k.f.map((x,j)=>`<li style="--i:${j}">${t(x)}</li>`).join('')}</ul></div></div>
+<div class="sol-cta-wrap"><a href="#contact" class="btn ${k.pop?'btn-primary':'btn-outline'} btn-sm" data-pkg="${k.id}"><span>${t(k.c)}</span><span class="arr">→</span></a></div></article>`).join('');
+    careEl.innerHTML=`<article class="sol-card care ${cls}"><div><div class="sol-num">+ — ${CARE.id}</div><div class="sol-icon" aria-hidden="true">${IC[CARE.id]}</div>
+<div class="sol-price"><span>${t('from')}</span><span class="sol-price-num">${CARE.p} ${t('mo')}</span></div>
+<p class="sol-desc">${t(CARE.d)}</p><p class="care-note">${t('care-note')}</p>
+<a href="#contact" class="btn btn-outline btn-sm" data-pkg="${CARE.id}"><span>${t(CARE.c)}</span><span class="arr">→</span></a></div>
+<ul class="sol-feats">${CARE.f.map(x=>`<li>${t(x)}</li>`).join('')}</ul></article>`;
+    if(firstRender){grid.querySelectorAll('.reveal').forEach(el=>io.observe(el));careEl.querySelectorAll('.reveal').forEach(el=>io.observe(el));firstRender=false}
+  }
+  grid.addEventListener('click',e=>{
+    const b=e.target.closest('.pk-head');if(!b)return;
+    const id=b.dataset.id,was=openId===id;openId=was?null:id;
+    grid.querySelectorAll('.pk').forEach(c=>{
+      const h=c.querySelector('.pk-head'),on=h.dataset.id===openId;
+      c.classList.toggle('open',on);h.setAttribute('aria-expanded',on);
     });
   });
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[data-pkg]');if(!a)return;
+    const sel=document.getElementById('f-pkg');if(sel)sel.value=a.dataset.pkg;
+  });
 
-  applyLang(CURRENT_LANG);
+  /* LEGAL MODAL */
+  const lg=document.getElementById('legal'),lgT=document.getElementById('lg-title'),lgB=document.getElementById('lg-body'),lgN=document.getElementById('lg-note'),lgC=document.getElementById('lg-close');
+  function fillLegal(){
+    if(!legalKey)return;
+    lgT.textContent=t(LTITLE[legalKey]);
+    lgB.innerHTML=LEGAL[legalKey].map(([h,p])=>`<h3>${h}</h3><p>${p.replace(/\[[^\]]+\]/g,m=>`<mark>${m}</mark>`)}</p>`).join('');
+    lgN.textContent=t('lg-tpl');
+  }
+  function openLegal(k){legalKey=k;lastFocus=document.activeElement;fillLegal();lg.classList.add('open');lg.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lgC.focus()}
+  function closeLegal(){lg.classList.remove('open');lg.setAttribute('aria-hidden','true');document.body.style.overflow='';legalKey=null;if(lastFocus)lastFocus.focus()}
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-legal]');if(b)openLegal(b.dataset.legal)});
+  lgC.addEventListener('click',closeLegal);
+  lg.addEventListener('click',e=>{if(e.target===lg)closeLegal()});
+  document.addEventListener('keydown',e=>{
+    if(!lg.classList.contains('open'))return;
+    if(e.key==='Escape')closeLegal();
+    if(e.key==='Tab'){e.preventDefault();lgC.focus()}
+  });
+
+  /* LANGUAGE */
+  function applyLang(lang){
+    if(!T[lang])lang='en';L=lang;
+    try{localStorage.setItem('donda_lang',lang)}catch(e){}
+    document.documentElement.setAttribute('lang',lang);
+    document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.getAttribute('data-i18n'))});
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>el.setAttribute('placeholder',t(el.getAttribute('data-i18n-placeholder'))));
+    document.getElementById('lang-cur').textContent=lang.toUpperCase();
+    document.querySelectorAll('.lang-opt').forEach(o=>o.classList.toggle('active',o.dataset.lang===lang));
+    renderPk();fillLegal();
+  }
+  const langBtn=document.getElementById('lang-btn'),langDrawer=document.getElementById('lang-drawer');
+  function setDrawer(on){langBtn.classList.toggle('open',on);langDrawer.classList.toggle('open',on);langBtn.setAttribute('aria-expanded',on)}
+  langBtn.addEventListener('click',e=>{e.stopPropagation();setDrawer(!langDrawer.classList.contains('open'))});
+  document.addEventListener('click',e=>{if(!langBtn.contains(e.target)&&!langDrawer.contains(e.target))setDrawer(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setDrawer(false)});
+  document.querySelectorAll('.lang-opt').forEach(o=>o.addEventListener('click',()=>{applyLang(o.dataset.lang);setDrawer(false)}));
+  applyLang(L);
+  const nt=document.getElementById('nav-toggle'),nl=document.getElementById('nav-links');
+  function setMenu(on){nl.classList.toggle('open',on);nt.setAttribute('aria-expanded',on)}
+  nt.addEventListener('click',e=>{e.stopPropagation();setMenu(!nl.classList.contains('open'))});
+  nl.addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('click',e=>{if(!nl.contains(e.target)&&!nt.contains(e.target))setMenu(false)});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+  window.addEventListener('resize',()=>{if(innerWidth>960)setMenu(false)});
 
   /* 3D */
-  if(window.THREE){ initPlanet(); initTech(); }
-  else {
-    const wt = setInterval(()=>{ if(window.THREE){clearInterval(wt);initPlanet();initTech();} }, 100);
-  }
+  if(window.THREE){initPlanet();initTech()}
+  else{const wt=setInterval(()=>{if(window.THREE){clearInterval(wt);initPlanet();initTech()}},100)}
 
-  /* FORM */
-  const form = document.getElementById('contactForm');
-  const formSuccess = document.getElementById('form-success');
-  const formError = document.getElementById('form-error');
-  const submitBtn = document.getElementById('form-submit-btn');
+  /* FORM (Formspree) */
+  const form=document.getElementById('contactForm'),fs=document.getElementById('form-success'),fe=document.getElementById('form-error'),sb=document.getElementById('form-submit-btn');
   if(form){
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      formError.classList.remove('show');
-      submitBtn.setAttribute('disabled','');
-      const originalHTML = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>Sending…</span>';
-      const data = new FormData(form);
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();fe.classList.remove('show');sb.setAttribute('disabled','');
+      const orig=sb.innerHTML;sb.innerHTML='<span>Sending…</span>';
+      const data=new FormData(form);
       try{
-        const res = await fetch(form.action, {method:'POST', body:data, headers:{'Accept':'application/json'}});
-        if(res.ok){
-          form.style.display='none';
-          formSuccess.classList.add('show');
-        } else { throw new Error('Bad response'); }
-      }catch(err){
-        formError.classList.add('show');
-        submitBtn.removeAttribute('disabled');
-        submitBtn.innerHTML = originalHTML;
-      }
+        const res=await fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+        if(res.ok){form.style.display='none';fs.classList.add('show')}else throw new Error('Bad response');
+      }catch(err){fe.classList.add('show');sb.removeAttribute('disabled');sb.innerHTML=orig}
     });
   }
 });
 
-/* ========= HERO PLANET (dark graphite) ========= */
+/* ========= HERO PLANET ========= */
 function initPlanet(){
-  const canvas = document.getElementById('planet-cv');
-  if(!canvas) return;
-  const wrap = canvas.parentElement;
-  const w = ()=>wrap.clientWidth, h = ()=>wrap.clientHeight;
-
-  const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(38, w()/h(), 0.1, 100);
-  cam.position.set(0, 0.3, 5.5);
-
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(w(), h(), false);
-
-  // Dark graphite lighting (no blue)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1);
-  key.position.set(4, 3, 5); scene.add(key);
-  const rim = new THREE.DirectionalLight(0xaaaaaa, 0.5);
-  rim.position.set(-4, 2, -3); scene.add(rim);
-  const fill = new THREE.PointLight(0xffffff, 0.3);
-  fill.position.set(0, -3, 3); scene.add(fill);
-
-  const grp = new THREE.Group();
-
-  // Wireframe outer sphere - subtle graphite
-  const sg = new THREE.SphereGeometry(1.55, 40, 40);
-  const sm = new THREE.MeshBasicMaterial({color:0x1a1a1a, wireframe:true, transparent:true, opacity:.18});
-  grp.add(new THREE.Mesh(sg, sm));
-
-  // Inner solid sphere - premium graphite finish
-  const inner = new THREE.Mesh(
-    new THREE.SphereGeometry(1.5, 96, 96),
-    new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:.75, roughness:.35, emissive:0x000000})
-  );
-  grp.add(inner);
-
-  // Highlight glossy overlay
-  const gloss = new THREE.Mesh(
-    new THREE.SphereGeometry(1.51, 64, 64),
-    new THREE.MeshStandardMaterial({color:0x2a2a2a, metalness:.9, roughness:.15, transparent:true, opacity:.4})
-  );
-  grp.add(gloss);
-
-  // Elegant rings - thin, subtle
-  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.006, 8, 96), new THREE.MeshBasicMaterial({color:0x0a0a0a, transparent:true, opacity:.35}));
-  ring1.rotation.x = Math.PI/2.2;
-  grp.add(ring1);
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.35, 0.004, 8, 96), new THREE.MeshBasicMaterial({color:0x1a1a1a, transparent:true, opacity:.22}));
-  ring2.rotation.x = Math.PI/3;
-  ring2.rotation.y = Math.PI/4;
-  grp.add(ring2);
-
-  // Floating nodes
-  const nodes = [];
-  const nodeMat = new THREE.MeshBasicMaterial({color:0x0a0a0a});
-  for(let i=0;i<12;i++){
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.028,10,10), nodeMat);
-    const ang = (i/12)*Math.PI*2;
-    const rad = 1.85 + Math.sin(i)*0.1;
-    node.position.set(Math.cos(ang)*rad, Math.sin(i*1.3)*0.35, Math.sin(ang)*rad);
-    nodes.push(node);
-    grp.add(node);
-  }
-
+  const canvas=document.getElementById('planet-cv');if(!canvas)return;
+  const wrap=canvas.parentElement,w=()=>wrap.clientWidth,h=()=>wrap.clientHeight;
+  const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(38,w()/h(),.1,100);cam.position.set(0,.3,5.5);
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(w(),h(),false);
+  scene.add(new THREE.AmbientLight(0xffffff,.35));
+  const key=new THREE.DirectionalLight(0xffffff,1.1);key.position.set(4,3,5);scene.add(key);
+  const rim=new THREE.DirectionalLight(0xaaaaaa,.5);rim.position.set(-4,2,-3);scene.add(rim);
+  const fill=new THREE.PointLight(0xffffff,.3);fill.position.set(0,-3,3);scene.add(fill);
+  const grp=new THREE.Group();
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.55,40,40),new THREE.MeshBasicMaterial({color:0x1a1a1a,wireframe:true,transparent:true,opacity:.18})));
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.5,96,96),new THREE.MeshStandardMaterial({color:0x0a0a0a,metalness:.75,roughness:.35,emissive:0x000000})));
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.51,64,64),new THREE.MeshStandardMaterial({color:0x2a2a2a,metalness:.9,roughness:.15,transparent:true,opacity:.4})));
+  const ring1=new THREE.Mesh(new THREE.TorusGeometry(2.05,.006,8,96),new THREE.MeshBasicMaterial({color:0x0a0a0a,transparent:true,opacity:.35}));ring1.rotation.x=Math.PI/2.2;grp.add(ring1);
+  const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.35,.004,8,96),new THREE.MeshBasicMaterial({color:0x1a1a1a,transparent:true,opacity:.22}));ring2.rotation.x=Math.PI/3;ring2.rotation.y=Math.PI/4;grp.add(ring2);
+  const nodes=[],nm=new THREE.MeshBasicMaterial({color:0x0a0a0a});
+  for(let i=0;i<12;i++){const n=new THREE.Mesh(new THREE.SphereGeometry(.028,10,10),nm),a=(i/12)*Math.PI*2,r=1.85+Math.sin(i)*.1;n.position.set(Math.cos(a)*r,Math.sin(i*1.3)*.35,Math.sin(a)*r);nodes.push(n);grp.add(n)}
   scene.add(grp);
-
-  let tx = 0, ty = 0, cx = 0, cy = 0;
-  wrap.addEventListener('mousemove', e=>{
-    const r = wrap.getBoundingClientRect();
-    tx = ((e.clientX - r.left)/r.width - 0.5) * 0.5;
-    ty = ((e.clientY - r.top)/r.height - 0.5) * 0.3;
-  });
-  wrap.addEventListener('mouseleave', ()=>{tx=0;ty=0});
-
-  function onR(){ cam.aspect = w()/h(); cam.updateProjectionMatrix(); renderer.setSize(w(), h(), false); }
-  window.addEventListener('resize', onR); onR();
-
-  let t = 0;
-  function anim(){
-    t += 0.005;
-    cx += (tx - cx) * 0.06;
-    cy += (ty - cy) * 0.06;
-    grp.rotation.y = t + cx;
-    grp.rotation.x = Math.sin(t*0.5)*0.1 + cy;
-    ring1.rotation.z = t*1.2;
-    ring2.rotation.z = -t*0.9;
-    nodes.forEach((n,i)=>{
-      const ang = (i/nodes.length)*Math.PI*2 + t;
-      const rad = 1.85 + Math.sin(t+i)*0.08;
-      n.position.x = Math.cos(ang)*rad;
-      n.position.z = Math.sin(ang)*rad;
-    });
-    renderer.render(scene, cam);
-    requestAnimationFrame(anim);
-  }
-  anim();
+  let tx=0,ty=0,cx=0,cy=0;
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*.5;ty=((e.clientY-r.top)/r.height-.5)*.3});
+  wrap.addEventListener('mouseleave',()=>{tx=0;ty=0});
+  function onR(){cam.aspect=w()/h();cam.updateProjectionMatrix();renderer.setSize(w(),h(),false)}
+  window.addEventListener('resize',onR);onR();
+  let t=0;
+  (function anim(){
+    t+=.005;cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
+    grp.rotation.y=t+cx;grp.rotation.x=Math.sin(t*.5)*.1+cy;ring1.rotation.z=t*1.2;ring2.rotation.z=-t*.9;
+    nodes.forEach((n,i)=>{const a=(i/nodes.length)*Math.PI*2+t,r=1.85+Math.sin(t+i)*.08;n.position.x=Math.cos(a)*r;n.position.z=Math.sin(a)*r});
+    renderer.render(scene,cam);requestAnimationFrame(anim);
+  })();
 }
 
-/* ========= TECH PLANET (secondary) ========= */
+/* ========= TECH PLANET ========= */
 function initTech(){
-  const canvas = document.getElementById('t3d-cv');
-  if(!canvas) return;
-  const wrap = canvas.parentElement;
-  const w = ()=>wrap.clientWidth, h = ()=>wrap.clientHeight;
-
-  const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(40, w()/h(), 0.1, 100);
-  cam.position.z = 5.2;
-
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(w(), h(), false);
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const dl = new THREE.DirectionalLight(0xffffff, 0.9);
-  dl.position.set(3,2,4); scene.add(dl);
-  const dl2 = new THREE.DirectionalLight(0xaaaaaa, 0.4);
-  dl2.position.set(-3,-1,2); scene.add(dl2);
-
-  const grp = new THREE.Group();
-  const sg = new THREE.SphereGeometry(1.55, 40, 40);
-  grp.add(new THREE.Mesh(sg, new THREE.MeshBasicMaterial({color:0x0a0a0a, wireframe:true, transparent:true, opacity:.15})));
-  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.5, 96, 96), new THREE.MeshStandardMaterial({color:0x0a0a0a, metalness:.7, roughness:.3})));
-
-  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(2.1, 0.005, 8, 96), new THREE.MeshBasicMaterial({color:0x0a0a0a, transparent:true, opacity:.3}));
-  ring1.rotation.x = Math.PI/2.2; grp.add(ring1);
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.5, 0.003, 8, 96), new THREE.MeshBasicMaterial({color:0x1a1a1a, transparent:true, opacity:.2}));
-  ring2.rotation.x = Math.PI/3; ring2.rotation.y = Math.PI/4; grp.add(ring2);
-
-  const nodes = [];
-  const nMat = new THREE.MeshBasicMaterial({color:0x0a0a0a});
-  for(let i=0;i<14;i++){
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.03,10,10), nMat);
-    const ang = (i/14)*Math.PI*2;
-    const rad = 1.9 + Math.sin(i)*0.12;
-    node.position.set(Math.cos(ang)*rad, Math.sin(i*1.3)*0.4, Math.sin(ang)*rad);
-    nodes.push(node); grp.add(node);
-  }
+  const canvas=document.getElementById('t3d-cv');if(!canvas)return;
+  const wrap=canvas.parentElement,w=()=>wrap.clientWidth,h=()=>wrap.clientHeight;
+  const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,w()/h(),.1,100);cam.position.z=5.2;
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(w(),h(),false);
+  scene.add(new THREE.AmbientLight(0xffffff,.5));
+  const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(3,2,4);scene.add(dl);
+  const dl2=new THREE.DirectionalLight(0xaaaaaa,.4);dl2.position.set(-3,-1,2);scene.add(dl2);
+  const grp=new THREE.Group();
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.55,40,40),new THREE.MeshBasicMaterial({color:0x0a0a0a,wireframe:true,transparent:true,opacity:.15})));
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.5,96,96),new THREE.MeshStandardMaterial({color:0x0a0a0a,metalness:.7,roughness:.3})));
+  const ring1=new THREE.Mesh(new THREE.TorusGeometry(2.1,.005,8,96),new THREE.MeshBasicMaterial({color:0x0a0a0a,transparent:true,opacity:.3}));ring1.rotation.x=Math.PI/2.2;grp.add(ring1);
+  const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.5,.003,8,96),new THREE.MeshBasicMaterial({color:0x1a1a1a,transparent:true,opacity:.2}));ring2.rotation.x=Math.PI/3;ring2.rotation.y=Math.PI/4;grp.add(ring2);
+  const nodes=[],nm=new THREE.MeshBasicMaterial({color:0x0a0a0a});
+  for(let i=0;i<14;i++){const n=new THREE.Mesh(new THREE.SphereGeometry(.03,10,10),nm),a=(i/14)*Math.PI*2,r=1.9+Math.sin(i)*.12;n.position.set(Math.cos(a)*r,Math.sin(i*1.3)*.4,Math.sin(a)*r);nodes.push(n);grp.add(n)}
   scene.add(grp);
-
-  function onR(){ cam.aspect = w()/h(); cam.updateProjectionMatrix(); renderer.setSize(w(), h(), false); }
-  window.addEventListener('resize', onR); onR();
-
-  let t = 0;
-  function anim(){
-    t += 0.005;
-    grp.rotation.y = t;
-    grp.rotation.x = Math.sin(t*0.5)*0.12;
-    ring1.rotation.z = t*1.3;
-    ring2.rotation.z = -t*1.0;
-    nodes.forEach((n,i)=>{
-      const ang = (i/nodes.length)*Math.PI*2 + t;
-      const rad = 1.9 + Math.sin(t+i)*0.1;
-      n.position.x = Math.cos(ang)*rad;
-      n.position.z = Math.sin(ang)*rad;
-    });
-    renderer.render(scene, cam);
-    requestAnimationFrame(anim);
-  }
-  anim();
+  function onR(){cam.aspect=w()/h();cam.updateProjectionMatrix();renderer.setSize(w(),h(),false)}
+  window.addEventListener('resize',onR);onR();
+  let t=0;
+  (function anim(){
+    t+=.005;grp.rotation.y=t;grp.rotation.x=Math.sin(t*.5)*.12;ring1.rotation.z=t*1.3;ring2.rotation.z=-t;
+    nodes.forEach((n,i)=>{const a=(i/nodes.length)*Math.PI*2+t,r=1.9+Math.sin(t+i)*.1;n.position.x=Math.cos(a)*r;n.position.z=Math.sin(a)*r});
+    renderer.render(scene,cam);requestAnimationFrame(anim);
+  })();
 }
 </script>
 </body>
