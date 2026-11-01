@@ -2,10 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/en", "destination": "/index.html" },
-    { "source": "/cs", "destination": "/index.html" },
-    { "source": "/sk", "destination": "/index.html" },
-    { "source": "/fr", "destination": "/index.html" },
-    { "source": "/ar", "destination": "/index.html" }
+    { "source": "/en", "destination": "/" },
+    { "source": "/cs", "destination": "/" },
+    { "source": "/sk", "destination": "/" },
+    { "source": "/fr", "destination": "/" },
+    { "source": "/ar", "destination": "/" }
   ]
 }
